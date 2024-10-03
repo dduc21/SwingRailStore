@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from htmldemo.net/juan/juan/shop.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:30 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <title>Juan - Shoes Store HTML Template</title>
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+    <!-- main wrapper start -->
+    <main>
+        <!-- breadcrumb area start -->
+        <div style="background: #fafafa;
+     margin-bottom: 20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  " style="padding: 13px;font-size: 13px;">
+                        <span>Trang chủ /</span>
+                        <span>Chi tiết sản phẩm </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb area end -->
+
+        <!-- page main wrapper start -->
+        <div class="shop-main-wrapper ">
+            <div class="container">
+                <div class="row">
+                    <!-- sidebar area start -->
+                    <div class="col-lg-3 order-2 order-lg-1">
+                        <div class="sidebar-wrapper">
+                            <!-- single sidebar start -->
+                            <div class="sidebar-single">
+                                <div class="sidebar-title">
+                                    <div style="
+                                    display: inline-block;
+                                    text-transform: uppercase;
+                                    font-size: 14px;
+                                    line-height: 22px;
+                                    font-weight: 600;
+                                    padding: 10px 0 10px;
+                                    color: #333;
+                                    cursor: pointer;
+                                    position: relative;">Thể loại</div>
+                                    <span> <i style="    
+                                        font-size: 10px;
+                                        color: #333;" class="fa fa-minus"></i></span>
+                                </div>
+                                <div class="sidebar-body">
+                                    <ul class="color-list">
+                                        <li ng-repeat="type in listTypes">
+                                            <input type="checkbox" ng-click="chooseType(type[0])"
+                                                id="type_product_{{type[0]}}" style="    
+                                                   width: 19px;
+                                                   height: 19px;
+                                                   position: relative;
+                                                   top: 4px;">
+                                            <div style="    display: inline-block;
+                                            cursor: pointer;
+                                            line-height: 18px;
+                                            font-weight: normal;
+                                            margin-bottom: 0;
+                                            color: #646464;">{{type[1]}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- single sidebar end -->
+
+                            <!-- single sidebar start -->
+                            <div class="sidebar-single">
+                                <div class="sidebar-title">
+                                    <div style="
+                                    display: inline-block;
+                                    text-transform: uppercase;
+                                    font-size: 14px;
+                                    line-height: 22px;
+                                    font-weight: 600;
+                                    padding: 10px 0 10px;
+                                    color: #333;
+                                    cursor: pointer;
+                                    position: relative;">Thương hiệu</div>
+                                    <span> <i style="    
+                                        font-size: 10px;
+                                        color: #333;" class="fa fa-minus"></i></span>
+                                </div>
+                                <div class="sidebar-body">
+                                    <ul class="color-list">
+                                        <li ng-repeat="type in listBrands">
+                                            <input type="checkbox" ng-click="chooseBrand(type[0])"
+                                                id="brand_product_{{type[0]}}" style="    
+                                                   width: 19px;
+                                                   height: 19px;
+                                                   position: relative;
+                                                   top: 4px;">
+                                            <div style="    display: inline-block;
+                                            cursor: pointer;
+                                            line-height: 18px;
+                                            font-weight: normal;
+                                            margin-bottom: 0;
+                                            color: #646464;">{{type[1]}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- single sidebar end -->
+
+                            <!-- single sidebar start -->
+                            <div class="sidebar-single">
+                                <div class="sidebar-title">
+                                    <div style="
+                                    display: inline-block;
+                                    text-transform: uppercase;
+                                    font-size: 14px;
+                                    line-height: 22px;
+                                    font-weight: 600;
+                                    padding: 10px 0 10px;
+                                    color: #333;
+                                    cursor: pointer;
+                                    position: relative;">Màu sắc</div>
+                                    <span> <i style="    
+                                        font-size: 10px;
+                                        color: #333;" class="fa fa-minus"></i></span>
+                                </div>
+                                <div class="sidebar-body">
+                                    <ul class="color-list">
+                                        <li ng-repeat="type in listColors">
+                                            <input type="checkbox" ng-click="chooseColor(type[0])"
+                                                id="color_product_{{type[0]}}" style="    
+                                                   width: 19px;
+                                                   height: 19px;
+                                                   position: relative;
+                                                   top: 4px;">
+                                            <div style="    display: inline-block;
+                                            cursor: pointer;
+                                            line-height: 18px;
+                                            font-weight: normal;
+                                            margin-bottom: 0;
+                                            color: #646464;">{{type[1]}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- single sidebar end -->
+
+                            <!-- single sidebar start -->
+                            <div class="sidebar-single">
+                                <div class="sidebar-title">
+                                    <div style="
+                                    display: inline-block;
+                                    text-transform: uppercase;
+                                    font-size: 14px;
+                                    line-height: 22px;
+                                    font-weight: 600;
+                                    padding: 10px 0 10px;
+                                    color: #333;
+                                    cursor: pointer;
+                                    position: relative;">Kích cỡ</div>
+                                    <span> <i style="    
+                                        font-size: 10px;
+                                        color: #333;" class="fa fa-minus"></i></span>
+                                </div>
+                                <div class="sidebar-body">
+                                    <ul class="color-list">
+                                        <li ng-repeat="type in listSizes">
+                                            <input type="checkbox" ng-click="chooseSize(type[0])"
+                                                id="size_product_{{type[0]}}" style="    
+                                                   width: 19px;
+                                                   height: 19px;
+                                                   position: relative;
+                                                   top: 4px;">
+                                            <div style=" display: inline-block;
+                                            cursor: pointer;
+                                            line-height: 18px;
+                                            font-weight: normal;
+                                            margin-bottom: 0;
+                                            color: #646464;">{{type[1]}}</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- single sidebar end -->
+
+                            <!-- single sidebar start -->
+                            <div class="sidebar-single">
+                                <div class="sidebar-title">
+                                    <div style="
+                                    display: inline-block;
+                                    text-transform: uppercase;
+                                    font-size: 14px;
+                                    line-height: 22px;
+                                    font-weight: 600;
+                                    padding: 10px 0 10px;
+                                    color: #333;
+                                    cursor: pointer;
+                                    position: relative;">Giá sản phẩm</div>
+                                    <span> <i style="    
+                                        font-size: 10px;
+                                        color: #333;" class="fa fa-minus"></i></span>
+                                </div>
+                                <div class="sidebar-body">
+                                    <div class="price-range-wrap">
+                                        <div class="price-range" data-min="20" data-max="4000000"></div>
+                                        <div class="range-slider">
+                                            <form action="#">
+                                                <div class="price-input" style=" display: inline-block;
+                                                cursor: pointer;
+                                                line-height: 18px;
+                                                font-weight: normal;
+                                                margin-bottom: 0;
+                                                color: #646464;""
+                                                >
+                                                    <label for=" amount">Giá: </label>
+                                                    <input type="text" id="amount">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- single sidebar end -->
+
+                           
+                        </div>
+                    </div>
+                    <!-- sidebar area end -->
+
+                    <!-- shop main wrapper start -->
+                    <div class="col-lg-9 order-1 order-lg-2">
+                        <div class="shop-product-wrapper">
+                            <!-- product item list start -->
+                            <div class="shop-product-wrap grid-view row mbn-50">
+                                <div class="col-lg-3 col-sm-6" ng-repeat="product in products">
+                                    <!-- product single item start -->
+                                    <div class="product-item mb-50">
+                                        <div class="product-thumb" style="position: relative;">
+                                            <a href="#!san-pham-chi-tiet/{{product.idSanPham.id}}">
+                                                </span>
+                                                <span
+                                                    ng-repeat="image in getAllImagesByIDProductDetail(product.id)"></span>
+                                                <img id="image-{{product.id}}" style="width: 221px;height: 210px;   " />
+                                                <div ng-if="product.idDotGiamGia != null" style="position: absolute;
+                                                                                                top: 10px;
+                                                                                                font-size: 12px;
+                                                                                                left: 10px;
+                                                                                                line-height: 1;
+                                                                                                font-weight: bold;
+                                                                                                z-index: 9;
+                                                                                                color: #fff;
+                                                                                                background: #000000;
+                                                                                                border-radius: 50%;
+                                                                                                width: 35px;
+                                                                                                height: 35px;
+                                                                                                line-height: 35px;">
+                                                    <span>
+                                                        {{"-" + product.idDotGiamGia.phanTramGiam + "%"}}
+                                                    </span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="product-content">
+                                            <h5 class="product-name">
+                                                <a href="#!san-pham-chi-tiet/{{product.idSanPham.id}}" style="color: #272727;
+                                        font-weight: 500;
+                                        font-size: 16px;">{{product.idSanPham.ten}}</a>
+                                            </h5>
+                                            <div class="price-box">
+                                                <span class="price-regular"
+                                                    style="color: #f94c43;font-weight: 700;font-size: 14px;">
+                                                    {{formatToVND(product.idDotGiamGia == null ? product.donGia : (100 -
+                                                    product.idDotGiamGia.phanTramGiam) * product.donGia / 100) }}</span>
+                                                <span class="price-old" style="   
+                                            color: #939393;
+                                            font-size: 13px;
+                                            margin-left: 5px;
+                                            font-weight: normal;"
+                                                    ng-if="product.idDotGiamGia != null"><del>{{formatToVND(product.donGia)}}</del></span>
+                                            </div>
+                                            <div class="product-action-link">
+                                                <a hidden href="#" data-bs-toggle="tooltip" title="Wishlist"><i
+                                                        class="ion-android-favorite-outline"></i></a>
+                                                <a href="#!san-pham-chi-tiet/{{product.idSanPham.id}}" data-bs-toggle="tooltip" title="Add To Cart"><i
+                                                        class="ion-bag"></i></a>
+                                                <a hidden ng-click="quickView(product.idSanPham.id)" data-bs-toggle="modal"
+                                                    data-bs-target="#quick_view"> <span data-bs-toggle="tooltip"
+                                                        title="Quick View"><i class="ion-ios-eye-outline"></i></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- product single item start -->
+
+
+                                </div>
+
+                            </div>
+                            <!-- product item list end -->
+
+                        </div>
+                    </div>
+                    <!-- shop main wrapper end -->
+                </div>
+            </div>
+        </div>
+        <!-- page main wrapper end -->
+    </main>
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+</body>
+
+
+</html>

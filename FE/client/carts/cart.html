@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from htmldemo.net/juan/juan/cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:35 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!-- notification -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+    <!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+    <!-- off-canvas menu start -->
+    <aside class="off-canvas-wrapper">
+        <div class="off-canvas-overlay"></div>
+        <div class="off-canvas-inner-content">
+            <div class="btn-close-off-canvas">
+                <i class="ion-android-close"></i>
+            </div>
+
+            <div class="off-canvas-inner">
+                <!-- search box start -->
+                <div class="search-box-offcanvas">
+                    <form>
+                        <input type="text" placeholder="Search Here...">
+                        <button class="search-btn"><i class="ion-ios-search-strong"></i></button>
+                    </form>
+                </div>
+                <!-- search box end -->
+
+                <!-- mobile menu start -->
+                <div class="mobile-navigation">
+                    <!-- mobile menu navigation start -->
+                    <nav>
+                        <ul class="mobile-menu">
+                            <li class="menu-item-has-children"><a href="index.html">Home</a>
+                                <ul class="dropdown">
+                                    <li><a href="index.html">Home version 01</a></li>
+                                    <li><a href="index-2.html">Home version 02</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><a href="#">pages</a>
+                                <ul class="megamenu dropdown">
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 01</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop.html">shop grid left
+                                                    sidebar</a></li>
+                                            <li><a href="shop-grid-right-sidebar.html">shop grid right
+                                                    sidebar</a></li>
+                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
+                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 02</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-details.html">product details</a></li>
+                                            <li><a href="product-details-affiliate.html">product
+                                                    details
+                                                    affiliate</a></li>
+                                            <li><a href="product-details-variable.html">product details
+                                                    variable</a></li>
+                                            <li><a href="product-details-group.html">product details
+                                                    group</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 03</a>
+                                        <ul class="dropdown">
+                                            <li><a href="cart.html">cart</a></li>
+                                            <li><a href="checkout.html">checkout</a></li>
+                                            <li><a href="compare.html">compare</a></li>
+                                            <li><a href="wishlist.html">wishlist</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 04</a>
+                                        <ul class="dropdown">
+                                            <li><a href="my-account.html">my-account</a></li>
+                                            <li><a href="login-register.html">login-register</a></li>
+                                            <li><a href="contact-us.html">contact us</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children "><a href="#">shop</a>
+                                <ul class="dropdown">
+                                    <li class="menu-item-has-children"><a href="#">shop grid layout</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop.html">shop grid left sidebar</a></li>
+                                            <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
+                                            <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
+                                            <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="#">shop list layout</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
+                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
+                                            <li><a href="shop-list-full-width.html">shop list full width</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="#">products details</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-details.html">product details</a></li>
+                                            <li><a href="product-details-affiliate.html">product details affiliate</a>
+                                            </li>
+                                            <li><a href="product-details-variable.html">product details variable</a>
+                                            </li>
+                                            <li><a href="product-details-group.html">product details group</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children "><a href="#">Blog</a>
+                                <ul class="dropdown">
+                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
+                                    <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
+                                    <li><a href="blog-grid-full-width.html">blog grid no sidebar</a></li>
+                                    <li><a href="blog-details.html">blog details</a></li>
+                                    <li><a href="blog-details-audio.html">blog details audio</a></li>
+                                    <li><a href="blog-details-video.html">blog details video</a></li>
+                                    <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact-us.html">Contact us</a></li>
+                        </ul>
+                    </nav>
+                    <!-- mobile menu navigation end -->
+                </div>
+                <!-- mobile menu end -->
+
+                <!-- user setting option start -->
+                <div class="mobile-settings">
+                    <ul class="nav">
+                        <li>
+                            <div class="dropdown mobile-top-dropdown">
+                                <a href="#" class="dropdown-toggle" id="currency" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    Currency
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="currency">
+                                    <a class="dropdown-item" href="#">$ USD</a>
+                                    <a class="dropdown-item" href="#">$ EURO</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown mobile-top-dropdown">
+                                <a href="#" class="dropdown-toggle" id="myaccount" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    My Account
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="myaccount">
+                                    <a class="dropdown-item" href="my-account.html">my account</a>
+                                    <a class="dropdown-item" href="login-register.html"> login</a>
+                                    <a class="dropdown-item" href="login-register.html">register</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- user setting option end -->
+
+                <!-- offcanvas widget area start -->
+                <div class="offcanvas-widget-area">
+                    <div class="off-canvas-contact-widget">
+                        <ul>
+                            <li><i class="fa fa-mobile"></i>
+                                <a href="#">0123456789</a>
+                            </li>
+                            <li><i class="fa fa-envelope-o"></i>
+                                <a href="#">info@yourdomain.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="off-canvas-social-widget">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                    </div>
+                </div>
+                <!-- offcanvas widget area end -->
+            </div>
+        </div>
+    </aside>
+    <!-- off-canvas menu end -->
+
+    <!-- main wrapper start -->
+    <main>
+        <!-- breadcrumb area start -->
+        <div style="background: #fafafa;
+         margin-bottom: 20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  " style="padding: 13px;font-size: 13px;">
+                        <span>Trang chủ /</span>
+                        <span>Giỏ hàng</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb area end -->
+
+        <h1 style="
+            font-size: 30px;
+            text-transform: uppercase;
+            margin: 0 0 25px;
+            text-align: center;">Giỏ hàng của bạn</h1>
+        <!-- cart main wrapper start -->
+        <div class="cart-main-wrapper" ng-init="loadDataProductDetail()">
+            <div class="container">
+                <div class="section-bg-color">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div style="
+                            background: #fafafa;
+                            padding: 15px;">
+                                <div style="
+                                 font-size: 13px;
+                                 margin-top: 0;
+                                 margin-bottom: 10px;">Bạn đang có {{cartDetails.length}} sản phẩm trong giỏ hàng</div>
+
+                                <div style="    
+                                        padding-top: 10px;
+                                        padding-bottom: 10px;
+                                        display: flex;    background: #fff;" ng-repeat="cartDetail in cartDetails">
+                                    <div style="
+                                        display: inline-flex;
+                                        width: 13%;
+                                        padding: 0 20px;">
+                                        <a> <span
+                                                ng-repeat="img in getAllImagesByIDProductDetail(cartDetail.idSanPhamChiTiet.id)"></span>
+                                            <img src="assets/img/cart/cart-1.jpg" alt="product"
+                                                id="image-{{cartDetail.idSanPhamChiTiet.id}}">
+                                    </div>
+
+                                    <!--right  -->
+                                    <div style="    
+                                    display: inline-flex;
+                                    width: 85%;">
+                                        <div style="   
+                                     display: inline-flex;
+                                    width: 40%;
+                                    align-items: center;">
+                                            <a style="    
+                                    text-decoration: none;
+                                    color: #000;
+                                    display: inline-block;">
+                                                <h3 style="    
+                                    font-size: 14px;
+                                    margin-bottom: 5px;">
+                                                    {{cartDetail.idSanPhamChiTiet.idSanPham.ten}}
+                                                </h3>
+                                                <div style="
+                                                font-size: 12px;
+                                                color: #777;
+                                                margin-top: 3px;">
+                                                    <label style="font-weight: 600;font-size: 10px;color: #333;">Màu
+                                                        sắc:</label>
+                                                    <span>{{cartDetail.idSanPhamChiTiet.idMauSac.ten}}</span>
+
+                                                    <label
+                                                        style="font-weight: 600;font-size: 10px;color: #333;margin-left: 10px;">Kích
+                                                        cỡ:</label>
+                                                    <span>{{cartDetail.idSanPhamChiTiet.idKichCo.kichCo}}</span>
+                                                </div>
+
+                                            </a>
+
+                                        </div>
+
+                                        <div style="
+                                        display: inline-flex;
+                                        width: 30%;
+                                        align-items: center;
+                                        justify-content: center;">
+                                            <input style="float: left;
+ background: #f3f4f4;
+ border: solid 1px #f3f4f4;
+ cursor: pointer;
+ font-weight: 600;
+ font-size: 16px;
+ outline: none;
+ height: 32px;
+ width: 32px;
+ text-align: center;
+ border-radius: 0;" ng-click="minusQuantity(cartDetail)" value="-">
+
+                                            <input min="1" value="1" disabled ng-change="changeQuantity(cartDetail)" ng-model="cartDetail.soLuong" style="    
+background: #fff;
+font-weight: 600;
+height: 32px;
+padding: 0;
+text-align: center;
+width: 70px;
+border: 1px solid #f3f4f4;
+border-left: none;
+border-right: none;
+border-radius: 1px;
+float: left;
+-webkit-appearance: none;">
+
+                                            <input style="float: left;
+background: #f3f4f4;
+border: solid 1px #f3f4f4;
+cursor: pointer;
+font-weight: 600;
+font-size: 16px;
+outline: none;
+height: 32px;
+width: 32px;
+text-align: center;
+border-radius: 0;" ng-click="plusQuantity(cartDetail)" value="+">
+                                        </div>
+
+                                        <div style="   
+                                         display: inline-flex;
+                                        width: 15%;
+                                        font-size: 14px;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        align-items: center;">
+                                            <span>{{formatToVND(cartDetail.idSanPhamChiTiet.idDotGiamGia == null
+                                                ? cartDetail.idSanPhamChiTiet.donGia : (100 -
+                                                cartDetail.idSanPhamChiTiet.idDotGiamGia.phanTramGiam)/100 *
+                                                cartDetail.idSanPhamChiTiet.donGia)}}</span>
+                                            <del
+                                                ng-if="cartDetail.idSanPhamChiTiet.idDotGiamGia != null">({{formatToVND(cartDetail.idSanPhamChiTiet.donGia)}})</del>
+                                        </div>
+
+                                        <div style="
+                                        display: inline-flex;
+                                        text-align: center;
+                                        width: 25%;
+                                        flex-direction: column;
+                                        justify-content: center;
+                                        font-size: 15px;
+                                        font-weight: bold;
+                                        color: #a73340;">
+                                            <div>
+                                                <label style="font-size: 14px;color: #777;font-weight: 200;">Thành
+                                                    tiền:</label>
+                                                <span style="font-size: 14px;">{{formatToVND(
+                                                    cartDetail.idSanPhamChiTiet.idDotGiamGia == null ?
+                                                    cartDetail.soLuong * cartDetail.idSanPhamChiTiet.donGia :
+                                                    cartDetail.soLuong * cartDetail.idSanPhamChiTiet.donGia * (100 -
+                                                    cartDetail.idSanPhamChiTiet.idDotGiamGia.phanTramGiam) / 100)
+                                                    }}</span>
+                                            </div>
+
+                                            <div ng-click="removeCartDetail(cartDetail)">
+                                                <i class="ti ti-trash-x"></i>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <!-- Cart Calculation Area -->
+                            <div class="cart-calculator-wrapper">
+                                <div class="cart-calculate-items" style="    border: 1px solid #dfe0e1;padding: 15px;
+                                margin-bottom: 15px;background-color: #fff;">
+                                    <h2 style="font-size: 17px;
+                                    font-weight: bold;
+                                    margin-top: 10px;
+                                    margin-bottom: 15px;">Thông tin đơn hàng
+                                    </h2>
+
+                                    <div style="    
+                                    padding-bottom: 10px;
+                                    border-top: 1px dotted #dfe0e1;
+                                    padding-top: 15px;color:#333;display: flex;
+                                    justify-content: space-between;font-size: 14px;
+                                    font-weight: bold;">
+                                        <div>Tổng tiền:</div>
+                                        <div>{{formatToVND(subTotal)}}</div>
+                                    </div>
+
+                                    <div style="   
+                                    border-top: 1px dotted #dfe0e1;
+                                    font-size: 12px; font-weight: 400;
+                                    padding-top: 10px;
+                                    text-align: center;">
+                                        <p>Bạn có thể nhập mã giảm giá ở trang thanh toán</p>
+                                    </div>
+                                </div>
+                                <a style="
+                                 display: block;
+                                 background: #3a4863;
+                                 color: #fff;
+                                 text-decoration: none;
+                                 text-transform: uppercase;
+                                 padding: 10px 5px;
+                                 text-align: center;
+                                 font-size: 15px;
+                                 font-weight: bold;
+                                 border-radius: 0;" href="#!thanh-toan" class="btn d-block">Thanh toán</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- cart main wrapper end -->
+    </main>
+    <!-- main wrapper end -->
+
+    <br />
+    <br>
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+
+    <!-- toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+
+</html>

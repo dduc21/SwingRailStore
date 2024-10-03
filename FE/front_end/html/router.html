@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Swing Rail Store</title>
+  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+
+  <!-- CSS Custom Files -->
+  <link rel="stylesheet" href="../assets/css/styles.min.css" />
+  <link rel="stylesheet" href="../assets/css/router_custom.css" />
+  <link rel="stylesheet" href="../assets/css/customers/add_customer.css" />
+  <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+
+  <!-- FONT Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- DATE picker -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+  <!-- ICON -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+</head>
+
+<body ng-app="main-app" style="font-family: 'Quicksand', sans-serif!important;">
+  <!--  Body Wrapper -->
+  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    data-sidebar-position="fixed" data-header-position="fixed" ng-controller="AngularController">
+    <!-- Sidebar Start -->
+    <aside class="left-sidebar" ng-model="view">
+      <!-- Sidebar scroll-->
+      <div>
+        <div class="brand-logo d-flex align-items-center justify-content-between">
+          <a href="" class="text-nowrap logo-img" style="
+            font-size: 24px;
+            font-weight: 900;
+          ">
+            <img style="width: 45%;margin-left: 48px;"
+              src="data:image/png;base64,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" alt="">
+          </a>
+          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <i class="ti ti-x fs-8"></i>
+          </div>
+        </div>
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+          <ul id="sidebarnav">
+
+            <li ng-if="employee.chucVu.ma == 1" class="sidebar-item">
+              <a class="sidebar-link" href="#!thong-ke" aria-expanded="false" onclick="removeOption()">
+                <span>
+                  <i class="ti ti-layout-dashboard"></i>
+                </span>
+                <span class="hide-menu">Thống kê</span>
+              </a>
+            </li>
+
+            <li class="sidebar-item" onclick="removeOption()">
+              <a class="sidebar-link active" aria-expanded="false" href="#!ban-hang">
+                <span>
+                  <i class="ti ti-garden-cart"></i>
+                </span>
+                <span class="hide-menu">Bán hàng tại quầy</span>
+              </a>
+            </li>
+
+            <li class="sidebar-item" onclick="removeOption()">
+              <a class="sidebar-link" aria-expanded="false" href="#!hoa-don">
+                <span>
+                  <i class="ti ti-receipt-2"></i>
+                </span>
+                <span class="hide-menu">Quản lí đơn hàng</span>
+              </a>
+            </li>
+
+            <li ng-if="employee.chucVu.ma == 1" class="OptionContainer sidebar-item">
+              <a class="OptionHead sidebar-link" onclick="ToggleOption(this)" style="cursor: pointer;">
+                <div style="display: flex;">
+                  <span>
+                    <i class="ti ti-shoe" style="font-family: tabler-icons !important;
+                   speak: none;
+                   font-style: normal;
+                   font-weight: normal;
+                   font-variant: normal;
+                   text-transform: none;
+                   line-height: 1;
+                   -webkit-font-smoothing: antialiased;
+                   font-size: 21px;"></i>
+                  </span>
+                  <div style="margin-left: 16px;">Quản lý sản phẩm</div>
+                </div>
+
+                <div><i class="fa-solid fa-chevron-down" x="0px" y="0px" width="20" height="20">
+                  </i></div>
+              </a>
+              <div class="OptionBody sidebar-item">
+                <a href="#!san-pham" class="sidebar-link OptionContainer" style="color: #2A3547; display: block;"
+                  onclick="selectSubMenu(this)">
+                  <span style="color: #2A3547; transform: translateX(48px); display: inline-block;">
+                    Sản phẩm
+                  </span>
+                </a>
+
+                <a href="#!the-loai" class="sidebar-link OptionContainer" style="color: #2A3547; display: block;"
+                  onclick="selectSubMenu(this)">
+                  <span style="color: #2A3547; transform: translateX(48px); display: inline-block;">
+                    Thể loại
+                  </span>
+                </a>
+
+                <a href="#!mau-sac" class="sidebar-link OptionContainer" style="color: #2A3547; display: block;"
+                  onclick="selectSubMenu(this)">
+                  <span style="color: #2A3547; transform: translateX(48px); display: inline-block;">
+                    Màu sắc
+                  </span>
+                </a>
+
+                <a href="#!kich-co" class="sidebar-link OptionContainer" style="color: #2A3547; display: block;"
+                  onclick="selectSubMenu(this)">
+                  <span style="color: #2A3547; transform: translateX(48px); display: inline-block;">
+                    Kích cỡ
+                  </span>
+                </a>
+
+                <a href="#!thuong-hieu" class="sidebar-link OptionContainer" style="color: #2A3547; display: block;"
+                  onclick="selectSubMenu(this)">
+                  <span style="color: #2A3547; transform: translateX(48px); display: inline-block;">
+                    Thương hiệu
+                  </span>
+                </a>
+
+              </div>
+            </li>
+
+            <li class="OptionContainer sidebar-item">
+              <a class="OptionHead sidebar-link" onclick="ToggleOption(this)" style="cursor: pointer;">
+                <div style="display: flex;">
+                  <span>
+                    <i class="ti ti-users" style="font-family: tabler-icons !important;
+                                                  speak: none;
+                                                  font-style: normal;
+                                                  font-weight: normal;
+                                                  font-variant: normal;
+                                                  text-transform: none;
+                                                  line-height: 1;
+                                                  -webkit-font-smoothing: antialiased;
+                                                  font-size: 21px;"></i>
+                  </span>
+                  <div style="margin-left: 16px;">Quản lý tài khoản</div>
+                </div>
+
+                <div><i class="fa-solid fa-chevron-down" x="0px" y="0px" width="20" height="20">
+                  </i></div>
+              </a>
+              <div class="OptionBody sidebar-item">
+                <a ng-if="employee.chucVu.ma == 1" href="#!nhan-vien" class="sidebar-link OptionContainer"
+                  style="color: #2A3547; display: block;" onclick="selectSubMenu(this)">
+                  <span style="color: #2A3547; transform: translateX(48px); display: inline-block;">
+                    Nhân viên
+                  </span>
+                </a>
+
+                <a href="#!khach-hang" class="sidebar-link OptionContainer" style="color: #2A3547; display: block;"
+                  onclick="selectSubMenu(this)">
+                  <span style="color: #2A3547; transform: translateX(48px); display: inline-block;">
+                    Khách hàng
+                  </span>
+                </a>
+              </div>
+            </li>
+
+            <li ng-if="employee.chucVu.ma == 1" class="sidebar-item" onclick="removeOption()">
+              <a class="sidebar-link" aria-expanded="false" href="#!dot-giam-gia">
+                <span>
+                  <i class="ti ti-discount-2"></i>
+                </span>
+                <span class="hide-menu">Đợt giảm giá</span>
+              </a>
+            </li>
+
+            <li ng-if="employee.chucVu.ma == 1" class="sidebar-item" onclick="removeOption()">
+              <a class="sidebar-link" href="#!phieu-giam-gia" aria-expanded="false">
+                <span>
+                  <i class="ti ti-gift"></i>
+                </span>
+                <span class="hide-menu">Phiếu giảm giá</span>
+              </a>
+            </li>
+
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+
+    <div class="body-wrapper">
+      <!--  Header Start -->
+      <header class="app-header" style="border-bottom: 1px solid #3333331f;">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item d-block d-xl-none">
+              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                <i class="ti ti-menu-2"></i>
+              </a>
+            </li>
+
+          </ul>
+          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+              <li class="nav-item dropdown">
+                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" class="rounded-circle"
+                    ng-if="employee != null && employee.avatar == null ">
+                  <img src="{{employee.avatar}}" alt="" width="35" height="35" class="rounded-circle"
+                    ng-if="employee != null && employee.avatar != null ">
+                  <img src="{{employee.avatar}}" alt="" width="35" height="35" class="rounded-circle"
+                    ng-if="employee == null ">
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                  <div class="message-body">
+                    <a data-bs-toggle="modal" data-bs-target="#changePassModal" style="cursor: pointer;"
+                      class="d-flex align-items-center gap-2 dropdown-item">
+                      <i class="ti ti-edit-circle fs-6"></i>
+                      <p class="mb-0 fs-3">Đổi mật khẩu</p>
+                    </a>
+                    <div ng-click="logout()" class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng
+                      xuất</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!--  Header End -->
+      <!-- <div class="container-fluid">
+        <div ng-include="view"></div>
+    </div>
+    </div> -->
+      <div class="container-fluid">
+        <div ng-view></div>
+      </div>
+    </div>
+
+    <!-- brand modal -->
+    <div class="modal fade" id="changePassModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel">Thay đổi mật khẩu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <label for="oldPassModal" class="form-label">Nhập mật khẩu cũ</label>
+              <input placeholder="Nhập nhập mật khẩu cũ...." style="height: 40px;" type="password" class="form-control"
+                ng-model="oldPass" id="oldPassModal">
+            </div>
+
+            <div>
+              <label for="newPassModal" class="form-label">Nhập mật khẩu mới</label>
+              <input placeholder="Nhập mật khẩu mới...." style="height: 40px;" type="password" class="form-control"
+                ng-model="newPass" id="newPassModal">
+            </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              <i class="ti ti-x" style="
+                                             display: inline-block;
+                                             font-size: 18px;
+                                             transform: translateY(2px);
+                                         "></i>
+              Đóng</button>
+            <button type="button" class="btn btn-primary" ng-click="changePass()" style="margin-right: 15px;">
+              <i class="ti ti-edit" style="
+                                 display: inline-block;
+                                 font-size: 18px;
+                                 transform: translateY(2px);
+                             "></i>
+              Thay đổi
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/sidebarmenu.js"></script>
+  <script src="../assets/js/app.min.js"></script>
+  <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+  <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+  <script src="../assets/js/dashboard.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+    integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- notification -->
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+  <!-- sweet alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- angular js  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <!-- router -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"
+    integrity="sha512-y1qD3hz/IAf8W4+/UMLZ+CN6LIoUGi7srWJ3r1R17Hid8x0yXe+1B5ZelkaL1Mjzedzu0Cg3HBvDG02SAgSzBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- axios -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <!-- Production -->
+  <script src="https://unpkg.com/@popperjs/core@2"></script>
+  <script src="https://unpkg.com/tippy.js@6"></script>
+
+  <!-- pagination -->
+  <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+
+  <!-- chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- date picker -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+  <!-- QR code -->
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
+  <!-- sockjs -->
+  <script src="../lib/node_modules/angular-websocket/dist/angular-websocket.js"></script>
+  <script src="../lib//node_modules/sockjs-client/dist/sockjs.min.js"></script>
+  <script src="../lib//node_modules/stompjs/lib/stomp.js"></script>
+
+  <!-- file custom -->
+  <script>
+    var sub_menus = [];
+    var sub_menu_actives = [];
+    var menu_active = ""
+    var main_app = angular.module('main-app', [
+      'ngRoute',
+      'ui.bootstrap'
+    ]);
+
+    main_app.controller('AngularController',
+      function ($scope, $http) {
+        $scope.employee = JSON.parse(localStorage.getItem("employee"))
+
+        $scope.loadData = () => {
+          $http.get('http://localhost:8080/employee/get-employee/' + $scope.employee.id).then((response) => {
+            $scope.employee = response.data
+            console.log($scope.employee)
+          })
+        }
+
+        $scope.loadData()
+
+        $scope.logout = () => {
+          localStorage.removeItem("employee")
+          window.location.href = "/front_end/html/login.html"
+        }
+
+        $scope.changePass = () => {
+          var changePassModal = document.querySelector("#changePassModal")
+          var modal = bootstrap.Modal.getOrCreateInstance(changePassModal)
+
+          axios.put(`http://localhost:8080/employee/change-pass?oldPass=${$scope.oldPass}&newPass=${$scope.newPass}&id=${$scope.employee.id}`)
+            .then((response) => {
+              toastr.success("Đổi mật khẩu thành công!!!");
+              modal.hide()
+              $scope.oldPass = ""
+              $scope.newPass = ""
+            }).catch((error) => {
+              toastr.error(error.response.data.message)
+            })
+        }
+      });
+
+    // router
+    main_app.config(function ($routeProvider) {
+      $routeProvider
+        .when("/thong-ke", { templateUrl: "statistical/statistical.html", controller: "statisticalController" })
+
+        // Phiếu giảm giá
+        .when("/phieu-giam-gia", { templateUrl: "vouchers/voucher.html", controller: "voucherController as list" })
+        .when("/them-phieu-giam-gia", { templateUrl: "vouchers/add_voucher.html", controller: "addVoucherController" })
+        .when("/sua-phieu-giam-gia/:id", { templateUrl: "vouchers/edit_voucher.html", controller: "editVoucherController" })
+
+        // Đợt giảm giá 
+        .when("/dot-giam-gia", { templateUrl: "sales/sale.html", controller: "saleController" })
+        .when("/them-dot-giam-gia", { templateUrl: "sales/add_sale.html", controller: "addSaleController" })
+        .when("/sua-dot-giam-gia/:id", { templateUrl: "sales/edit_sale.html", controller: "editSaleController" })
+
+        // Nhân viên
+        .when("/nhan-vien", { templateUrl: "employees/employee.html", controller: "employeeController" })
+        .when("/them-nhan-vien", { templateUrl: "employees/add_employee.html", controller: "addEmployeeController" })
+        .when("/sua-nhan-vien/:id", { templateUrl: "employees/edit_employee.html", controller: "editEmployeeController" })
+
+        // Khách hàng 
+        .when("/khach-hang", { templateUrl: "customers/customer.html", controller: "customerController" })
+        .when("/them-khach-hang", { templateUrl: "customers/add_customer.html", controller: "addCustomerController" })
+        .when("/sua-khach-hang/:id", { templateUrl: "customers/edit_customer.html", controller: "editCustomerController" })
+
+        // Thương hiệu
+        .when("/thuong-hieu", { templateUrl: "products/brands/brand.html", controller: "brandController" })
+
+        // Kích cỡ
+        .when("/kich-co", { templateUrl: "products/sizes/size.html", controller: "sizeController" })
+
+        // Màu sắc
+        .when("/mau-sac", { templateUrl: "products/colors/color.html", controller: "colorController" })
+
+        // Thể loại
+        .when("/the-loai", { templateUrl: "products/types/type.html", controller: "typeController" })
+
+        // Sản phẩm
+        .when("/san-pham", { templateUrl: "products/products/product.html", controller: "productController" })
+        .when("/them-san-pham", { templateUrl: "products/products/add_product.html", controller: "addProductController" })
+        .when("/sua-san-pham/:id", { templateUrl: "products/products/edit_product.html", controller: "editProductController" })
+        .when("/chi-tiet-san-pham/:id", { templateUrl: "products/products/product_detail.html", controller: "productDetailController" })
+
+        // Hóa đơn
+        .when("/hoa-don", { templateUrl: "bills/bill.html", controller: "billController" })
+        .when("/chi-tiet-hoa-don/:id", { templateUrl: "bills/bill_detail.html", controller: "billDetailController" })
+
+        // point of sale
+        .when("/ban-hang", { templateUrl: "bills/point_of_sale.html", controller: "pointOfSaleController" })
+
+        // refund
+        .when("/hoan-tien", { templateUrl: "refunds/refund.html", controller: "refundController" })
+
+        // mặc định 
+        .otherwise({
+          redirectTo: "/ban-hang"
+        })
+    })
+
+    function ToggleOption(element) {
+      menu_active = element
+      element = element.getElementsByClassName("fa-chevron-down")[0];
+      sub_menus.push(element);
+
+      if (element.parentElement.parentElement.parentElement.classList.contains("open")) {
+        element.parentElement.parentElement.parentElement.classList.remove("open");
+      }
+      else {
+        element.parentElement.parentElement.parentElement.classList.add("open");
+      }
+    }
+
+    function removeOption() {
+
+      if (sub_menu_actives.length > 0) {
+        for (var i = 0; i < sub_menu_actives.length; i++) {
+          if (sub_menu_actives[i].classList.contains("sub_menu_active")) {
+            sub_menu_actives[i].classList.remove("sub_menu_active");
+          }
+        }
+      }
+
+      for (var i = 0; i < sub_menus.length; i++) {
+        if (sub_menus[i].parentElement.parentElement.parentElement.classList.contains("open")) {
+          sub_menus[i].parentElement.parentElement.parentElement.classList.remove("open");
+        }
+      }
+    }
+
+    function selectSubMenu(element) {
+      if (menu_active.classList.contains("active")) {
+        menu_active.classList.remove("active");
+      }
+
+      if (sub_menu_actives.length > 0) {
+        for (var i = 0; i < sub_menu_actives.length; i++) {
+          if (sub_menu_actives[i].classList.contains("sub_menu_active")) {
+            sub_menu_actives[i].classList.remove("sub_menu_active");
+          }
+        }
+      }
+
+      sub_menu_actives.push(element)
+      element.classList.add("sub_menu_active");
+    }
+
+  </script>
+  <!-- VOUCHER -->
+  <script src="../assets/js/vouchers/voucher.js"></script>
+  <script src="../assets/js/vouchers/add_voucher.js"></script>
+  <script src="../assets/js/vouchers/edit_voucher.js"></script>
+
+  <!-- DOT GIAM GIA -->
+  <script src="../assets/js/sales/sale.js"></script>
+  <script src="../assets/js/sales/add_sale.js"></script>
+  <script src="../assets/js/sales/edit_sale.js"></script>
+
+  <!-- KHACH HANG -->
+  <script src="../assets/js/cutomers/customer.js"></script>
+  <script src="../assets/js/cutomers/add_customer.js"></script>
+  <script src="../assets/js/cutomers/edit_customer.js"></script>
+
+  <!-- NHAN VIEN -->
+  <script src="../assets/js/employees/employee.js"></script>
+  <script src="../assets/js/employees/add_employee.js"></script>
+  <script src="../assets/js/employees/edit_employee.js"></script>
+
+  <!-- THUONG HIEU -->
+  <script src="../assets/js/products/brands/brand.js"></script>
+
+  <!-- KICH CO -->
+  <script src="../assets/js/products/sizes/size.js"></script>
+
+  <!-- MAU SAC -->
+  <script src="../assets/js/products/colors/color.js"></script>
+
+  <!-- THE LOAI -->
+  <script src="../assets/js/products/types/type.js"></script>
+
+  <!-- SAN PHAM -->
+  <script src="../assets/js/products/products/product.js"></script>
+  <script src="../assets/js/products/products/add_product.js"></script>
+  <script src="../assets/js/products/products/product_detail.js"></script>
+
+  <!-- BAN HANG -->
+  <script src="../assets/js/bills/point_of_sale.js"></script>
+  <script src="../assets/js/bills/bill.js"></script>
+  <script src="../assets/js/bills/bill_detail.js"></script>
+
+  <!-- THONG KE -->
+  <script src="../assets/js/statistical/statistical.js"></script>
+
+</body>
+
+</html>

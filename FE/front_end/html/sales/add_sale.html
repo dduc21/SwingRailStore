@@ -1,0 +1,247 @@
+<div>
+  <div class="row">
+    <div class="col-lg-12 d-flex align-items-strech">
+      <div class="card w-100">
+        <div class="card-body">
+
+          <!-- bread crumbs -->
+          <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+            <div class="mb-3 mb-sm-0">
+              <i class="ti ti-home-2"></i> / <a href="#!dot-giam-gia">Danh sách đợt giảm giá</a> / <span
+                style="color: black;display: inline-block;">Thêm đợt giảm giá</span>
+            </div>
+          </div>
+
+          <!-- form -->
+          <div style="display: flex;justify-content: space-between;margin-top: 10px;">
+
+            <div style="width: 48%;">
+              <div style="display: flex;justify-content: space-between;align-items: center;">
+                <div style="width: 48%;">
+                  <label for="exampleInputEmail1" class="form-label">Tên đợt giảm giá <sup
+                      style="color: #fa0000a8;">*</sup></label>
+                  <input placeholder="Nhập tên phiếu giảm giá...." style="height: 40px;" type="text"
+                    class="form-control" ng-model="sale.ten" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+
+                <div style="width: 48%;">
+                  <label for="exampleInputEmail1" class="form-label">Giá trị (%) <sup style="color: #fa0000a8;">*</sup>
+                  </label>
+                  <input placeholder="Nhập phần trăm...." style="height: 40px;" type="number" class="form-control"
+                    onkeydown="return event.keyCode !== 69 && event.keyCode !== 187 && event.keyCode !== 189"
+                    id="exampleInputEmail1" ng-model="sale.phanTramGiam" aria-describedby="emailHelp">
+                </div>
+
+              </div>
+
+              <div style="display: flex;justify-content: space-between;align-items: center;margin-top: 10px;">
+
+                <div style="width: 48%;">
+                  <label for="exampleInputEmail1" class="form-label">Ngày bắt đầu <sup style="color: #fa0000a8;">*</sup>
+                  </label>
+                  <input class="form-control" id="dateandtime-input" type="datetime-local"
+                    placeholder="dd/mm/aaaa hh:mm" ng-model="sale.ngayBatDau" data-input="data-input" />
+                </div>
+
+                <div style="width: 48%;">
+                  <label for="exampleInputEmail1" class="form-label">Ngày kết thúc <sup
+                      style="color: #fa0000a8;">*</sup>
+                  </label>
+                  <input class="form-control" id="dateandtime-input" type="datetime-local"
+                    placeholder="dd/mm/aaaa hh:mm" ng-model="sale.ngayKetThuc" data-input="data-input" />
+                </div>
+
+              </div>
+
+              <div style="margin-top: 15px; float: right;">
+                <button type="submit" class="btn btn-primary" ng-click="addSale()"> 
+                  <i class="ti ti-plus"
+                  style="
+                            display: inline-block;
+                            font-size: 18px;
+                            transform: translateY(2px);
+                        "
+                  ></i> 
+                  Thêm đợt giảm giá</button>
+              </div>
+            </div>
+
+            <div style="width: 50%;">
+
+              <label for="exampleInputEmail1" class="form-label">Danh sách sản phẩm</label>
+              <input placeholder="Nhập tên sản phẩm...." style="height: 40px;" type="text" class="form-control"
+                ng-model="keyProduct" id="exampleInputEmail1" aria-describedby="emailHelp" ng-keyup="searchProduct()">
+              <br />
+              <table class="table" style="text-align: center;">
+                <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%)">
+                  <tr>
+                    <th>
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                        ng-model="checkedProduct" ng-click="chooseProduct('all')">
+                    </th>
+                    <th>
+                      <h6 class="fw-semibold mb-0 text-center" style="border-right: 1px solid #b1acac;">#</h6>
+                    </th>
+                    <th class="border-bottom-0 text-center">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên</h6>
+                    </th>
+                    <th class="border-bottom-0 text-center">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Thể loại</h6>
+                    </th>
+                    <th class="border-bottom-0 text-center">
+                      <h6 class="fw-semibold mb-0">Thương hiệu</h6>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="product in products.content">
+                    <td>
+                      <input class="form-check-input " type="checkbox" value="" id="product-{{product.id}}"
+                        ng-click="chooseProduct(product)">
+                    </td>
+                    <td>
+                      <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+                    </td>
+                    <td>
+                      {{product.ten}}
+                    </td>
+                    <td>
+                      <span class="fw-normal">{{product.tenTheLoai}}</span>
+                    </td>
+                    <td>
+                      <span class="fw-normal">{{product.tenThuongHieu}}</span>
+                    </td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+
+              <!-- Pagination -->
+              <span ng-show="numPages!=0">
+                <uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage"
+                  class="pagination-sm" previous-text="‹" next-text="›" first-text="«" last-text="»" style="
+                width: 16%;
+                margin-left: auto;
+                margin-right: auto;
+                " max-size="3" ng-change="pageChanged()"></uib-pagination>
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="card" style="padding:20px" ng-if="productChooses.length > 0">
+            <label for="exampleInputEmail1" style="margin-bottom: 10px;" class="form-label">Danh sách sản phẩm chi
+              tiết</label>
+
+            <div class="d-sm-flex d-block align-items-center justify-content-between" style="margin-bottom: 15px;">
+              <div style="width: 24%;">
+                <label for="exampleInputEmail1" class="form-label" style="font-weight: 400;">Tên sản phẩm chi tiết</label>
+                <input placeholder="Nhập tên sản phẩm chi tiết...." style="height: 40px;" type="text" class="form-control"
+                  ng-model="key.key" id="exampleInputEmail1" aria-describedby="emailHelp" ng-keyup="searchProductDetail()">
+              </div>
+
+              <div style="width: 24%;">
+                <label for="exampleInputEmail1" class="form-label" style="font-weight: 400;">Kích cỡ</label>
+                <select class="form-select" style="width: 88%;" id="city" name="city" 
+                ng-change="searchProductDetail()"  
+                placeholder="Chọn trạng thái" ng-model="key.idKichCo">
+                  <option value="" selected> -- Chọn kích cỡ --</option>
+                  <option ng-repeat="size in sizes" value="{{size.id}}">{{size.kichCo}}</option>
+                </select>
+              </div>
+
+              <div style="width: 24%;">
+                <label for="exampleInputEmail1" class="form-label" style="font-weight: 400;">Màu sắc</label>
+                <select class="form-select" style="width: 88%;" id="city" name="city" 
+                ng-change="searchProductDetail()"  
+                placeholder="Chọn trạng thái" ng-model="key.idMauSac">
+                  <option value="" selected> -- Chọn màu sắc --</option>
+                  <option ng-repeat="color in colors" value="{{color.id}}">{{color.ten}}</option>
+                </select>
+              </div>
+
+              <div style="width: 24%;">
+                <label for="exampleInputEmail1" class="form-label" style="font-weight: 400;">Thể loại</label>
+                <select class="form-select" style="width: 88%;" id="city" name="city" 
+                  ng-change="searchProductDetail()"
+                  placeholder="Chọn trạng thái" ng-model="key.idTheLoai">
+                  <option value="" selected> -- Chọn thể loại --</option>
+                  <option ng-repeat="type in types" value="{{type.id}}">{{type.ten}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table" style="text-align: center;">
+                <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%)">
+                  <tr>
+                    <th>
+                      <input class="form-check-input " type="checkbox" value="" ng-model="checkedAllProductDetails"
+                        ng-click="chooseProductDetail('all')">
+                    </th>
+                    <th style="width: 7%;">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">#</h6>
+                    </th>
+                    <th class="border-bottom-0" style="width: 18%;">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Ảnh</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên sản phẩm</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Số lượng</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Giá bán</h6>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="product in productDetails.content" ng-if="product.idDotGiamGia == null">
+                    <td>
+                      <input class="form-check-input " type="checkbox" value="" id="product-detail-{{product.id}}"
+                        ng-click="chooseProductDetail(product)">
+                    </td>
+                    <td>
+                      <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+                    </td>
+                    <td>
+                      <img ng-repeat="image in getAllImagesByIDProductDetail(product.id)" src="{{image.duongDan}}"
+                        style="width: 100px;height: 100px;">
+                      <div id="image-{{product.id}}">
+                      </div>
+
+                    </td>
+                    <td style="color: #333;">
+                      {{product.idSanPham.ten}} [{{product.idMauSac.ten}} - {{product.idKichCo.kichCo}}]
+                    </td>
+                    <td>
+                      {{product.soLuongTon}}
+                    </td>
+                    <td>
+                      {{formatToVND(product.donGia)}}
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+            <span ng-show="numPages!=0">
+              <uib-pagination items-per-page="itemsPerPageDetail" total-items="totalItemsDetail"
+                ng-model="currentPageDetail" class="pagination-sm" previous-text="‹" next-text="›" first-text="«"
+                last-text="»" style="
+                    width: 16%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    " max-size="3" ng-change="pageChangedPageDetail()"></uib-pagination>
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>

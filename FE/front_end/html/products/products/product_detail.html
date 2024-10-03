@@ -1,0 +1,314 @@
+<div>
+  <div class="col-lg-12 d-flex align-items-strech">
+    <div class="card w-100">
+      <div class="card-body">
+
+        <!-- bread crumbs -->
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+          <div class="mb-3 mb-sm-0">
+            <i class="ti ti-home-2"></i> / <span style="color: black;display: inline-block;">Danh sách sản phẩm</span>
+          </div>
+        </div>
+
+        <!-- searh bar -->
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+
+          <div style="display: flex; justify-content: space-between;width: 45%;">
+
+            <div style="width: 48%;margin-left: 10px;">
+              <div style="color: black;margin-bottom: 5px;">
+                Kích cỡ
+              </div>
+              <select class="form-select" style="width: 88%;" id="city" name="city" ng-change="searchProductDetail()"
+                placeholder="Chọn trạng thái" ng-model="idSize">
+                <option value="" selected>Chọn kích cỡ</option>
+                <option ng-repeat="size in sizes" value="{{size.id}}">{{size.kichCo}}</option>
+              </select>
+            </div>
+
+            <div style="width: 50%;">
+              <div style="color: black;margin-bottom: 5px;">
+                Màu sắc
+              </div>
+              <select class="form-select" style="width: 88%;" id="city" name="city" ng-change="searchProductDetail()"
+                placeholder="Chọn trạng thái" ng-model="idColor">
+                <option value="" selected>Chọn màu sắc</option>
+                <option ng-repeat="color in colors" value="{{color.id}}">{{color.ten}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top: 17px;">
+            <a href="#!them-san-pham" type="button" class="btn btn-primary m-1"
+              style="height: 40px;margin-bottom: 5px;">
+              <i class="ti ti-circle-plus" style="
+                            display: inline-block;
+                            font-size: 18px;
+                            line-height: 20px;
+                            transform: translateY(2px);
+                        "></i>
+              Thêm sản phẩm</a>
+          </div>
+
+        </div>
+
+        <!-- table -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%)">
+              <tr>
+                <th style="width: 7%;">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">#</h6>
+                </th>
+                <th class="border-bottom-0" style="width: 18%;">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Ảnh</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên sản phẩm</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Số lượng</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Giá bán</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Kích thước</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Màu sắc</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Trạng thái</h6>
+                </th>
+
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Hành động</h6>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="product in productDetails.content">
+                <td class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+                </td>
+                <td class="border-bottom-0" style="position: relative;">
+                  <img ng-repeat="image in getAllImagesByIDProductDetail(product.id)" src="{{image.duongDan}}"
+                    style="width: 100px;height: 100px;">
+                  <div id="image-{{product.id}}">
+
+                  </div>
+                  <div class="ribbon" ng-if="product.idDotGiamGia !== null && product.idDotGiamGia.trangThai === 1">
+                    <span>- {{product.idDotGiamGia.phanTramGiam}}%</span>
+                  </div>
+
+                  <div class="bagde-flag-wrap" ng-if="product.idDotGiamGia !== null" hidden>
+                    <a href="#" class="bagde-flag"> - {{product.idDotGiamGia.phanTramGiam}} % </a>
+                  </div>
+
+                </td>
+                <td class="border-bottom-0">
+                  {{product.idSanPham.ten}}
+                </td>
+                <td class="border-bottom-0">
+                  {{product.soLuongTon}}
+                </td>
+                <td class="border-bottom-0">
+                  {{formatToVND(product.donGia)}}
+                </td>
+                <td class="border-bottom-0">
+                  <span class="fw-normal">{{product.idKichCo.kichCo}}</span>
+                </td>
+                <td class="border-bottom-0">
+                  <span class="fw-normal">{{product.idMauSac.ten}}</span>
+                </td>
+                <td class="border-bottom-0">
+                  <div class="d-flex align-items-center gap-2" ng-if="product.trangThai == 0">
+                    <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                                padding: 11px;
+                                font-size: 11px;">Ngừng kinh doanh</span>
+                  </div>
+
+                  <div class="d-flex align-items-center gap-2" ng-if="product.trangThai == 1">
+                    <span class="badge bg-primary rounded-3 fw-semibold" style="    
+                              padding: 11px;
+                              font-size: 11px;">Đang kinh doanh</span>
+                  </div>
+
+                </td>
+                <td class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0 fs-4">
+                    <button style="border: none;background-color: transparent;" data-bs-target="#editProductDetailModal"
+                      data-bs-toggle="modal" ng-click="setProductDetail(product)">
+                      <i style="
+                              display: inline-block;
+                              font-size: 23px;  
+                              color: #d4d42e;" class="ti ti-edit"></i>
+                    </button>
+
+                  </h6>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <span ng-show="numPages!=0">
+          <uib-pagination items-per-page="itemsPerPageProductDetail" total-items="totalItemsProductDetail"
+            ng-model="currentPageProductDetail" class="pagination-sm" previous-text="‹" next-text="›" first-text="«"
+            last-text="»" style="
+                  width: 16%;
+                  margin-left: auto;
+                  margin-right: auto;
+                  " max-size="3" ng-change="pageChangedProductDetail()"></uib-pagination>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- customer modal -->
+<div class="modal fade" id="editProductDetailModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 861px;right: 155px;">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLabel">Sửa chi tiết sản phẩm</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+      </div>
+      <div class="modal-body" style="padding-left: 34px;padding-right: 34px;">
+        <div>
+          <div>
+            <label for="exampleInputEmail1" class="form-label" style="width: 150px;">Tên sản phẩm: </label>
+            <span>{{product_detail.idSanPham.ten}}</span>
+          </div>
+
+          <div style=" margin-top: 20px;display: flex;justify-content: space-between;">
+            <div style="width: 48%;">
+              <label for="exampleInputEmail1" class="form-label" style="width: 150px;">Thương hiệu:
+              </label>
+              <span>{{product_detail.idSanPham.idThuongHieu.ten}}</span>
+            </div>
+
+            <div style="width: 48%;">
+              <label for="exampleInputEmail1" class="form-label" style="width: 150px;">Thể loại:
+              </label>
+              <span>{{product_detail.idSanPham.idTheLoai.ten}}</span>
+            </div>
+
+          </div>
+
+          <div style=" margin-top: 20px;display: flex;justify-content: space-between;">
+            <div style="width: 48%;">
+              <label for="exampleInputEmail1" class="form-label">Màu sắc
+              </label>
+
+              <span id="colorProductDetail">
+              </span>
+            </div>
+
+            <div style="width: 48%;">
+              <label for="exampleInputEmail1" class="form-label">Kích cỡ
+              </label>
+
+              <span id="sizeProductDetail">
+
+              </span>
+            </div>
+
+          </div>
+
+          <div style=" margin-top: 20px;display: flex;justify-content: space-between;">
+            <div style="width: 48%;">
+              <label for="exampleInputEmail1" class="form-label">Số lượng tồn
+              </label>
+              <input placeholder="Nhập số điện thoại..." style="height: 40px;" type="number" class="form-control"
+                onkeydown="return event.keyCode !== 69 && event.keyCode !== 187 && event.keyCode !== 189"
+                id="exampleInputEmail1" ng-model="product_detail.soLuongTon" aria-describedby="emailHelp">
+            </div>
+
+            <div style="width: 48%;">
+              <label for="exampleInputEmail1" class="form-label">Đơn giá
+              </label>
+              <input placeholder="Nhập email..." style="height: 40px;" type="number" class="form-control"
+                onkeydown="return event.keyCode !== 69 && event.keyCode !== 187 && event.keyCode !== 189"
+                id="exampleInputEmail1" ng-model="product_detail.donGia" aria-describedby="emailHelp">
+            </div>
+
+          </div>
+
+          <div style=" margin-top: 20px;display: flex;justify-content: space-between;">
+            <div style="width: 48%;">
+              <label for="exampleInputEmail1" class="form-label">QR code:
+              </label>
+              <div style="margin-left: 70px;" id="qrcode"></div>
+            </div>
+          </div>
+
+          <div style=" margin-top: 20px;display: flex;justify-content: space-between;">
+            <div>
+              <div style="margin-bottom: 10px;">
+                <label for="exampleInputEmail1" class="form-label" style="display: inline-block;width: 110px;">Ảnh sản
+                  phẩm:
+                </label>
+                <div class="fw-semibold mb-0 fs-4" style="position: relative;display: inline-block;">
+                  <a>
+                    <i style="
+                      display: inline-block;
+                      font-size: 23px;  
+                      color: #d4d42e;" class="ti ti-photo-plus"></i>
+                  </a>
+                  <input type="file" multiple accept="image/*" style="position: absolute;
+                  top: 1px;
+                  left: 1px;
+                  width: 26px;
+                  opacity: 0;
+                  height: 21px;" ng-click="getColorSelected(color, size)"
+                    onchange="angular.element(this).scope().changeImage(this)" />
+                </div>
+              </div>
+
+              <div style="margin-left: 70px;display: flex;flex-wrap: wrap;">
+                <div ng-repeat="image in images" style="width: 150px;
+                  height: 100px;
+                  background-image: url('{{image.duongDan}}'); 
+                  background-size:cover; position: relative;
+                  margin-right: 15px;margin-bottom: 20px;">
+                  <i class="ti ti-x" style="
+                        font-size: 12px;
+                        position: absolute;
+                        top: -8px;
+                        right: -7px;
+                        background: #d11a2a;
+                        color: white;
+                        border-radius: 50%;
+                        padding: 4px;" ng-click="removeImage(image)"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          <i class="ti ti-x" style="
+                                         display: inline-block;
+                                         font-size: 18px;
+                                         transform: translateY(2px);
+                                     "></i>
+          Đóng</button>
+        <button type="button" class="btn btn-primary" ng-click="updateProductDetail()" style="margin-right: 15px;">
+          <i class="ti ti-edit" style="
+                             display: inline-block;
+                             font-size: 18px;
+                             transform: translateY(2px);
+                         "></i>
+          Xác nhận
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

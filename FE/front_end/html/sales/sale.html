@@ -1,0 +1,199 @@
+<div class="col-lg-12 d-flex align-items-strech">
+  <div class="card w-100">
+    <div class="card-body">
+
+      <!-- bread crumbs -->
+      <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+        <div class="mb-3 mb-sm-0">
+          <i class="ti ti-home-2"></i> / <span style="color: black;display: inline-block;">Danh sách đợt giảm
+            giá</span>
+        </div>
+      </div>
+
+      <!-- searh bar -->
+      <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+
+        <div style="display: flex; justify-content: space-between;">
+
+          <div class="mb-3 mb-sm-0">
+            <div style="color: black;margin-bottom: 5px;">
+              Nhập mã, tên đợt giảm giá
+            </div>
+            <input style="width: 262px; height: 40px;" type="text" class="form-control" id="keySearchSale"
+              ng-model="keySale" ng-keyup="fillterBySearchKey()" placeholder="Tìm kiếm phiếu giảm giá theo tên,...">
+          </div>
+
+          <div class="mb-3 mb-sm-0" style="margin-left: 15px;">
+            <div style="color: black;">
+              Trạng thái
+            </div>
+            <div style="margin-top: 14px;">
+              <span>
+                <input type="radio" name="radio" style="margin-right: 2px;" checked="true" value="all"
+                  ng-click="fillterByStateSale('')">
+                <span style="
+                                    display: inline-block;
+                                    font-size: 13px;
+                                    transform: translateY(-2px);
+                                   "> Tất cả </span>
+              </span>
+
+              <span style="display: inline-block; margin-left: 10px;">
+                <input type="radio" name="radio" style="margin-right: 2px;" value="0" ng-click="fillterByStateSale(0)">
+                <span style="
+                                    display: inline-block;
+                                    font-size: 13px;
+                                    transform: translateY(-2px);
+                                   "> Chưa diễn ra </span>
+              </span>
+
+              <span style="display: inline-block; margin-left: 10px;">
+                <input type="radio" name="radio" style="margin-right: 2px;" value="1" ng-click="fillterByStateSale(1)">
+                <span style="
+                                    display: inline-block;
+                                    font-size: 13px;
+                                    transform: translateY(-2px);
+                                   "> Đang diễn ra </span>
+              </span>
+
+              <span style="display: inline-block; margin-left: 10px;">
+                <input type="radio" name="radio" style="margin-right: 2px;" value="2" ng-click="fillterByStateSale(2)">
+                <span style="
+                                    display: inline-block;
+                                    font-size: 13px;
+                                    transform: translateY(-2px);
+                                   "> Đã kết thúc </span>
+              </span>
+
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+        <div>
+          <a href="#!them-dot-giam-gia" type="button" class="btn btn-primary m-1"
+            style="height: 40px;margin-bottom: 5px;">
+            <i class="ti ti-circle-plus" style="
+                            display: inline-block;
+                            font-size: 18px;
+                            transform: translateY(2px);
+                        "></i>
+            Thêm đợt giảm giá</a>
+        </div>
+
+      </div>
+
+      <!-- table -->
+      <div class="table-responsive">
+        <table class="table">
+          <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%)">
+            <tr>
+              <th>
+                <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">#</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Mã</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Giá trị</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Ngày bắt đầu</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Ngày kết thúc</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Trạng thái</h6>
+              </th>
+              <th class="border-bottom-0">
+                <h6 class="fw-semibold mb-0">Thao tác</h6>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="sale in sales.content">
+              <td class="border-bottom-0">
+                <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+              </td>
+              <td class="border-bottom-0">
+                <span class="fw-normal">{{sale.ma}}</span>
+              </td>
+              <td class="border-bottom-0">
+                <span class="fw-normal">{{sale.ten}}</span>
+              </td>
+              <td class="border-bottom-0">
+                <span class="fw-normal">{{sale.phanTramGiam}}%</span>
+              </td>
+              <td class="border-bottom-0">
+                <span class="fw-normal">{{sale.ngayBatDau | date : " dd/MM/yyyy"}}</span>
+              </td>
+              <td class="border-bottom-0">
+                <span class="fw-normal">{{sale.ngayKetThuc | date : " dd/MM/yyyy"}}</span>
+              </td>
+              <td class="border-bottom-0">
+
+                <div class="d-flex align-items-center gap-2" ng-if="sale.trangThai == 0">
+                  <span class="badge bg-warning rounded-3 fw-semibold" style="    
+                                  padding: 11px;
+                                  font-size: 11px;">Chưa diễn ra</span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2" ng-if="sale.trangThai == 1">
+                  <span class="badge bg-primary rounded-3 fw-semibold" style="    
+                                padding: 11px;
+                                font-size: 11px;">Đang diễn ra</span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2" ng-if="sale.trangThai == 2">
+                  <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                              padding: 11px;
+                              font-size: 11px;">Kết thúc</span>
+                </div>
+
+                <div class="d-flex align-items-center gap-2" ng-if="sale.trangThai == 3">
+                  <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                              padding: 11px;
+                              font-size: 11px;">Đã hủy</span>
+                </div>
+
+              </td>
+              <td class="border-bottom-0">
+                <h6 class="fw-semibold mb-0 fs-4">
+                  <a ng-href="#!sua-dot-giam-gia/{{sale.id}}">
+                    <i style="
+                              display: inline-block;
+                              font-size: 23px;  
+                              color: #d4d42e;" class="ti ti-edit"></i>
+                  </a>
+
+                  <a ng-click="changeStatusSale(sale.id, sale.trangThai)">
+                    <i id="change_status" style="
+                              display: inline-block;
+                              font-size: 23px;
+                              color: #f05119;
+                              margin-left: 10px;" class="ti ti-calendar-off"></i>
+                  </a>
+                </h6>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+      <span ng-show="numPages!=0">
+        <uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage"
+          class="pagination-sm" previous-text="‹" next-text="›" first-text="«" last-text="»" style="
+                  width: 16%;
+                  margin-left: auto;
+                  margin-right: auto;
+                  " max-size="3" ng-change="pageChanged()"></uib-pagination>
+      </span>
+    </div>
+  </div>
+</div>

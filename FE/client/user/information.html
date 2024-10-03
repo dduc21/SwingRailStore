@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from htmldemo.net/juan/juan/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:36 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <title>Juan - Shoes Store HTML Template</title>
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!-- notification -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+    <!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+    <!-- main wrapper start -->
+    <main style="margin-bottom: 20px;">
+        <!-- breadcrumb area start -->
+        <div style="background: #fafafa;
+       margin-bottom: 20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  " style="padding: 13px;font-size: 13px;">
+                        <span>Trang chủ /</span>
+                        <span>Thông tin cá nhân</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb area end -->
+        <div style="
+            padding: 221px;
+            padding-top: 20px;
+            padding-bottom: 20px;">
+            <div class="row">
+                <div class="col-lg-12 d-flex align-items-strech">
+                    <div class="card w-100" style="padding: 50px;">
+                        <div class="card-body">
+                            <!-- form -->
+                            <div class="add-customer">
+                                <div class="add-customer-left">
+                                    <h6 style="
+                                        text-align: center;
+                                        font-weight: 800;
+                                        font-size: 17px;">Ảnh đại diện</h6>
+
+                                    <div class="small-12 medium-2 large-2 columns">
+                                        <div class="circle">
+                                            <img class="profile_pic" src="{{customer.avatar}}" ng-if="customer.avatar != null">
+                                            <img class="profile_pic" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuL1DqQXdqW4ZQdqeYHwQ4ZxBEUUj9c0LeKeA481_YuDnh4UkLeBG4CsWiTOjlTYgOaQU&usqp=CAU" ng-if="customer.avatar == null">
+                                        </div>
+                                        <div class="p-image">
+                                            <input class="file-upload" type="file" accept="image/*"
+                                                ng-model="customer.file"
+                                                onchange="angular.element(this).scope().changeImage(this)" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="add-customer-right">
+                                    <div>
+                                        <label for="exampleInputEmail1" class="form-label">Tên khách hàng <sup
+                                                style="color: #fa0000a8;">*</sup></label>
+                                        <input placeholder="Nhập tên khách hàng...." style="height: 40px;" type="text"
+                                            class="form-control" ng-model="customer.ten" id="exampleInputEmail1"
+                                            aria-describedby="emailHelp">
+                                    </div>
+
+                                    <div
+                                        style="display: flex;justify-content: space-between;align-items: center; margin-top: 20px;">
+                                        <div style="width: 48%;">
+                                            <label for="exampleInputEmail1" class="form-label">Email <sup
+                                                    style="color: #fa0000a8;">*</sup></label>
+                                            <input placeholder="Nhập email...." style="height: 40px;" type="text"
+                                                class="form-control" ng-model="customer.email" id="exampleInputEmail1"
+                                                aria-describedby="emailHelp">
+                                        </div>
+
+                                        <div style="width: 48%;">
+                                            <label for="exampleInputEmail1" class="form-label">Số điện thoại <sup
+                                                    style="color: #fa0000a8;">*</sup> </label>
+                                            <input placeholder="Nhập số điện thoại..." style="height: 40px;"
+                                                type="text m" class="form-control" id="exampleInputEmail1"
+                                                ng-model="customer.soDienThoai" aria-describedby="emailHelp">
+                                        </div>
+
+                                    </div>
+
+                                    <div
+                                        style="display: flex;justify-content: space-between;align-items: center; margin-top: 20px;">
+                                        <div style="width: 48%;">
+                                            <label for="exampleInputEmail1" class="form-label">Tỉnh/Thành phố <sup
+                                                    style="color: #fa0000a8;">*</sup></label>
+                                            <div class="select-wrap">
+                                                <select class="form-select" id="city" name="city"
+                                                    onchange="angular.element(this).scope().getAllDistrict()"
+                                                    placeholder="Chọn trạng thái">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div style="width: 48%;">
+                                            <label for="exampleInputEmail1" class="form-label">Quận/huyện <sup
+                                                    style="color: #fa0000a8;">*</sup> </label>
+                                            <div class="select-wrap">
+                                                <select class="form-select" id="district" name="district"
+                                                    onchange="angular.element(this).scope().getFullWardCode()"
+                                                    placeholder="Chọn trạng thái">
+                                                    <option value="">--Chọn Quận/Huyện--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div
+                                        style="display: flex;justify-content: space-between;align-items: center; margin-top: 20px;">
+                                        <div style="width: 48%;">
+                                            <label for="exampleInputEmail1" class="form-label">Xã/phường <sup
+                                                    style="color: #fa0000a8;">*</sup></label>
+                                            <div class="select-wrap">
+                                                <select class="form-select" id="ward" name="select"
+                                                    placeholder="Chọn trạng thái" ng-click="selectWard()">
+                                                    >
+                                                    <option value="">--Chọn Xã/Phường--</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div style="width: 48%;">
+                                            <label for="exampleInputEmail1" class="form-label">Số nhà/Ngõ/Đường <sup
+                                                    style="color: #fa0000a8;">*</sup> </label>
+                                            <input placeholder="Nhập địa chỉ..." style="height: 40px;" type="text"
+                                                class="form-control" id="exampleInputEmail1" ng-model="customer.diaChi"
+                                                aria-describedby="emailHelp">
+                                        </div>
+
+                                    </div>
+
+                                    <div style="margin-top: 15px; float: right;">
+                                        <button 
+                                        style="    
+                                            font-size: 16px;
+                                            padding: 15px;
+                                            background-color: #3a4863;
+                                            color: white;
+                                            font-weight: 700;
+                                            border: none;
+                                            border-radius: 5px;width: 360px;"
+                                        type="submit" class="btn btn-primary" ng-click="updateCustomer()">
+                                            <i class="ti ti-edit" style="
+                                        display: inline-block;
+                                        font-size: 18px;
+                                        transform: translateY(2px);
+                                          "></i>
+                                            Lưu thay đổi</button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+    <!-- main wrapper end -->
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+
+    <!-- toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+
+<!-- Mirrored from htmldemo.net/juan/juan/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:36 GMT -->
+
+</html>

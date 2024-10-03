@@ -1,0 +1,718 @@
+<style>
+    @font-face {
+        font-family: "Open Sans";
+        src: url(https://netology-code.github.io/html-2-diploma/sources/fonts/OpenSans-Regular.woff);
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: "Open Sans";
+        src: url(https://netology-code.github.io/html-2-diploma/sources/fonts/OpenSans-Bold.woff);
+        font-weight: bold;
+        font-style: normal;
+    }
+
+    body {
+        min-width: 1200px;
+        margin: 0;
+        font-family: "Open Sans", "Arial", sans-serif;
+        font-size: 14px;
+        color: black;
+        background-color: white;
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        clip: rect(0 0 0 0);
+        overflow: hidden;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    img {
+        vertical-align: middle;
+    }
+
+
+    /* ШАПКА */
+    .site-header {
+        position: relative;
+        background-image: url("https://netology-code.github.io/html-2-diploma/sources/images/banner-bg.jpg");
+        background-color: rgba(0, 0, 0, 0.6);
+        background-size: cover;
+    }
+
+    .site-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #000;
+        opacity: 0.6;
+        z-index: 1;
+    }
+
+    .header-wrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 1170px;
+        margin: 0 auto;
+        padding-top: 25px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .menu-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .menu-item:nth-child(n+2) {
+        margin-left: 33px;
+    }
+
+    .menu-link {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 13px;
+        color: #ded6d1;
+    }
+
+    .menu-link:hover {
+        text-decoration: underline;
+    }
+
+    .site-title {
+        width: 685px;
+        margin: 0 auto;
+        padding: 105px 0 128px 0;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: bold;
+        font-size: 45px;
+        line-height: 75px;
+        color: #ffffff;
+        position: relative;
+        z-index: 2;
+    }
+
+    /*СТАТЬИ*/
+
+    .content-wrap {
+        width: 1170px;
+        margin: 0 auto;
+        padding: 61px 0 64px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .article {
+        display: flex;
+    }
+
+    .article:not(:last-child) {
+        margin-bottom: 60px;
+    }
+
+    .article-text-column {
+        width: 367px;
+        padding-left: 30px;
+    }
+
+    .tab-list {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tab-link {
+        margin-right: 20px;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: #b59f5b;
+    }
+
+    .tab-link:hover {
+        text-decoration: underline;
+        text-decoration-color: rgba(181, 159, 91, 0.4);
+    }
+
+    .article-title {
+        width: 330px;
+        margin: 0;
+        padding-top: 5px;
+        text-transform: uppercase;
+        font-size: 20px;
+    }
+
+    .article-title-link {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .article-title-link:hover {
+        color: #b59f5b;
+    }
+
+    .article-datetime {
+        margin-right: 5px;
+        font-size: 12px;
+        line-height: 40px;
+        color: #888888;
+    }
+
+    .article-author {
+        font-weight: bold;
+        font-style: normal;
+        font-size: 12px;
+        line-height: 40px;
+        color: black;
+    }
+
+    /* КОНТЕНТ СБОКУ */
+    .sidebar {
+        width: 275px;
+    }
+
+    .sidebar-title {
+        margin: 0;
+        font-size: 14px;
+        font-weight: bold;
+        color: black;
+        text-transform: uppercase;
+        text-align: center;
+    }
+
+    .sidebar-title::after {
+        content: "";
+        display: block;
+        width: 65px;
+        height: 3px;
+        margin: 5px auto;
+        background-color: rgba(181, 159, 91, 0.4);
+    }
+
+    .new-posts-list {
+        margin: 20px 0 20px 0;
+    }
+
+    .new-posts-article {
+        display: flex;
+        margin-bottom: 22px;
+    }
+
+    .post-img-column {
+        padding-top: 5px;
+    }
+
+    .post-text-column {
+        margin: 0;
+        padding-left: 18px;
+    }
+
+    .new-posts-datetime {
+        font-size: 12px;
+        color: #888888;
+    }
+
+    .new-posts-title {
+        margin: 0;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .new-posts-link {
+        text-decoration: none;
+        color: #000;
+        line-height: 18px;
+        font-size: 10px;
+    }
+
+    .new-posts-link:hover {
+        color: #b59f5b;
+    }
+
+    .search {
+        padding-bottom: 55px;
+    }
+
+    .search-field {
+        box-sizing: border-box;
+        padding-left: 15px;
+        width: 220px;
+        height: 48px;
+        vertical-align: middle;
+        outline: none;
+        border: transparent 1px solid;
+        background-color: #f4f7f6;
+    }
+
+    .search-field:focus {
+        border: 1px solid #b59f5b;
+    }
+
+    .search-button {
+        width: 48px;
+        height: 48px;
+        background-color: #b59f5b;
+        border: none;
+        background-image: url("https://netology-code.github.io/html-2-diploma/sources/images/search.svg");
+        background-repeat: no-repeat;
+        background-size: 18px;
+        background-position: center center;
+        vertical-align: middle;
+        transition: color 0.3s, background-color 0.3s;
+    }
+
+    .search-button:hover {
+        background-color: #000;
+    }
+
+    .subscription-field {
+        width: 272px;
+        height: 48px;
+        box-sizing: border-box;
+        margin-top: 25px;
+        padding-left: 15px;
+        vertical-align: middle;
+        outline: none;
+        border: transparent 1px solid;
+        background-color: #f4f7f6;
+    }
+
+    .subscription-field:focus {
+        border: 1px solid #b59f5b;
+    }
+
+    .subscription-button {
+        width: 272px;
+        height: 48px;
+        margin: 17px 0 62px 0;
+        background-color: #b59f5b;
+        color: white;
+        border: none;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: color 0.3s, background-color 0.3s;
+    }
+
+    .subscription-button:hover {
+        background-color: #000;
+    }
+
+    .tags-list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 22px 0 60px 0;
+    }
+
+    .tags-item {
+        padding: 0 10px 7px 0;
+    }
+
+    .tags-link {
+        display: inline-block;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #000;
+        border: 3px solid #eeeeee;
+    }
+
+    .tags-link:hover {
+        border: 3px solid #b59f5b;
+    }
+
+    .category-item {
+        border-bottom: 1px solid #eeeeee;
+    }
+
+    .category-link {
+        font-weight: bold;
+        line-height: 47px;
+        text-decoration: none;
+        color: #000;
+    }
+
+    .category-link:hover {
+        color: #b59f5b;
+    }
+
+    .number {
+        margin-left: 5px;
+        font-size: 12px;
+        color: #b59f5b;
+    }
+
+    /* ПОДВАЛ */
+
+    .footer-wrap {
+        width: 1170px;
+        margin: 0 auto;
+    }
+
+    .social-list {
+        display: flex;
+        background-color: #f4f7f6;
+        justify-content: center;
+        padding: 30px 0;
+    }
+
+    .social-item:nth-child(n+2) {
+        margin-left: 30px;
+    }
+
+    .social-link {
+        display: inline-block;
+        width: 20px;
+        height: 25px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .dribble {
+        background-image: url("https://netology-code.github.io/html-2-diploma/sources/images/social/001-dribbble.svg");
+    }
+
+    .tumblr {
+        background-image: url("https://netology-code.github.io/html-2-diploma/sources/images/social/003-tumblr.svg")
+    }
+
+    .pinterest {
+        background-image: url("https://netology-code.github.io/html-2-diploma/sources/images/social/002-pinterest.svg")
+    }
+
+    .copyrights {
+        margin: 0;
+        padding: 55px 0 40px 0;
+        text-align: center;
+    }
+
+    .copyright-link {
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 40px;
+        color: #999999;
+    }
+</style>
+
+<header class="site-header">
+
+    <div class="header-wrap">
+
+
+    </div>
+
+
+    <h1 class="site-title">Tin tức mới nhất</h1>
+</header>
+
+
+<div class="content-wrap">
+
+
+    <main class="main-posts-list">
+
+
+        <article class="article">
+
+            <div class="article-img-column">
+                <img class="article-img" style="width: 400px;"
+                    src="https://i1-kinhdoanh.vnecdn.net/2024/02/03/Image-35910154-ExtractWord-0-O-9629-6476-1706932422.png?w=1020&h=0&q=100&dpr=1&fit=crop&s=QHKAuQTh3ko3U1rsJZDb5w"
+                    alt="Человек, идущий по берегу">
+            </div>
+
+            <div class="article-text-column">
+                <ul class="tab-list">
+                    <li class="tab-item">
+                        <a class="tab-link" href="#!thong-tin-tin-tuc">Giày</a>
+                    </li>
+                    <li class="tab-item">
+                        <a class="tab-link" href="#!thong-tin-tin-tuc">Công nghệ</a>
+                    </li>
+                </ul>
+                <h2 class="article-title">
+                    <a style="display: inline-block;font-weight: 600;" class="article-title-link" href="#!thong-tin-tin-tuc">Extrim và
+                        Yên Foundation mang Tết ấm cho cộng đồng</a>
+                </h2>
+                <time class="article-datetime" datetime="2019-06-10">3/2/2024</time>
+                <cite class="article-author">Vô danh</cite>
+                <div class="article-content" style="color: #9d9a9a;">
+                    <p>Công ty vệ sinh giày Extrim cùng Tổ chức Yên Foundation triển khai chiến dịch "Xuân chân thành
+                        đổi Tết chân ấm" với hoạt động quyên góp giày, túi, balo cho các em nhỏ khó khăn.</p>
+                </div>
+            </div>
+
+        </article>
+
+        <article class="article">
+
+            <div class="article-img-column">
+                <img class="article-img" style="width: 400px;"
+                    src="https://i1-kinhdoanh.vnecdn.net/2023/02/25/nikeset-1677339785-8043-1677339846.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=UpOJTZ7RCKdcFvJBU3YH5Q"
+                    alt="Человек, идущий по берегу">
+            </div>
+
+            <div class="article-text-column">
+                <ul class="tab-list">
+                    <li class="tab-item">
+                        <a class="tab-link" href="#!thong-tin-tin-tuc">Giày</a>
+                    </li>
+
+                </ul>
+                <h2 class="article-title">
+                    <a style="display: inline-block;font-weight: 600;" class="article-title-link" href="#!thong-tin-tin-tuc">
+                        Nike - hãng giày ra đời từ bài luận trong trường đại học</a>
+                </h2>
+                <time class="article-datetime" datetime="2019-06-10">3/4/2024</time>
+                <cite class="article-author">Vô danh</cite>
+                <div class="article-content" style="color: #9d9a9a;">
+                    <p>Phil Knight nảy ra ý tưởng về Nike nhờ tham gia đội tuyển điền kinh của trường và trải nghiệm
+                        trong các lớp học về kinh doanh.</p>
+                </div>
+            </div>
+
+        </article>
+
+        <article class="article">
+
+            <div class="article-img-column">
+                <img class="article-img" style="width: 400px;"
+                    src="https://i1-vnexpress.vnecdn.net/2022/10/29/-9249-1667029938.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=sceG7STGROlH7GnlEgGEVg"
+                    alt="Человек, идущий по берегу">
+            </div>
+
+            <div class="article-text-column">
+                <ul class="tab-list">
+                    <li class="tab-item">
+                        <a class="tab-link" href="#!thong-tin-tin-tuc">Giày</a>
+                    </li>
+
+                </ul>
+                <h2 class="article-title">
+                    <a style="display: inline-block;font-weight: 600;" class="article-title-link" href="#!thong-tin-tin-tuc">
+                        Giày đi bộ nhanh nhất thế giới</a>
+                </h2>
+                <time class="article-datetime" datetime="2019-06-10">4/4/2024</time>
+                <cite class="article-author">Vô danh</cite>
+                <div class="article-content" style="color: #9d9a9a;">
+                    <p>"Moonwalker không phải là giày trượt. Bạn không trượt trên chúng mà sẽ đi bộ. Bạn cũng không cần
+                        phải học cách sử dụng. Những đôi giày này học hỏi từ bạn", Xunjie Zang, nhà sáng lập kiêm Giám
+                        đốc điều hành Shift Robotics, nhấn mạnh.</p>
+                </div>
+            </div>
+
+        </article>
+
+        <article class="article">
+
+            <div class="article-img-column">
+                <img class="article-img" style="width: 400px;"
+                    src="https://i1-vnexpress.vnecdn.net/2022/08/19/giayphanhuysinhhccopy-16608771-6857-8152-1660877687.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=KzYvRg828I298mld8fbCqw"
+                    alt="Человек, идущий по берегу">
+            </div>
+
+            <div class="article-text-column">
+                <ul class="tab-list">
+                    <li class="tab-item">
+                        <a class="tab-link" href="#!thong-tin-tin-tuc">Giày</a>
+                    </li>
+
+                </ul>
+                <h2 class="article-title">
+                    <a style="display: inline-block;font-weight: 600;" class="article-title-link" href="#!thong-tin-tin-tuc">
+                        Trung Quốc phát triển giày phân hủy sinh học</a>
+                </h2>
+                <time class="article-datetime" datetime="2019-06-10">4/4/2024</time>
+                <cite class="article-author">Vô danh</cite>
+                <div class="article-content" style="color: #9d9a9a;">
+                    <p>Tổng cộng hơn 500 đôi giày đã được Đại học Công nghệ Hóa học Bắc Kinh (BUCT) trao tặng cho các
+                        giảng viên và sinh viên tại buổi lễ phát hành
+                        lô giày phân hủy hoàn toàn dựa trên sinh học đầu tiên vào hôm 16/8.</p>
+                </div>
+            </div>
+
+        </article>
+
+        <article class="article">
+
+            <div class="article-img-column">
+                <img class="article-img" style="width: 400px;"
+                    src="https://i1-vnexpress.vnecdn.net/2021/05/25/saostarfc1xjsgeqieq4zut-162191-8193-4486-1621915866.png?w=500&h=300&q=100&dpr=2&fit=crop&s=X3a4_M8xKy-tHIuiz4pBDg"
+                    alt="Человек, идущий по берегу">
+            </div>
+
+            <div class="article-text-column">
+                <ul class="tab-list">
+                    <li class="tab-item">
+                        <a class="tab-link" href="#!thong-tin-tin-tuc">Giày</a>
+                    </li>
+
+                </ul>
+                <h2 class="article-title">
+                    <a style="display: inline-block;font-weight: 600;" class="article-title-link" href="#!thong-tin-tin-tuc">
+                        Thanh niên đeo giày thay khẩu trang</a>
+                </h2>
+                <time class="article-datetime" datetime="2019-06-10">4/4/2024</time>
+                <cite class="article-author">Vô danh</cite>
+                <div class="article-content" style="color: #9d9a9a;">
+                    <p>Anh chàng này quên đeo khẩu trang nên đã dùng giày để thay thế. Hành động lạ lùng này của nam
+                        thanh niên lập tức thu hút sự chú ý. Nhiều người đã ngoái lại nhìn anh ta, có người còn cố không
+                        cười lớn tiếng.</p>
+                </div>
+            </div>
+
+        </article>
+
+        <div style="    font-size: 18px;
+         color: #999999;
+         width: 200px;
+         margin-left: auto;
+         margin-right: auto;">
+            -- Xem thêm --
+        </div>
+
+    </main>
+
+
+    <aside class="sidebar">
+
+        <section class="new-posts">
+            <h2 class="sidebar-title">Cùng chuyên mục</h2>
+
+            <div class="new-posts-list">
+
+                <article class="new-posts-article">
+                    <div class="post-img-column">
+                        <img class="new-posts-image" style="width: 200px;"
+                            src="https://i1-giaitri.vnecdn.net/2020/02/10/image003-1581320047-1556-1581320970.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=cF_S1-EVrEAIjeEczt01pQ"
+                            alt="Человек, идущий по берегу">
+                    </div>
+
+                    <div class="post-text-column">
+                        <time class="new-posts-datetime" datetime="2019-06-14">5/4/2024</time>
+                        <h3 class="new-posts-title">
+                            <a class="new-posts-link" href="#!thong-tin-tin-tuc">giayBOM - Thương hiệu giày dành cho người Việt</a>
+                        </h3>
+                    </div>
+                </article>
+
+                <article class="new-posts-article">
+                    <div class="post-img-column">
+                        <img class="new-posts-image" style="width: 160px;"
+                            src="https://i1-giaitri.vnecdn.net/2019/12/17/bia-1576569963-4936-1576570254.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=p97-ALIJiwDqYGXf2YLRXQ"
+                            alt="Человек, идущий по берегу">
+                    </div>
+
+                    <div class="post-text-column">
+                        <time class="new-posts-datetime" datetime="2019-06-14">6/4/2024</time>
+                        <h3 class="new-posts-title">
+                            <a class="new-posts-link" href="#!thong-tin-tin-tuc">Cách bảo quản phụ kiện thời trang</a>
+                        </h3>
+                    </div>
+                </article>
+
+                <article class="new-posts-article">
+                    <div class="post-img-column">
+                        <img class="new-posts-image" style="width: 120px;"
+                            src="https://i1-kinhdoanh.vnecdn.net/2019/11/11/image1-1573491089-4259-1573491413.jpg?w=500&h=300&q=100&dpr=2&fit=crop&s=FE1y3lj3UNKVAkoLpsuCFA"
+                            alt="Человек, идущий по берегу">
+                    </div>
+
+                    <div class="post-text-column">
+                        <time class="new-posts-datetime" datetime="2019-06-14">10/4/2024</time>
+                        <h3 class="new-posts-title">
+                            <a class="new-posts-link" href="#!thong-tin-tin-tuc">Cách chọn giày chạy bộ</a>
+                        </h3>
+                    </div>
+                </article>
+
+            </div>
+
+            <form class="search">
+                <label class="visually-hidden" for="search">Поиск по блогу</label>
+                <input id="search" type="search" class="search-field" name="search"
+                    placeholder="Nhập thông tin cần tìm kiếm..." required>
+                <button class="search-button"><span class="visually-hidden">Tìm kiếm</span></button>
+            </form>
+        </section>
+
+        <section class="subscription">
+            <h2 class="sidebar-title">Nhận tin tức mới nhất</h2>
+
+            <form class="subscription-form">
+                <label class="visually-hidden" for="email">Подписаться</label>
+                <input id="email" type="email" class="subscription-field" name="email" placeholder="Nhập email"
+                    required>
+                <button class="subscription-button">Nhận thông tin mới nhất</button>
+            </form>
+        </section>
+
+        <section class="tags">
+            <h2 class="sidebar-title">Từ khóa</h2>
+            <ul class="tags-list">
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">Giày cá tra</a>
+                </li>
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">Cầu cá tra</a>
+                </li>
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">Thỏ seven màu</a>
+                </li>
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">emi fukaza</a>
+                </li>
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">Shigeo tokuda</a>
+                </li>
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">Yua mikami</a>
+                </li>
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">food</a>
+                </li>
+                <li class="tags-item">
+                    <a class="tags-link" href="#!thong-tin-tin-tuc">health</a>
+                </li>
+            </ul>
+        </section>
+
+        <section class="categories">
+            <h2 class="sidebar-title">Danh sách chuyên mục</h2>
+            <ul class="category-list">
+                <li class="category-item">
+                    <a class="category-link" href="#!thong-tin-tin-tuc">Giày thể thao<sup class="number">12</sup></a>
+                </li>
+                <li class="category-item">
+                    <a class="category-link" href="#!thong-tin-tin-tuc">Giày mới phát hành<sup class="number">4</sup></a>
+                </li>
+                <li class="category-item">
+                    <a class="category-link" href="#!thong-tin-tin-tuc">Giày mới nhất<sup class="number">145</sup></a>
+                </li>
+                <li class="category-item">
+                    <a class="category-link" href="#!thong-tin-tin-tuc">Hài hước<sup class="number">28</sup></a>
+                </li>
+
+            </ul>
+        </section>
+
+    </aside>
+</div>

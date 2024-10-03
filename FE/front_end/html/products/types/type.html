@@ -1,0 +1,173 @@
+<div>
+    <div class="row">
+      <div class="col-lg-12 d-flex align-items-strech">
+        <div class="card w-100">
+          <div class="card-body">
+  
+            <!-- bread crumbs -->
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+              <div class="mb-3 mb-sm-0">
+                <i class="ti ti-home-2"></i> / <span style="color: black;display: inline-block;">Danh sách thể loại
+                  </span>
+              </div>
+            </div>
+  
+            <!-- searh bar -->
+            <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+  
+              <div style="display: flex; justify-content: space-between;width: 63%;">
+  
+                <div class="mb-3 mb-sm-0">
+                  <div style="color: black;margin-bottom: 5px;">
+                    Nhập tên thể loại
+                  </div>
+                  <input style="width: 262px; height: 40px;" type="text" class="form-control" ng-model="key"
+                    ng-keyup="fillterBytypeKey()" placeholder="Tìm kiếm thể loại theo tên,...">
+                </div>
+  
+              </div>
+  
+              <div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#typeModal">
+                  <i class="ti ti-circle-plus" style="
+                              display: inline-block;
+                              font-size: 18px;
+                              transform: translateY(2px);
+                          "></i>
+                  Thêm thể loại
+                </button>
+              </div>
+  
+            </div>
+  
+            <!-- table -->
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%)">
+                  <tr>
+                    <th>
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">#</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên thể loại</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Ngày tạo</h6>
+                    </th>
+                    <th class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0">Thao tác</h6>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="type in types.content">
+                    <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+                    </td>
+                    <td class="border-bottom-0">
+                      <span class="fw-normal">{{type.ten}}</span>
+                    </td>
+                    <td class="border-bottom-0">
+                      <p class="mb-0 fw-normal">{{type.ngayTao | date : "dd/MM/y"}}</p>
+                    </td>
+                    <td class="border-bottom-0">
+                      <h6 class="fw-semibold mb-0 fs-4">
+                        <span id="update_type" type="button" ng-click="loadtype(type.id)">
+                          <i style="
+                                display: inline-block;
+                                font-size: 23px;  
+                                color: #d4d42e;" class="ti ti-edit"></i>
+                        </span>
+  
+                      </h6>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+  
+            <span ng-show="numPages!=0">
+              <uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage"
+                class="pagination-sm" previous-text="‹" next-text="›" first-text="«" last-text="»" style="
+                    width: 16%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    " max-size="3" ng-change="pageChanged()"></uib-pagination>
+            </span>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+    <!-- Modal -->
+    <div class="modal fade" id="typeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel">Thêm thể loại</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+          </div>
+          <div class="modal-body">
+            <label for="exampleInputEmail1" class="form-label">Tên thể loại <sup
+                style="color: #fa0000a8;">*</sup></label>
+            <input placeholder="Nhập tên thể loại...." style="height: 40px;" type="text" class="form-control"
+              ng-model="name_type" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              <i class="ti ti-x" style="
+                                      display: inline-block;
+                                      font-size: 18px;
+                                      transform: translateY(2px);
+                                  "></i>
+              Đóng</button>
+            <button type="button" class="btn btn-primary" ng-click="addtype()">
+              <i class="ti ti-circle-plus" style="
+                              display: inline-block;
+                              font-size: 18px;
+                              transform: translateY(2px);
+                          "></i>
+              Thêm thể loại
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- UPDATE Modal -->
+    <div class="modal fade" id="typeUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center" id="exampleModalLabel">Cập nhật thể loại</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+          </div>
+          <div class="modal-body">
+            <label for="exampleInputEmail1" class="form-label">Tên thể loại <sup
+                style="color: #fa0000a8;">*</sup></label>
+            <input placeholder="Nhập tên thể loại...." style="height: 40px;" type="text" class="form-control"
+              id="nameUpdatetype" aria-describedby="emailHelp" ng-model="type.ten">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+              <i class="ti ti-x" style="
+                                          display: inline-block;
+                                          font-size: 18px;
+                                          transform: translateY(2px);
+                                      "></i>
+              Đóng</button>
+            <button type="button" class="btn btn-warning" ng-click="updatetype()">
+              <i class="ti ti-edit" style="
+                                          display: inline-block;
+                                          font-size: 18px;
+                                          transform: translateY(2px);
+                                      "></i>
+              Cập nhật thể loại
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

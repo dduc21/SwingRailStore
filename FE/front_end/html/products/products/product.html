@@ -1,0 +1,189 @@
+<div>
+  <div class="col-lg-12 d-flex align-items-strech">
+    <div class="card w-100">
+      <div class="card-body">
+
+        <!-- bread crumbs -->
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+          <div class="mb-3 mb-sm-0">
+            <i class="ti ti-home-2"></i> / <span style="color: black;display: inline-block;">Danh sách sản phẩm</span>
+          </div>
+        </div>
+
+        <!-- searh bar -->
+        <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+
+          <div style="display: flex; justify-content: space-between;width: 67%;">
+
+            <div class="mb-3 mb-sm-0">
+              <div style="color: black;margin-bottom: 5px;">
+                Nhập tên sản phẩm
+              </div>
+              <input style="width: 213px; height: 40px;" type="text" id="searchKey" class="form-control"
+                ng-model="keyProduct" ng-keyup="fillterByProductKey()" placeholder="Tìm kiếm sản phẩm theo tên,...">
+            </div>
+
+            <div style="width: 40%;margin-left: 10px;">
+              <div style="color: black;margin-bottom: 5px;">
+                Thương hiệu
+              </div>
+              <select class="form-select" style="width: 88%;" id="city" name="city" 
+              ng-change="searchProductDetail()"  
+              placeholder="Chọn trạng thái" ng-model="idBrand">
+                <option value="" selected>Chọn thương hiệu</option>
+                <option ng-repeat="brand in brands" value="{{brand.id}}">{{brand.ten}}</option>
+              </select>
+            </div>
+
+            <div style="width: 35%;">
+              <div style="color: black;margin-bottom: 5px;">
+                Thể loại
+              </div>
+              <select class="form-select" style="width: 88%;" id="city" name="city" 
+              ng-change="searchProductDetail()"  
+              placeholder="Chọn trạng thái" ng-model="idType">
+                <option value="" selected>Chọn thể loại</option>
+                <option ng-repeat="type in types" value="{{type.id}}">{{type.ten}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div>
+            <a href="#!them-san-pham" type="button" class="btn btn-primary m-1"
+              style="height: 40px;margin-bottom: 5px;">
+              <i class="ti ti-circle-plus" style="
+                            display: inline-block;
+                            font-size: 18px;
+                            transform: translateY(2px);
+                        "></i>
+              Thêm sản phẩm</a>
+          </div>
+
+        </div>
+
+        <!-- table -->
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%)">
+              <tr>
+                <th style="width: 7%;">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">#</h6>
+                </th>
+                <th class="border-bottom-0" style="width: 18%;">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên</h6>
+                </th>
+                <th class="border-bottom-0" style="width: 11%;">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Số lượng</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Thể loại</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Thương hiệu</h6>
+                </th>
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Trạng thái</h6>
+                </th>
+
+                <th class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0">Thao tác</h6>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="product in products.content">
+                <td class="border-bottom-0">
+                  <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+                </td>
+                <td class="border-bottom-0">
+                  <span id="name_{{product.id}}">
+                    {{product.ten}}
+                  </span>
+                  <span id="name_edit_{{product.id}}" style="display: none;">
+                    <input placeholder="Nhập tên sản phẩm" style="height: 40px;" type="text"
+                            class="form-control" ng-model="product.ten" id="exampleInputEmail1"
+                            aria-describedby="emailHelp">
+                  </span>
+                </td>
+                <td class="border-bottom-0">
+                  {{product.soLuong}}
+                </td>
+                <td class="border-bottom-0">
+                  <span class="fw-normal" id="type_{{product.id}}">{{product.tenTheLoai}}</span>
+                  <span class="fw-normal" id="type_edit_{{product.id}}" style="display: none;">sửa nè</span>
+                </td>
+                <td class="border-bottom-0">
+                  <span class="fw-normal"  id="brand_{{product.id}}">{{product.tenThuongHieu}}</span>
+                  <span class="fw-normal"  id="brand_edit_{{product.id}}" style="display: none;">sửa nè</span>
+                </td>
+                <td class="border-bottom-0">
+                  <span id="status_product_{{product.id}}">
+                    <div class="d-flex align-items-center gap-2" ng-if="product.trangThai == 0">
+                      <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                                  padding: 11px;
+                                  font-size: 11px;">Ngừng kinh doanh</span>
+                    </div>
+  
+                    <div class="d-flex align-items-center gap-2" ng-if="product.trangThai == 1">
+                      <span class="badge bg-primary rounded-3 fw-semibold" style="    
+                                padding: 11px;
+                                font-size: 11px;">Đang kinh doanh</span>
+                    </div>
+                  </span>
+
+                  <span id="status_product_edit_{{product.id}}" style="display: none;"></span>
+                  
+
+                </td>
+                <td class="border-bottom-0" style="padding: 16px 6px;">
+                  <h6 class="fw-semibold mb-0 fs-4">
+                    <a ng-href="#!chi-tiet-san-pham/{{product.id}}">
+                      <i style="
+                              display: inline-block;
+                              font-size: 23px;  
+                              color: #61cb85;" class="ti ti-eye"></i>
+                    </a>
+
+                    <a  style="margin-left: 5px;" ng-click="editProduct(product)" id="edit_button_{{product.id}}">
+                      <i style="
+                              display: inline-block;
+                              font-size: 23px;  
+                              color: #d4d42e;" class="ti ti-edit"></i>
+                    </a>
+
+                    <a  ng-click="saveProduct(product)" id="save_button_{{product.id}}" style="display: none;">
+                      <i style="
+                              display: inline-block;
+                              font-size: 23px;  
+                              color: #d4d42e;" class="ti ti-device-floppy"></i>
+                    </a>
+
+                    <a   ng-click="editProduct(product)" id="cancel_button_{{product.id}}" style="display: none;">
+                      <i style="
+                              display: inline-block;
+                              font-size: 23px;  
+                              color: #ff0000;" class="ti ti-square-rounded-x"></i>
+                    </a>
+
+                  </h6>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <span ng-show="numPages!=0">
+          <uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage"
+            class="pagination-sm" previous-text="‹" next-text="›" first-text="«" last-text="»" style="
+                  width: 16%;
+                  margin-left: auto;
+                  margin-right: auto;
+                  " max-size="3" ng-change="pageChanged()"></uib-pagination>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from htmldemo.net/juan/juan/product-details-variable.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:35 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <title>Juan - Shoes Store HTML Template</title>
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.cfss" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+    <!-- font family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- notification -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+</head>
+
+<body style="font-family: 'Quicksand', sans-serif!important;">
+
+    <!-- off-canvas menu start -->
+    <aside class="off-canvas-wrapper">
+        <div class="off-canvas-overlay"></div>
+        <div class="off-canvas-inner-content">
+            <div class="btn-close-off-canvas">
+                <i class="ion-android-close"></i>
+            </div>
+
+            <div class="off-canvas-inner">
+                <!-- search box start -->
+                <div class="search-box-offcanvas">
+                    <form>
+                        <input type="text" placeholder="Search Here...">
+                        <button class="search-btn"><i class="ion-ios-search-strong"></i></button>
+                    </form>
+                </div>
+                <!-- search box end -->
+
+                <!-- mobile menu start -->
+                <div class="mobile-navigation">
+                    <!-- mobile menu navigation start -->
+                    <nav>
+                        <ul class="mobile-menu">
+                            <li class="menu-item-has-children"><a href="index.html">Home</a>
+                                <ul class="dropdown">
+                                    <li><a href="index.html">Home version 01</a></li>
+                                    <li><a href="index-2.html">Home version 02</a></li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children"><a href="#">pages</a>
+                                <ul class="megamenu dropdown">
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 01</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop.html">shop grid left
+                                                    sidebar</a></li>
+                                            <li><a href="shop-grid-right-sidebar.html">shop grid right
+                                                    sidebar</a></li>
+                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
+                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 02</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-details.html">product details</a></li>
+                                            <li><a href="product-details-affiliate.html">product
+                                                    details
+                                                    affiliate</a></li>
+                                            <li><a href="product-details-variable.html">product details
+                                                    variable</a></li>
+                                            <li><a href="product-details-group.html">product details
+                                                    group</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 03</a>
+                                        <ul class="dropdown">
+                                            <li><a href="cart.html">cart</a></li>
+                                            <li><a href="checkout.html">checkout</a></li>
+                                            <li><a href="compare.html">compare</a></li>
+                                            <li><a href="wishlist.html">wishlist</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="mega-title menu-item-has-children"><a href="#">column 04</a>
+                                        <ul class="dropdown">
+                                            <li><a href="my-account.html">my-account</a></li>
+                                            <li><a href="login-register.html">login-register</a></li>
+                                            <li><a href="contact-us.html">contact us</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children "><a href="#">shop</a>
+                                <ul class="dropdown">
+                                    <li class="menu-item-has-children"><a href="#">shop grid layout</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop.html">shop grid left sidebar</a></li>
+                                            <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
+                                            <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
+                                            <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="#">shop list layout</a>
+                                        <ul class="dropdown">
+                                            <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
+                                            <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
+                                            <li><a href="shop-list-full-width.html">shop list full width</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children"><a href="#">products details</a>
+                                        <ul class="dropdown">
+                                            <li><a href="product-details.html">product details</a></li>
+                                            <li><a href="product-details-affiliate.html">product details affiliate</a>
+                                            </li>
+                                            <li><a href="product-details-variable.html">product details variable</a>
+                                            </li>
+                                            <li><a href="product-details-group.html">product details group</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-item-has-children "><a href="#">Blog</a>
+                                <ul class="dropdown">
+                                    <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
+                                    <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
+                                    <li><a href="blog-grid-full-width.html">blog grid no sidebar</a></li>
+                                    <li><a href="blog-details.html">blog details</a></li>
+                                    <li><a href="blog-details-audio.html">blog details audio</a></li>
+                                    <li><a href="blog-details-video.html">blog details video</a></li>
+                                    <li><a href="blog-details-left-sidebar.html">blog details left sidebar</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact-us.html">Contact us</a></li>
+                        </ul>
+                    </nav>
+                    <!-- mobile menu navigation end -->
+                </div>
+                <!-- mobile menu end -->
+
+                <!-- user setting option start -->
+                <div class="mobile-settings">
+                    <ul class="nav">
+                        <li>
+                            <div class="dropdown mobile-top-dropdown">
+                                <a href="#" class="dropdown-toggle" id="currency" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    Currency
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="currency">
+                                    <a class="dropdown-item" href="#">$ USD</a>
+                                    <a class="dropdown-item" href="#">$ EURO</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown mobile-top-dropdown">
+                                <a href="#" class="dropdown-toggle" id="myaccount" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    My Account
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="myaccount">
+                                    <a class="dropdown-item" href="my-account.html">my account</a>
+                                    <a class="dropdown-item" href="login-register.html"> login</a>
+                                    <a class="dropdown-item" href="login-register.html">register</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- user setting option end -->
+
+                <!-- offcanvas widget area start -->
+                <div class="offcanvas-widget-area">
+                    <div class="off-canvas-contact-widget">
+                        <ul>
+                            <li><i class="fa fa-mobile"></i>
+                                <a href="#">0123456789</a>
+                            </li>
+                            <li><i class="fa fa-envelope-o"></i>
+                                <a href="#">info@yourdomain.com</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="off-canvas-social-widget">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                    </div>
+                </div>
+                <!-- offcanvas widget area end -->
+            </div>
+        </div>
+    </aside>
+    <!-- off-canvas menu end -->
+
+    <!-- main wrapper start -->
+    <main>
+        <!-- breadcrumb area start -->
+        <div style="background: #fafafa;
+        margin-bottom: 20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  " style="padding: 13px;font-size: 13px;">
+                        <span>Trang chủ /</span>
+                        <span>Chi tiết sản phẩm /</span>
+                        <span>{{product.ten}} </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb area end -->
+
+        <!-- product details wrapper start -->
+        <div class="product-details-wrapper ">
+            <div class="container custom-container">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- product details inner end -->
+                        <div style="padding: 14px;">
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="" mb-20">
+                                        <!-- <div ng-repeat="img in imageCurrents" >
+                                            <img src="{{img.duongDan}}" alt="" style="width: 475px;" />
+                                        </div> -->
+                                        <span ng-repeat="img in getAllImagesBecomeSlides(product.id, 'product')"></span>
+                                        <div id="image-product-{{product.id}}"></div>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="product-details-des">
+                                        <h3 class="pro-det-title" style="font-size: 1.7rem;
+                                            font-weight: 700;
+                                            line-height: initial;
+                                            ">{{product.ten}}</h3>
+
+                                        <div class="price-box" style="border-bottom: 1px dotted #dfe0e1;">
+                                            <span style="    display: inline-block;
+                                                            padding: 5px 15px;
+                                                            margin-right: 10px;
+                                                            background: #f2f5fa;
+                                                            text-transform: uppercase;
+                                                            font-weight: 700;
+                                                            font-size: 12px;
+                                                            color: #f94c43;"
+                                                ng-if="productChooseCurrent != null && productChooseCurrent.idDotGiamGia != null">
+                                                -{{productChooseCurrent.idDotGiamGia.phanTramGiam}}%
+                                            </span>
+
+                                            <span class="regular-price" style="    font-size: 18px;
+                                            opacity: .92;
+                                            font-weight: bold;">{{
+                                                formatToVND(productChooseCurrent === null ? 0 :
+                                                productChooseCurrent.idDotGiamGia == null ?
+                                                productChooseCurrent.donGia :
+                                                (productChooseCurrent.donGia * (100 -
+                                                productChooseCurrent.idDotGiamGia.phanTramGiam) / 100)
+                                                )
+                                                }}</span>
+                                            <span class="old-price" style="
+                                            font-size: 14px;
+                                            color: #777a7b;
+                                            padding-left: 10px;
+                                            font-weight: 500;"
+                                                ng-if="productChooseCurrent != null && productChooseCurrent.idDotGiamGia != null"><del>{{formatToVND(
+                                                    productChooseCurrent.donGia
+                                                    )}}</del></span>
+                                        </div>
+
+                                        <div class="color-option" style="margin-top: 10px;margin-bottom: 10px;">
+                                            <label style="    
+                                                margin-bottom: 0;
+                                                white-space: nowrap;
+                                                font-weight: 600;
+                                                margin-right: 10px;
+                                                color: #333;
+                                                font-size: 13px;">Màu sắc :</label>
+
+                                            <span id="color-product-detail">
+                                            </span>
+
+
+                                        </div>
+
+                                        <div class="color-option" style="border-bottom: 1px dotted #dfe0e1;">
+                                            <label style="    
+                                                margin-bottom: 0;
+                                                white-space: nowrap;
+                                                font-weight: 600;
+                                                margin-right: 10px;
+                                                color: #333;
+                                                font-size: 13px;">Kích cỡ :</label>
+                                            <span id="size-product-detail">
+                                                <button id="size-product-detail-{{productDetail.idKichCo.id}}"
+                                                    ng-repeat="productDetail in productDetailChooses"
+                                                    class="size-product-detail"
+                                                    ng-disabled="productDetail.soLuongTon === 0"
+                                                    ng-click="chooseSize(productDetail)">{{productDetail.idKichCo.kichCo}}
+                                                </button>
+                                            </span>
+
+                                        </div>
+
+                                        <div style="padding: 10px 0;">
+                                            <label style="    
+                                            margin-bottom: 0;
+                                            white-space: nowrap;
+                                            font-weight: 600;
+                                            margin-right: 10px;
+                                            float: left;
+                                            color: #333;
+                                            font-size: 13px;">Số lượng :</label>
+
+                                            <input style="float: left;
+                                            background: #f3f4f4;
+                                            border: solid 1px #f3f4f4;
+                                            cursor: pointer;
+                                            font-weight: 600;
+                                            font-size: 16px;
+                                            outline: none;
+                                            height: 32px;
+                                            width: 32px;
+                                            text-align: center;
+                                            border-radius: 0;" ng-click="minusQuantity()" value="-">
+
+                                            <input disabled ng-change="changeQuantity(cartDetail)" min="1" value="1"
+                                                ng-model="quantity_of_cart" style="    
+                                                                        background: #fff;
+                                                                        font-weight: 600;
+                                                                        height: 32px;
+                                                                        padding: 0;
+                                                                        text-align: center;
+                                                                        width: 70px;
+                                                                        border: 1px solid #f3f4f4;
+                                                                        border-left: none;
+                                                                        border-right: none;
+                                                                        border-radius: 1px;
+                                                                        float: left;
+                                                                        -webkit-appearance: none;">
+
+                                            <input style="float: left;
+                                        background: #f3f4f4;
+                                        border: solid 1px #f3f4f4;
+                                        cursor: pointer;
+                                        font-weight: 600;
+                                        font-size: 16px;
+                                        outline: none;
+                                        height: 32px;
+                                        width: 32px;
+                                        text-align: center;
+                                        border-radius: 0;" ng-click="plusQuantity()" value="+">
+                                        </div>
+
+                                        <div style="padding: 10px 0;clear: both;">
+                                            <button ng-click="addToCart()" style="    
+                                            font-size: 16px;
+                                            padding: 15px;
+                                            background-color: #3a4863;
+                                            color: white;
+                                            font-weight: 700;
+                                            border-radius: 5px;width: 360px;"
+                                                ng-if="productChooseCurrent.soLuongTon !== 0">
+                                                <i class="fa-solid fa-cart-plus"></i>
+                                                Thêm vào giỏ hàng</button>
+
+                                            <button ng-click="addToCart()" style="    
+                                                font-size: 16px;
+                                                padding: 15px;
+                                                background-color: #f94c43;
+                                                opacity: 0.6;
+                                                color: white;
+                                                font-weight: 700;
+                                                border-radius: 5px;width: 360px;"
+                                                disabled
+                                                ng-if="productChooseCurrent.soLuongTon === 0">
+                                                Sản phẩm đã tạm hết hàng</button>
+                                        </div>
+
+                                        <div class="color-option">
+                                            <label style="    
+                                                margin-bottom: 0;
+                                                white-space: nowrap;
+                                                font-weight: 600;
+                                                margin-right: 10px;
+                                                color: #333;
+                                                font-size: 13px;">Mô tả :</label>
+                                            <div>
+                                                {{product.moTa}}
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- product details inner end -->
+
+
+                        <!-- featured product area start -->
+                        <section class="Related-product" style="margin-top: 20px;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h2 class="title" style="
+                                        font-size: 18px;
+                                        font-weight: 700;margin-bottom: 10px;">Sản phẩm tương tự</h2>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Slider main container -->
+                                    <div class="swiper">
+                                        <!-- Additional required wrapper -->
+                                        <div class="swiper-wrapper">
+                                            <!-- Slides -->
+                                            <div class="swiper-slide" ng-repeat="product in productNewests">
+                                                <!-- product single item start -->
+                                                <div class="product-item mb-50">
+                                                    <div class="product-thumb">
+                                                        <a href="#!san-pham-chi-tiet/{{product.idSanPham.id}}">
+                                                            </span>
+                                                            <span
+                                                                ng-repeat="image in getAllImagesByIDProductDetailSwiper(product.id)"></span>
+                                                            <img id="image-{{product.id}}"
+                                                                style="width: 221px;height: 210px;   " />
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h5 class="product-name">
+                                                            <a href="#!san-pham-chi-tiet/{{product.idSanPham.id}}"
+                                                                style="color: #272727;
+                                                            font-weight: 500;
+                                                            font-size: 16px;">{{product.idSanPham.ten}}</a>
+                                                        </h5>
+                                                        <div class="price-box">
+                                                            <span class="price-regular"
+                                                                style="color: #f94c43;font-weight: 700;font-size: 14px;">
+                                                                {{formatToVND(product.idDotGiamGia == null ?
+                                                                product.donGia : (100 -
+                                                                product.idDotGiamGia.phanTramGiam) * product.donGia /
+                                                                100) }}</span>
+                                                            <span class="price-old" style="   
+                                                                color: #939393;
+                                                                font-size: 13px;
+                                                                margin-left: 5px;
+                                                                font-weight: normal;"
+                                                                ng-if="product.idDotGiamGia != null"><del>{{formatToVND(product.donGia)}}</del></span>
+                                                        </div>
+                                                        <div class="product-action-link">
+                                                            <a hidden href="#" data-bs-toggle="tooltip" title="Wishlist"><i
+                                                                    class="ion-android-favorite-outline"></i></a>
+                                                            <a  href="#!san-pham-chi-tiet/{{product.idSanPham.id}}" data-bs-toggle="tooltip" title="Add To Cart"><i
+                                                                    class="ion-bag"></i></a>
+                                                            <a hidden ng-click="quickView(product.idSanPham.id)"
+                                                                data-bs-toggle="modal" data-bs-target="#quick_view">
+                                                                <span data-bs-toggle="tooltip" title="Quick View"><i
+                                                                        class="ion-ios-eye-outline"></i></span> </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- product single item start -->
+                                            </div>
+
+                                        </div>
+
+                                        <!-- If we need navigation buttons -->
+                                        <div class="swiper-button-prev"></div>
+                                        <div class="swiper-button-next"></div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                        <!-- featured product area end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- product details wrapper end -->
+    </main>
+    <!-- main wrapper end -->
+
+    <!-- Quick view modal start -->
+    <div class="modal" id="quick_view">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <!-- product details inner end -->
+                    <div class="product-details-inner">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <div class="product-large-slider mb-20">
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img1.jpg" alt="product thumb" />
+                                    </div>
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img2.jpg" alt="product thumb" />
+                                    </div>
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img3.jpg" alt="product thumb" />
+                                    </div>
+                                    <div class="pro-large-img img-zoom">
+                                        <img src="assets/img/product/product-details-img4.jpg" alt="product thumb" />
+                                    </div>
+                                </div>
+                                <div class="pro-nav slick-row-5">
+                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img1.jpg"
+                                            alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img2.jpg"
+                                            alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img3.jpg"
+                                            alt="" /></div>
+                                    <div class="pro-nav-thumb"><img src="assets/img/product/product-details-img4.jpg"
+                                            alt="" /></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="product-details-des">
+                                    <h3 class="pro-det-title">Primitive Mens Premium Shoes</h3>
+                                    <div class="pro-review">
+                                        <span><a href="#">1 Review(s)</a></span>
+                                    </div>
+                                    <div class="price-box">
+                                        <span class="regular-price">$70.00</span>
+                                        <span class="old-price"><del>$80.00</del></span>
+                                    </div>
+                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                        tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                                    <div class="quantity-cart-box d-flex align-items-center mb-20">
+                                        <div class="quantity">
+                                            <div class="pro-qty"><input type="text" value="1"></div>
+                                        </div>
+                                        <a href="cart.html" class="btn btn-default">Add To Cart</a>
+                                    </div>
+                                    <div class="availability mb-20">
+                                        <h5 class="cat-title">Availability:</h5>
+                                        <span>In Stock</span>
+                                    </div>
+                                    <div class="share-icon">
+                                        <h5 class="cat-title">Share:</h5>
+                                        <a href="#"><i class="fa fa-facebook"></i></a>
+                                        <a href="#"><i class="fa fa-twitter"></i></a>
+                                        <a href="#"><i class="fa fa-pinterest"></i></a>
+                                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product details inner end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offcanvas search form start -->
+    <div class="offcanvas-search-wrapper">
+        <div class="offcanvas-search-inner">
+            <div class="offcanvas-close">
+                <i class="ion-android-close"></i>
+            </div>
+            <div class="container">
+                <div class="offcanvas-search-box">
+                    <form class="d-flex bdr-bottom w-100">
+                        <input type="text" placeholder="Search entire storage here...">
+                        <button class="search-btn"><i class="ion-ios-search-strong"></i>search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offcanvas search form end -->
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/popper.js@1"></script>
+    <script src="https://unpkg.com/tippy.js@5"></script>
+
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+
+    <script type="module">
+        import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs'
+
+        const swiper = new Swiper('.swiper', {
+            slidesPerView: 5,
+            spaceBetween: 30,
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            }
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+
+
+
+</html>

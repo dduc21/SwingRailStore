@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from htmldemo.net/juan/juan/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:52:45 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <title>The sneaker house</title>
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/css/images/shoe-icon-11028-Windows.ico" type="image/x-icon" />
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!-- icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+    <!-- carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- notification -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+    <style>
+        html,
+        body {
+            font-family: "Quicksand", sans-serif;
+        }
+    </style>
+
+</head>
+
+<body ng-app="clientApp" ng-controller="clientController" style="font-family: 'Quicksand', sans-serif!important;">
+
+    <!-- Start Header Area -->
+    <header class="header-area">
+        <!-- main header start -->
+        <div class="main-header d-none d-lg-block">
+
+            <!-- header middle area start -->
+            <div class="header-main-area sticky">
+                <div class="container">
+                    <div class="row align-items-center position-relative">
+                        <!-- start logo area -->
+                        <div class="col-lg-2">
+                            <div class="logo">
+                                <a href="#!trang-chu" style="   
+                                 font-size: 19px;
+                                font-weight: 200;">
+                                    <img style="width: 50%;"
+                                        src="data:image/png;base64,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"
+                                        alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <!-- start logo area -->
+
+                        <!-- main menu area start -->
+                        <div class="col-lg-8 position-static">
+                            <div class="main-menu-area">
+                                <div class="main-menu">
+                                    <!-- main menu navbar start -->
+                                    <nav class="desktop-menu">
+                                        <ul>
+                                            <li class="active btn-nav" id="home" ng-click="changeActive(0)"><a
+                                                    href="#!trang-chu" style="font-weight: 600;">Trang
+                                                    chủ</a>
+                                            </li>
+
+                                            <li class="static btn-nav" id="men_shoes" ng-click="changeActive(1)"
+                                                style="font-weight: 600;"><a href="#!danh-sach-san-pham"
+                                                    style="font-weight: 600;">Giày nam
+                                                    <!-- <i class="fa fa-angle-down"></i> -->
+                                                </a>
+                                                <ul class="megamenu dropdown">
+                                                    <li class="mega-title"><a href="#">Thương hiệu<caption></caption>
+                                                        </a>
+                                                        <ul>
+                                                            <li><a href="shop.html">Addidas
+                                                                </a></li>
+                                                            <li><a href="shop-grid-right-sidebar.html">Nike
+                                                                </a></li>
+                                                            <li><a href="shop-list-left-sidebar.html">Vans
+                                                                </a></li>
+                                                            <li><a href="shop-list-right-sidebar.html">Balenciaga
+                                                                </a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="mega-title"><a href="#">Thể loại</a>
+                                                        <ul>
+                                                            <li><a href="product-details.html">Giày thể thao</a></li>
+                                                            <li><a href="product-details-affiliate.html">Giày chạy bộ
+                                                                </a></li>
+                                                            <li><a href="product-details-variable.html">Giày bóng rổ
+                                                                </a></li>
+                                                            <li><a href="product-details-group.html">Giày bóng đá
+                                                                </a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="static btn-nav" id="newsest" ng-click="changeActive(2    )"><a
+                                                    href="#!tin-tuc" style="font-weight: 600;">
+                                                    Tin tức</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                    <!-- main menu navbar end -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- main menu area end -->
+
+                        <!-- mini cart area start -->
+                        <div class="col-lg-2">
+                            <div class="header-configure-wrapper">
+                                <div class="header-configure-area">
+                                    <ul class="nav justify-content-end">
+                                        <li>
+                                            <a href="#" class="offcanvas-btn">
+                                                <i class="ion-ios-search-strong"></i>
+                                            </a>
+                                        </li>
+                                        <li class="user-hover">
+                                            <a ng-if="user == null">
+                                                <i class="ti ti-user"></i>
+                                            </a>
+                                            <a ng-if="user != null">
+                                                <img src="{{user.avatar}}" alt="" style="
+                                                border-radius: 50%;
+                                                width: 34px;
+                                                height: 34px;
+                                                transform: translateY(-7px);" ng-if="user.avatar != null">
+
+                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuL1DqQXdqW4ZQdqeYHwQ4ZxBEUUj9c0LeKeA481_YuDnh4UkLeBG4CsWiTOjlTYgOaQU&usqp=CAU"
+                                                    alt="" style="
+                                                            border-radius: 50%;
+                                                            width: 34px;
+                                                            height: 34px;
+                                                            transform: translateY(-7px);" ng-if="user.avatar == null">
+                                            </a>
+
+                                            <ul style="padding: 10px!important;padding-left: 16px!important;"
+                                                class="dropdown-list" ng-if="user == null">
+                                                <li><a href="#!dang-nhap">Đăng nhập</a></li>
+                                                <li><a href="#!dang-ky">Đăng ký</a></li>
+                                            </ul>
+
+                                            <ul style="padding: 10px!important;padding-left: 16px!important;"
+                                                class="dropdown-list" ng-if="user !== null">
+                                                <li><a href="#!thong-tin">Thông tin</a></li>
+                                                <li><a href="#!danh-sach-hoa-don">Danh sách hóa đơn</a></li>
+                                                <li><a href="#!doi-mat-khau">Đổi mật khẩu</a></li>
+                                                <li style="cursor: pointer;"><a ng-click="logOut()">Đăng xuất</a></li>
+                                            </ul>
+                                        </li>
+                                        <li ng-click="showMiniCart()">
+                                            <a class="minicart-btn">
+                                                <i class="ion-bag"></i>
+                                                <div class="notification" id="quantity_of_cart_mobile">0</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- mini cart area end -->
+                    </div>
+                </div>
+            </div>
+            <!-- header middle area end -->
+        </div>
+        <!-- main header start -->
+
+        <!-- mobile header start -->
+        <div class="mobile-header d-lg-none d-md-block sticky">
+            <!--mobile header top start -->
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <div class="mobile-main-header">
+                            <div class="mobile-logo">
+                                <a href="#!trang-chu" style="   
+                                     font-size: 15px;
+                                     font-weight: 600;">
+                                    <img style="width: 50%;"
+                                        src="data:image/png;base64,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"
+                                        alt="">
+                                </a>
+                            </div>
+                            <div class="mobile-menu-toggler">
+                                <div class="mini-cart-wrap">
+                                    <i class="ion-bag"></i>
+                                    <div class="notification" id="quantity_of_cart">0</div>
+                                </div>
+                                <div class="mobile-menu-btn">
+                                    <div class="off-canvas-btn">
+                                        <i class="ion-navicon"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- mobile header top start -->
+        </div>
+        <!-- mobile header end -->
+    </header>
+    <!-- end Header Area -->
+
+    <div ng-view></div>
+
+
+    <!-- map -->
+    <div style="position: relative;margin-bottom: -6px; margin-top: 20px;">
+        <!-- <div class="well" style="position: absolute;">
+            <form style="padding: 5px;">
+                <hggroup style="margin-top: 20px;display: inline-block;">
+                    <h2>Nhập email để nhận những thông tin mới nhất</h2>
+                </hggroup>
+                <div style="margin-bottom: 10px;">
+                    <label style="font-weight: 500;font-size: 16px;color:#333" for="">Email</label>
+                    <input type="text" class="form-control" name="login-username" id="login-username" required>
+                </div>
+
+                <button class='btn btn-primary' style="background-color: #3a4863;border: none;height: 50px;width: 100%;"
+                    id="btn-submit">
+                    <span class="button-text"><i style="margin-right: 10px;display: inline-block;"
+                            class="ti ti-send"></i>Đăng kí nhận thông tin!</span>
+                    <div class="button-loader">
+                    </div>
+                </button>
+            </form>
+        </div> -->
+
+
+    </div>
+
+    <!-- Start Footer Area Wrapper -->
+    <footer class="footer-wrapper" style="background-color: #191919;">
+        <!-- footer main area start -->
+        <div class="footer-widget-area ">
+            <div style="display: flex;">
+                <div class="row mtn-40" style="padding: 20px;width: 70%;padding-top: 50px;">
+                    <!-- footer widget item start -->
+                    <div class="col-xl-6 col-lg-3 col-md-6" style="padding-left: 60px;transform: translateY(-24px);">
+                        <div class="widget-item mt-40">
+                            <h5 class="widget-title">
+                                <a href="index.html" style="   
+                                font-size: 19px;
+                               font-weight: 200;">
+                                    <img style="width: 40%; margin-left: 60px; display: inline-block;"
+                                        src="data:image/png;base64,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"
+                                        alt="">
+                                </a>
+
+                            </h5>
+                            <div class="widget-body">
+                                <ul class="location-wrap">
+                                    <li>
+                                        <div class=" order-1 order-md-2" style="width: 55%;">
+                                            <div class="footer-social-link text-center text-md-end">
+                                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li><i class="ion-ios-location-outline"></i>Số 14, Vinhome, Phước Mỹ, Hà Nội</li>
+                                    <li><i class="ion-ios-email-outline"></i>Email: <a href="mailto:yourmail@gmail.com"
+                                            style="display: inline-block;font-size: inherit;">thesneaker@gmail.com</a>
+                                    </li>
+                                    <li><i class="ion-ios-telephone-outline"></i>Số điện thoại: <a
+                                            href="%2b0025425456554.html"
+                                            style="display: inline-block;font-size: inherit;">0968686868</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- footer widget item end -->
+
+                    <!-- footer widget item start -->
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="widget-item mt-40">
+                            <h5 class="widget-title">Danh mục</h5>
+                            <div class="widget-body">
+                                <ul class="useful-link">
+                                    <li><a href="#">Giày thể thao</a></li>
+                                    <li><a href="#">Giày chạy bộ</a></li>
+                                    <li><a href="#">Giày đá bóng</a></li>
+                                    <li><a href="#">Giày bóng rổ</a></li>
+                                    <li><a href="#">Giày nữ</a></li>
+                                    <li><a href="#">Giày nam</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- footer widget item end -->
+
+                    <!-- footer widget item start -->
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="widget-item mt-40">
+                            <h5 class="widget-title">Nhóm chúng tôi</h5>
+                            <div class="widget-body">
+                                <ul class="useful-link">
+                                    <li><a href="#">acc1</a></li>
+                                    <li><a href="#">acc2</a></li>
+                                    <li><a href="#">acc3</a></li>
+                                    <li><a href="#">acc4</a></li>
+                                    <li><a href="#">acc5</a></li>
+                                    <li><a href="#">acc6</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- footer widget item end -->
+
+
+
+                </div>
+
+                <!-- brand area start -->
+                <div style="width: 40%;">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6096.147427374028!2d105.73155268917573!3d21.03955903588125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab6b960c64f3%3A0xe299d1031f8a0a95!2zQ2FvIMSR4bqzbmcgcG9seQ!5e0!3m2!1sen!2s!4v1712204828208!5m2!1sen!2s"
+                        width="600" height="450" style="border:0;width: 100%;height: 100%;" allowfullscreen=""
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <!-- brand area end -->
+            </div>
+        </div>
+        <!-- footer main area end -->
+
+        <!-- footer bottom area start -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 order-2 order-md-1">
+                        <div class="copyright-text text-center text-md-start">
+                            <p>&copy; 2024 <b>Infinity</b> Made with <i class="fa fa-heart text-danger"></i> by <a
+                                    href="https://hasthemes.com/"><b>every body</b></a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- footer bottom area end -->
+    </footer>
+    <!-- End Footer Area Wrapper -->
+
+    <!-- offcanvas search form start -->
+    <div class="offcanvas-search-wrapper">
+        <div class="offcanvas-search-inner">
+            <div class="offcanvas-close">
+                <i class="ion-android-close"></i>
+            </div>
+            <div class="container">
+                <div class="offcanvas-search-box">
+                    <div class="d-flex bdr-bottom w-100">
+                        <input ng-model="searchText" type="text" placeholder="Nhập mã hóa đơn để tra cứu...">
+                        <button class="search-btn" style="width: 130px;" ng-click="search()">
+                            <i class="ion-ios-search-strong"></i>Tra
+                            cứu</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offcanvas search form end -->
+
+    <!-- offcanvas mini cart start -->
+    <div class="offcanvas-minicart-wrapper">
+        <div class="minicart-inner">
+            <div class="offcanvas-overlay"></div>
+            <div class="minicart-inner-content">
+                <div class="minicart-close">
+                    <i class="ion-android-close"></i>
+                </div>
+                <div class="minicart-content-box">
+                    <div class="minicart-item-wrapper">
+                        <ul>
+                            <li class="minicart-item" ng-repeat="cartDetail in cartDetails">
+                                <div class="minicart-thumb">
+                                    <a href="product-details.html">
+                                        <span
+                                            ng-repeat="img in getAllImagesByIDProductDetail(cartDetail.idSanPhamChiTiet.id)"></span>
+                                        <img src="assets/img/cart/cart-1.jpg" alt="product"
+                                            id="image-cart-{{cartDetail.idSanPhamChiTiet.id}}">
+                                    </a>
+                                </div>
+                                <div class="minicart-content">
+                                    <h3 class="product-name" style="padding-bottom: 0px;">
+                                        <a href="product-details.html"
+                                            style="font-weight: 700;">{{cartDetail.idSanPhamChiTiet.idSanPham.ten}}</a>
+                                    </h3>
+                                    <div style="display: flex;">
+                                        <div>
+                                            <label style="font-size: 11px;
+                                        font-weight: 700;">Màu sắc :</label>
+                                            <span
+                                                class="cart-quantity">{{cartDetail.idSanPhamChiTiet.idMauSac.ten}}</span>
+                                        </div>
+                                        <div style="margin-left: 10px;">
+                                            <label style="font-size: 11px;
+                                        font-weight: 700;">Kích cỡ :</label>
+                                            <span
+                                                class="cart-quantity">{{cartDetail.idSanPhamChiTiet.idKichCo.kichCo}}</span>
+                                        </div>
+
+                                    </div>
+                                    <p>
+                                        <span class="cart-quantity">{{cartDetail.soLuong}}
+                                            <strong>&times;</strong></span>
+                                        <span class="cart-price">
+                                            {{formatToVND(cartDetail.idSanPhamChiTiet.idDotGiamGia == null ?
+                                            cartDetail.idSanPhamChiTiet.donGia : (100 -
+                                            cartDetail.idSanPhamChiTiet.idDotGiamGia.phanTramGiam)/100 *
+                                            cartDetail.idSanPhamChiTiet.donGia)}}
+                                        </span>
+                                    </p>
+                                </div>
+                                <button class="minicart-remove" ng-click="removeCartDetail(cartDetail)"><i
+                                        class="ion-android-close"></i></button>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="minicart-pricing-box">
+                        <ul>
+                            <li class="total">
+                                <span>Tổng tiền</span>
+                                <span><strong>{{formatToVND(subTotal)}}</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="minicart-button">
+                        <a href="#!gio-hang" style="background-color: #3a4863;"><i class="fa fa-shopping-cart"></i>Đi
+                            đến
+                            giỏ hàng</a>
+                        <a href="#!thanh-toan" style="background-color: #3a4863;"><i class="fa fa-share"></i> Thanh
+                            toán</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offcanvas mini cart end -->
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+
+    <!-- angular js  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <!-- router -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"
+        integrity="sha512-y1qD3hz/IAf8W4+/UMLZ+CN6LIoUGi7srWJ3r1R17Hid8x0yXe+1B5ZelkaL1Mjzedzu0Cg3HBvDG02SAgSzBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- axios -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <!-- pagination -->
+    <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.0.3.js"></script>
+
+    <!-- swipper -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- sockjs -->
+    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+    <script src="http://cdn.sockjs.org/websocket-multiplex-0.1.js"></script>
+
+    <!-- custom code -->
+    <script>
+
+        // load quantity
+        var loadQuantityByIdProduct = (id) => {
+            var user = JSON.parse(localStorage.getItem("user"))
+            var html = document.getElementById('quantity_of_cart');
+            var html_mobile = document.getElementById('quantity_of_cart_mobile');
+            var idCustomer = user == null ? -1 : user.id
+            axios.get('http://localhost:8080/cart/get-quantity-by-id-customer/' + idCustomer).then(function (response) {
+                console.log(response.data)
+                html.innerHTML = response.data
+                html_mobile.innerHTML = response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+        }
+
+        loadQuantityByIdProduct(-1)
+
+        var clientApp = angular.module('clientApp', [
+            'ngRoute',
+            'ui.bootstrap'
+        ]);
+
+        clientApp.controller('clientController',
+            function ($scope, $http, $window) {
+                $scope.cartDetails = [];
+                $scope.subTotal = 0;
+                $scope.searchText = ""
+                $scope.user = JSON.parse(localStorage.getItem("user"))
+
+                $scope.showMiniCart = () => {
+                    var id = $scope.user == null ? -1 : $scope.user.id
+                    $http.get('http://localhost:8080/cart/get-cart-detail-by-id/' + id).then(function (response) {
+                        $scope.cartDetails = response.data
+                        $scope.subTotal = 0
+                        for (var i = 0; i < $scope.cartDetails.length; i++) {
+                            $scope.subTotal += $scope.cartDetails[i].idSanPhamChiTiet.idDotGiamGia == null ? $scope.cartDetails[i].soLuong * $scope.cartDetails[i].idSanPhamChiTiet.donGia : $scope.cartDetails[i].soLuong * (100 - $scope.cartDetails[i].idSanPhamChiTiet.idDotGiamGia.phanTramGiam) / 100 * $scope.cartDetails[i].idSanPhamChiTiet.donGia
+                        }
+                        setTimeout(function () {
+
+                        }, 10)
+                    }).catch(function (error) {
+                        console.log(error)
+                    })
+                    console.log($scope.user)
+                }
+
+                $scope.checkUser = () => {
+                    if ($scope.user != null) {
+                        $http.get('http://localhost:8080/customer/get-customer/' + $scope.user.id).then(function (response) {
+                            localStorage.setItem("user", JSON.stringify(response.data))
+                        })
+                    } else {
+                        localStorage.setItem("user", null)
+                    }
+                }
+
+                $scope.formatToVND = function (amount) {
+                    const formatter = new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                        minimumFractionDigits: 0, // Set to 0 to display whole numbers
+                    });
+                    return formatter.format(amount);
+                }
+
+                $scope.getAllImagesByIDProductDetail = function (id) {
+                    var html = document.getElementById("image-cart-" + id);
+                    axios.get('http://localhost:8080/image/get-all/' + id).then(function (response) {
+                        html.src = response.data[0].duongDan
+                    }).catch(function (error) {
+                        console.log(error)
+                    })
+                }
+
+                $scope.removeCartDetail = (e) => {
+                    Swal.fire({
+                        title: "Xác nhận xóa sản phẩm này?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Xác nhận",
+                        cancelButtonText: "Hủy"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            axios.delete('http://localhost:8080/cart-detail/remove-cart-detail/' + e.id).then(function (response) {
+                                toastr.success("Xóa sản phẩm thành công");
+                                window.location.reload()
+                            }).catch(function (error) {
+                                console.log(error)
+                            })
+                        }
+                    })
+                }
+
+                $scope.removeNavButton = () => {
+                    var htmls = document.getElementsByClassName("btn-nav")
+                    console.log(htmls)
+                    for (var html of htmls) {
+                        html.classList.add('static')
+                        html.classList.remove('active')
+                    }
+                }
+
+                $scope.changeActive = (status) => {
+                    $scope.removeNavButton()
+                    if (status == 0) {
+                        document.getElementById("home").classList.add('active')
+                        document.getElementById("home").classList.remove('static')
+
+                    } else if (status == 1) {
+                        document.getElementById("men_shoes").classList.add('active')
+                        document.getElementById("men_shoes").classList.remove('static')
+                    } else if (status == 2) {
+                        document.getElementById("newsest").classList.add('active')
+                        document.getElementById("newsest").classList.remove('static')
+                    }
+                }
+
+                $scope.search = () => {
+                    console.log($scope.searchText)
+                    $http.get('http://localhost:8080/bill/get-bill-by-code/' + $scope.searchText).then(function (response) {
+                        $scope.bill = response.data
+                        $window.location.href = '#!chi-tiet-hoa-don/' + response.data.id;
+
+                    }).catch(function (error) {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Có lỗi xảy ra",
+                            text: error.data.message,
+                        });
+                    })
+                }
+
+                $scope.showMiniCart();
+
+                $scope.checkUser()
+
+                $scope.logOut = () => {
+                    localStorage.setItem("user", null)
+                    $window.location.href = '#!trang-chu'
+                    $window.location.reload()
+                }
+            });
+
+        // router
+        clientApp.config(function ($routeProvider) {
+            $routeProvider
+                .when("/trang-chu", { templateUrl: "/client/home/index.html", controller: "homeController" })
+
+                .when("/tin-tuc", { templateUrl: "/client/news/new.html", controller: "newController" })
+                .when("/thong-tin-tin-tuc", { templateUrl: "/client/news/single-new.html", controller: "newController" })
+
+                // product detail
+                .when('/san-pham-chi-tiet/:id', { templateUrl: "/client/products/product-details.html", controller: "singleProductController" })
+
+                // cart
+                .when("/gio-hang", { templateUrl: "/client/carts/cart.html", controller: "cartController" })
+
+                // thanh toan 
+                .when("/thanh-toan", { templateUrl: "/client/bills/checkout.html", controller: "checkoutController" })
+
+                // bill detail 
+                .when("/chi-tiet-hoa-don/:id", { templateUrl: "/client/bills/bill_detail.html", controller: "billDetailController" })
+
+                // login
+                .when("/dang-nhap", { templateUrl: "/client/user/login.html", controller: "loginController" })
+
+                // register
+                .when("/dang-ky", { templateUrl: "/client/user/register.html", controller: "registerController" })
+
+                // in4 user
+                .when("/thong-tin", { templateUrl: "/client/user/information.html", controller: "informationController" })
+                .when("/danh-sach-hoa-don", { templateUrl: "/client/bills/bill.html", controller: "billControler" })
+                .when("/doi-mat-khau", { templateUrl: "/client/user/changePass.html", controller: "changePassController" })
+
+                // register
+                .when("/danh-sach-san-pham", { templateUrl: "/client/products/shop.html", controller: "shopControllers" })
+
+                // success payment
+                .when("/thanh-toan-thanh-cong", { templateUrl: "/client/bills/success_payment.html", controller: "successPaymentController" })
+                .when("/thanh-toan-that-bai", { templateUrl: "bills/error_payment.html", controller: "errorPaymentController" })
+
+
+                // mặc định 
+                .otherwise({ redirectTo: "/trang-chu" })
+        })
+
+    </script>
+
+    <!-- home -->
+    <script src="assets/js/home/home.js"></script>
+    <script src="assets/js/product_detail/product_detail.js"></script>
+    <script src="assets/js/cart/cart.js"></script>
+    <script src="assets/js/checkout/checkout.js"></script>
+    <script src="assets/js/bill/bill_detail.js"></script>
+    <script src="assets/js/user/register.js"></script>
+    <script src="assets/js/user/login.js"></script>
+    <script src="assets/js/user/setting.js"></script>
+    <script src="assets/js/user/bill.js"></script>
+    <script src="assets/js/user/changePass.js"></script>
+    <script src="assets/js/product_detail/shop.js"></script>
+    <script src="assets/js/bill/success_payment.js"></script>
+
+</body>
+
+
+
+</html>

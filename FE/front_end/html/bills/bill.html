@@ -1,0 +1,259 @@
+<div class="card p-3 shadow">
+  <!-- bread crumbs -->
+  <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+    <div class="mb-3 mb-sm-0">
+      <i class="ti ti-home-2"></i> / <span style="color: black;display: inline-block;">Quản lí đơn hàng</span>
+    </div>
+  </div>
+
+  <nav>
+    <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(-1)" style="position: relative;">
+        <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: -7px;
+        right: -5px;
+        background-color: #e85557;
+        font-size: 11px;
+        color: white;
+        font-weight: 600;
+        z-index: 5;
+        line-height: 20px;">{{quantityStateAll}}</div>
+        Tất cả
+      </button>
+      <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(1)" style="position: relative;">Xác
+        nhận đơn hàng
+        <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: -7px;
+        right: -5px;
+        background-color: #e85557;
+        font-size: 11px;
+        color: white;
+        font-weight: 600;
+        z-index: 5;
+        line-height: 20px;">{{quantityState1}}</div>
+      </button>
+      <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(2)" style="position: relative;">Chờ
+        giao
+        <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: -7px;
+        right: -5px;
+        background-color: #e85557;
+        font-size: 11px;
+        color: white;
+        font-weight: 600;
+        z-index: 5;
+        line-height: 20px;">{{quantityState2}}</div>
+      </button>
+      <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(3)"
+        style="position: relative;">Đang giao
+        <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: -7px;
+        right: -5px;
+        background-color: #e85557;
+        font-size: 11px;
+        color: white;
+        font-weight: 600;
+        z-index: 5;
+        line-height: 20px;">{{quantityState3}}</div>
+      </button>
+      <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(4)"
+        style="position: relative;">Hoàn thành
+        <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: -7px;
+        right: -5px;
+        background-color: #e85557;
+        font-size: 11px;
+        color: white;
+        font-weight: 600;
+        z-index: 5;
+        line-height: 20px;">{{quantityState4}}</div>
+      </button>
+      <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(5)" style="position: relative;">Hủy
+        <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: -7px;
+        right: -5px;
+        background-color: #e85557;
+        font-size: 11px;
+        color: white;
+        font-weight: 600;
+        z-index: 5;
+        line-height: 20px;">{{quantityState5}}</div>
+      </button>
+      <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+        role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(6)" style="position: relative;">Trả
+        hàng
+        <div style="
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        top: -7px;
+        right: -5px;
+        background-color: #e85557;
+        font-size: 11px;
+        color: white;
+        font-weight: 600;
+        z-index: 5;
+        line-height: 20px;">{{quantityState6}}</div>
+      </button>
+    </div>
+  </nav>
+  <div class="tab-content p-3 border" id="nav-tabContent">
+    <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <table class="table">
+        <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%);text-align: center;">
+          <tr>
+            <th style="width: 7%;">
+              <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">#</h6>
+            </th>
+            <th class="border-bottom-0">
+              <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Mã hóa đơn</h6>
+            </th>
+            <th class="border-bottom-0">
+              <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên khách hàng</h6>
+            </th>
+            <th class="border-bottom-0">
+              <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Loại</h6>
+            </th>
+            <th class="border-bottom-0">
+              <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Trạng thái</h6>
+            </th>
+            <th class="border-bottom-0">
+              <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tổng tiền</h6>
+            </th>
+            <th class="border-bottom-0">
+              <h6 class="fw-semibold mb-0">Thao tác</h6>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="bill in bills.content">
+            <td class="border-bottom-0">
+              <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+            </td>
+            <td class="border-bottom-0">
+              <span class="fw-normal">{{bill.ma}}</span>
+            </td>
+            <td class="border-bottom-0">
+
+              <div class="d-flex align-items-center gap-2" ng-if="bill.tenNguoiNhan === null">
+                <span class="badge bg-info rounded-3 fw-semibold" style="    
+                              padding: 11px;
+                              font-size: 11px;">Khách lẻ</span>
+              </div>
+
+              <div class="d-flex align-items-center gap-2" ng-if="bill.tenNguoiNhan !== null">
+                <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">{{bill.tenNguoiNhan}} - {{bill.sdtNguoiNhan}}</span>
+              </div>
+
+            </td>
+            <td class="border-bottom-0">
+
+              <div class="d-flex align-items-center gap-2" ng-if="bill.loaiHoaDon === 0|| bill.loaiHoaDon === null">
+                <span class="badge bg-info rounded-3 fw-semibold" style="    
+                              padding: 11px;
+                              font-size: 11px;">Bán tại quầy</span>
+              </div>
+
+              <div class="d-flex align-items-center gap-2" ng-if="bill.loaiHoaDon === 1">
+                <span class="badge bg-warning rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">Online</span>
+              </div>
+
+            </td>
+            <td class="border-bottom-0">
+              <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 1">
+                <span class="badge bg-primary rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">Xác nhận đơn hàng</span>
+              </div>
+              <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 2">
+                <span class="badge bg-info rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">Chờ giao</span>
+              </div>
+              <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 3">
+                <span class="badge bg-warning rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">Đang giao</span>
+              </div>
+              <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 4">
+                <span class="badge bg-success rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">Thành công</span>
+              </div>
+              <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 5">
+                <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">Bị hủy</span>
+              </div>
+              <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 6">
+                <span class="badge bg-warning rounded-3 fw-semibold" style="    
+                            padding: 11px;
+                            font-size: 11px;">Trả hàng</span>
+              </div>
+
+            </td>
+            <td class="border-bottom-0" style="color: red;font-weight: 700;">
+              <span class="fw-normal">{{formatToVND(bill.tongTienSauGiam)}}</span>
+            </td>
+            <td class="border-bottom-0">
+              <h6 class="fw-semibold mb-0 fs-4">
+                <a ng-href="#!chi-tiet-hoa-don/{{bill.id}}">
+                  <i style="
+                          display: inline-block;
+                          font-size: 23px;  
+                          color: #d4d42e;" class="ti ti-edit"></i>
+                </a>
+              </h6>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <span ng-show="numPages!=0">
+        <uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage"
+          class="pagination-sm" previous-text="‹" next-text="›" first-text="«" last-text="»" style="
+                width: 16%;
+                margin-left: auto;
+                margin-right: auto;
+                " max-size="3" ng-change="pageChanged()"></uib-pagination>
+      </span>
+    </div>
+  </div>
+</div>

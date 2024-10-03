@@ -1,0 +1,67 @@
+.add-customer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-customer-left{
+    width: 30%;;
+}
+
+.add-customer-right{
+    width: 68%;
+}
+
+
+.profile_pic {
+    display: inline-block;
+}
+
+.file-upload {
+    width: 198px;
+    height: 195px;
+    transform: translate(-32px, -55px);
+    opacity: 0;
+}
+
+.circle {
+    border-radius: 100% !important;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.profile_pic {
+    max-width: 200px;
+    height: 200px;
+}
+
+.p-image {
+    position: absolute;
+    top: 167px;
+    left: 90px;
+    color: #666666;
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.p-image:hover {
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.icon-upload-button {
+    transform: translate(111px, 93px);
+    font-size: 21px;
+}
+
+.icon-upload-button:hover {
+    transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    color: #999;
+}
+
+.icon-upload-button-close{
+    opacity: 0;
+}

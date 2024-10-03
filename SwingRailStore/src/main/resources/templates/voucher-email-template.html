@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông báo Voucher mới</title>
+</head>
+<body>
+<h2>Xin chào, <span th:text="${fullNameCustomer}">[Tên khách hàng]</span>!</h2>
+<p>Chúng tôi rất vui mừng thông báo rằng bạn đã nhận được một <b>Voucher giảm giá mới</b> từ Swing Rail Store.</p>
+
+<p><strong>Tên voucher:</strong> <span th:text="${voucherName}">[Tên voucher]</span></p>
+<p><strong>Mã voucher:</strong> <span th:text="${voucherCode}">[Mã voucher]</span></p>
+<p><strong>Giá trị voucher:</strong> <span th:text="${valueVoucher}">[Giá trị]</span></p>
+<p><strong>Áp dụng cho đơn hàng từ:</strong> <span th:text="${conditionVoucher}">[Điều kiện]</span></p>
+
+<p><strong>Thời gian bắt đầu:</strong> <span th:text="${startDate}">[Ngày bắt đầu]</span></p>
+<p><strong>Thời gian kết thúc:</strong> <span th:text="${endDate}">[Ngày kết thúc]</span></p>
+
+<p>Hãy sử dụng mã voucher này để nhận ưu đãi đặc biệt khi mua sắm!</p>
+
+<p>Trân trọng,<br/>\Swing Rail Store</p>
+</body>
+</html>

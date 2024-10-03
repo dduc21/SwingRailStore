@@ -1,0 +1,495 @@
+<style>
+    .flatpickr-calendar {
+        --flatpicker-padding: var(--spacing-scale-2x);
+        --datetimepicker-day-size: 24px;
+        --datetimepicker-arrows: 32px;
+        box-shadow: var(--surface-shadow-md);
+    }
+
+    .flatpickr-calendar.arrowTop::before,
+    .flatpickr-calendar.arrowTop::after {
+        border-color: transparent;
+    }
+
+    .flatpickr-calendar.open {
+        z-index: var(--z-index-layer-2);
+    }
+
+    .flatpickr-calendar .flatpickr-months {
+        align-items: center;
+        display: flex;
+        padding: var(--flatpicker-padding) var(--flatpicker-padding) 0;
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-prev-month,
+    .flatpickr-calendar .flatpickr-months .flatpickr-next-month {
+        height: auto;
+        padding: 0;
+        position: static;
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-prev-month.flatpickr-disabled,
+    .flatpickr-calendar .flatpickr-months .flatpickr-next-month.flatpickr-disabled {
+        cursor: not-allowed;
+        opacity: var(--disabled);
+        display: block;
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-prev-month.flatpickr-disabled *,
+    .flatpickr-calendar .flatpickr-months .flatpickr-next-month.flatpickr-disabled * {
+        pointer-events: none;
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-month {
+        flex: 1;
+        height: auto;
+        overflow: visible;
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-current-month {
+        display: flex;
+        height: auto;
+        padding: 0 var(--flatpicker-padding);
+        position: static;
+        width: 100%;
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-monthDropdown-months {
+        border-radius: var(--surface-rounder-sm);
+        color: var(--interactive);
+        font-size: var(--font-size-scale-up-01);
+        font-weight: var(--font-weight-semi-bold);
+        margin: 0;
+        padding: 0;
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-monthDropdown-months .flatpickr-monthDropdown-month {
+        color: var(--color);
+    }
+
+    .flatpickr-calendar .flatpickr-months .flatpickr-monthDropdown-months:hover {
+        background: transparent;
+    }
+
+    .flatpickr-calendar .flatpickr-months .numInputWrapper {
+        flex: 1;
+        margin-left: var(--flatpicker-padding);
+        width: auto;
+    }
+
+    .flatpickr-calendar .flatpickr-months .numInputWrapper input.cur-year {
+        border: var(--surface-width-sm) solid var(--border-color);
+        border-radius: var(--surface-rounder-sm);
+        color: var(--color);
+        font-size: var(--font-size-scale-base);
+        font-weight: var(--font-weight-semi-bold);
+        padding: 0 var(--spacing-scale-base);
+    }
+
+    .flatpickr-calendar .flatpickr-months .numInputWrapper span.arrowUp,
+    .flatpickr-calendar .flatpickr-months .numInputWrapper span.arrowDown {
+        display: none;
+    }
+
+    .flatpickr-calendar .flatpickr-weekdaycontainer {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        padding: 0 var(--flatpicker-padding);
+    }
+
+    .flatpickr-calendar span.flatpickr-weekday {
+        color: var(--color);
+        font-size: var(--font-size);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .flatpickr-calendar .dayContainer {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        padding: 0 var(--flatpicker-padding) var(--flatpicker-padding);
+    }
+
+    .flatpickr-calendar .flatpickr-day {
+        color: var(--interactive);
+        font-weight: var(--font-weight-semi-bold);
+        height: var(--datetimepicker-day-size);
+        line-height: var(--font-line-height-medium);
+        margin: calc(var(--flatpicker-padding) * 0.25) auto;
+        max-width: var(--datetimepicker-day-size);
+        width: var(--datetimepicker-day-size);
+    }
+
+    .flatpickr-calendar .flatpickr-day:focus {
+        outline: none;
+    }
+
+    .flatpickr-calendar .flatpickr-day.focus-visible,
+    .flatpickr-calendar .flatpickr-day:focus-visible {
+        outline-color: var(--focus);
+        outline-offset: var(--focus-offset);
+        outline-style: var(--focus-style);
+        outline-width: var(--focus-width);
+    }
+
+    .flatpickr-calendar .flatpickr-day.focus-visible {
+        --focus-offset: 0;
+        background: transparent;
+        border-color: transparent;
+    }
+
+    .flatpickr-calendar .flatpickr-day:hover {
+        background: var(--hover-effect);
+    }
+
+    .flatpickr-calendar .flatpickr-day.prevMonthDay,
+    .flatpickr-calendar .flatpickr-day.nextMonthDay {
+        font-weight: var(--font-weight-medium);
+        opacity: 0.6;
+    }
+
+    .flatpickr-calendar .flatpickr-day.today {
+        background: var(--orange-vivid-5);
+        border-color: transparent;
+        color: var(--red-warm-vivid-50);
+    }
+
+    .flatpickr-calendar .flatpickr-day.flatpickr-disabled {
+        cursor: not-allowed;
+        opacity: var(--disabled);
+        color: var(--color);
+    }
+
+    .flatpickr-calendar .flatpickr-day.flatpickr-disabled * {
+        pointer-events: none;
+    }
+
+    .flatpickr-calendar .flatpickr-day.flatpickr-disabled:hover {
+        background: transparent;
+    }
+
+    .flatpickr-calendar .flatpickr-day.inRange {
+        --interactive-rgb: var(--blue-warm-vivid-50-rgb);
+        --hover: var(--hover-dark);
+        background-image: linear-gradient(rgba(var(--interactive-rgb), var(--hover)), rgba(var(--interactive-rgb), var(--hover)));
+        border-color: transparent;
+        box-shadow: none;
+        color: var(--color-dark);
+        opacity: 1;
+    }
+
+    .flatpickr-calendar .flatpickr-day.selected,
+    .flatpickr-calendar .flatpickr-day.startRange,
+    .flatpickr-calendar .flatpickr-day.endRange {
+        background: var(--selected);
+        border-color: transparent;
+        color: var(--color-dark);
+        opacity: 1;
+    }
+
+    .flatpickr-calendar .flatpickr-time {
+        display: flex;
+        justify-content: center;
+        margin: 0 var(--flatpicker-padding);
+        max-height: none;
+    }
+
+    .flatpickr-calendar .flatpickr-time input {
+        --input-background: var(--bg-color);
+        --input-border-color: var(--color-secondary-06);
+        --input-border-width: 1px;
+        --input-border-style: solid;
+        --input-padding: 0 var(--spacing-scale-half);
+        --input-radius: var(--surface-rounder-sm);
+        background: var(--input-background);
+        border: var(--input-border-width) var(--input-border-style) var(--input-border-color);
+        border-radius: var(--input-radius);
+        color: var(--text-color);
+        display: block;
+        font-size: var(--font-size-scale-up-01);
+        font-weight: var(--font-weight-medium);
+        height: var(--input-size);
+        padding: var(--input-padding);
+        width: 100%;
+        margin: calc(var(--flatpicker-padding) * 0.25) 0;
+    }
+
+    .flatpickr-calendar .flatpickr-time input:not(:disabled):hover {
+        background-image: linear-gradient(rgba(var(--color-rgb), var(--hover)), rgba(var(--color-rgb), var(--hover)));
+    }
+
+    .flatpickr-calendar .flatpickr-time input:focus,
+    .flatpickr-calendar .flatpickr-time input:focus-visible,
+    .flatpickr-calendar .flatpickr-time input.focus-visible {
+        border-color: var(--focus) !important;
+        box-shadow: 0 0 0 var(--surface-width-md) var(--focus);
+        outline: none;
+    }
+
+    .flatpickr-calendar .flatpickr-time input.has-icon {
+        padding-right: var(--spacing-scale-5x);
+    }
+
+    .flatpickr-calendar .flatpickr-time input[type=password]::-ms-reveal,
+    .flatpickr-calendar .flatpickr-time input[type=password]::-ms-clear {
+        display: none;
+    }
+
+    .flatpickr-calendar .flatpickr-time .numInputWrapper {
+        align-items: center;
+        display: flex;
+        flex: 0 1 90px;
+        flex-flow: column;
+        height: auto;
+        padding: calc(var(--flatpicker-padding) * 0.5) var(--flatpicker-padding);
+    }
+
+    .flatpickr-calendar .flatpickr-time .numInputWrapper:hover {
+        background: transparent;
+    }
+
+    .flatpickr-calendar .flatpickr-time .numInputWrapper span {
+        align-items: center;
+        border: 0;
+        border-radius: 50px;
+        color: var(--interactive);
+        display: flex;
+        height: var(--datetimepicker-arrows);
+        justify-content: center;
+        opacity: 1;
+        padding: 0;
+        position: static;
+        width: var(--datetimepicker-arrows);
+    }
+
+    .flatpickr-calendar .flatpickr-time .numInputWrapper span:not(:disabled):hover {
+        background-image: linear-gradient(rgba(var(--interactive-rgb), var(--hover)), rgba(var(--interactive-rgb), var(--hover)));
+    }
+
+    .flatpickr-calendar .flatpickr-time .numInputWrapper span::after {
+        border: none;
+        position: static;
+    }
+
+    .flatpickr-calendar .flatpickr-time .numInputWrapper span.arrowUp {
+        order: -1;
+    }
+
+    .flatpickr-calendar .flatpickr-time .numInputWrapper span.arrowUp::after {
+        transform: rotate(225deg) translate(-1px, -1px);
+    }
+
+    .flatpickr-calendar.hasTime .flatpickr-time {
+        border-color: var(--border-color);
+        height: auto;
+    }
+
+    .flatpickr-calendar.hasTime.noCalendar .flatpickr-time {
+        border-color: transparent;
+    }
+
+    .br-datetimepicker.inverted .br-input,
+    .br-datetimepicker.inverted .br-input label,
+    .br-datetimepicker.dark-mode .br-input,
+    .br-datetimepicker.dark-mode .br-input label {
+        --color: var(--color-dark);
+        --focus-color: var(--focus-color-dark);
+    }
+
+    .br-datetimepicker input[disabled] {
+        cursor: not-allowed;
+    }
+</style>
+
+<div>
+    <div class="row">
+        <div class="col-lg-12 d-flex align-items-strech">
+            <div class="card w-100">
+                <div class="card-body">
+
+                    <!-- bread crumbs -->
+                    <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
+                        <div class="mb-3 mb-sm-0">
+                            <i class="ti ti-home-2"></i> / <a href="#!khach-hang">Danh sách khách hàng</a> / <span
+                                style="color: black;display: inline-block;">Sửa khách hàng</span>
+                        </div>
+                    </div>
+
+                    <!-- form -->
+                    <div class="add-customer">
+                        <div class="add-customer-left">
+                            <h6 style="
+                       text-align: center;
+                       font-weight: 800;
+                       font-size: 17px;">Ảnh đại diện</h6>
+
+                            <div class="small-12 medium-2 large-2 columns">
+                                <div class="circle">
+                                    <img class="profile_pic" src="{{customer.avatar}}">
+                                </div>
+                                <div class="p-image">
+                                    <input class="file-upload" type="file" accept="image/*" ng-model="customer.file"
+                                        onchange="angular.element(this).scope().changeImage(this)" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="add-customer-right">
+                            <div style="display: flex;justify-content: space-between;align-items: center;">
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Tên khách hàng <sup
+                                            style="color: #fa0000a8;">*</sup></label>
+                                    <input placeholder="Nhập tên khách hàng...." style="height: 40px;" type="text"
+                                        class="form-control" ng-model="customer.ten" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                </div>
+
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Ngày sinh <sup
+                                            style="color: #fa0000a8;">*</sup> </label>
+                                    <input placeholder="Nhập ngày sinh..." style="height: 40px;" type="date"
+                                        class="form-control" id="exampleInputEmail1" ng-model="customer.ngaySinh"
+                                        ng-value="customer.ngaySinh| date:'yyyy-MM-dd'" aria-describedby="emailHelp">
+                                </div>
+
+                            </div>
+
+                            <div
+                                style="display: flex;justify-content: space-between;align-items: center; margin-top: 20px;">
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Căn cước công dân <sup
+                                            style="color: #fa0000a8;">*</sup></label>
+                                    <input placeholder="Nhập CCCD...." style="height: 40px;" type="text"
+                                        class="form-control" ng-model="customer.cccd" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                </div>
+
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Giới tính <sup
+                                            style="color: #fa0000a8;">*</sup> </label>
+                                    <div>
+
+                                        <span>
+                                            <input type="radio" name="radio" style="margin-right: 2px;"
+                                                ng-model="customer.gioiTinh"
+                                                ng-checked='customer.gioiTinh == false ? true : false' value=0
+                                                ng-click="selectGender(0)">
+                                            <span style="
+                                                display: inline-block;
+                                                font-size: 13px;
+                                                transform: translateY(-2px);
+                                            "> Nam </span>
+                                        </span>
+
+                                        <span style="
+                            display: inline-block;
+                            margin-left: 14px;;">
+                                            <input type="radio" name="radio"
+                                                ng-checked='customer.gioiTinh == true ? true : false'
+                                                ng-model="customer.gioiTinh" style="margin-right: 2px;" value=1
+                                                ng-click="selectGender(1)">
+                                            <span style="
+                              display: inline-block;
+                              font-size: 13px;
+                              transform: translateY(-2px);
+                             "> Nữ </span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div
+                                style="display: flex;justify-content: space-between;align-items: center; margin-top: 20px;">
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Email <sup
+                                            style="color: #fa0000a8;">*</sup></label>
+                                    <input placeholder="Nhập email...." style="height: 40px;" type="text"
+                                        class="form-control" ng-model="customer.email" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp">
+                                </div>
+
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Số điện thoại <sup
+                                            style="color: #fa0000a8;">*</sup> </label>
+                                    <input placeholder="Nhập số điện thoại..." style="height: 40px;" type="text m"
+                                        class="form-control" id="exampleInputEmail1" ng-model="customer.soDienThoai"
+                                        aria-describedby="emailHelp">
+                                </div>
+
+                            </div>
+
+                            <div
+                                style="display: flex;justify-content: space-between;align-items: center; margin-top: 20px;">
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Tỉnh/Thành phố <sup
+                                            style="color: #fa0000a8;">*</sup></label>
+                                    <div class="select-wrap">
+                                        <select class="form-select" 
+                                                id="city" 
+                                                name="city" 
+                                                onchange="angular.element(this).scope().getAllDistrict()"
+                                                placeholder="Chọn trạng thái">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Quận/huyện <sup
+                                            style="color: #fa0000a8;">*</sup> </label>
+                                    <div class="select-wrap">
+                                        <select class="form-select" id="district" 
+                                            name="district"
+                                            onchange="angular.element(this).scope().getFullWardCode()" 
+                                            placeholder="Chọn trạng thái">
+                                            <option value="">--Chọn Quận/Huyện--</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div
+                                style="display: flex;justify-content: space-between;align-items: center; margin-top: 20px;">
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Xã/phường <sup
+                                            style="color: #fa0000a8;">*</sup></label>
+                                    <div class="select-wrap">
+                                        <select class="form-select" id="ward" name="select"
+                                            placeholder="Chọn trạng thái" ng-click="selectWard()">
+                                            >
+                                            <option value="">--Chọn Xã/Phường--</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div style="width: 48%;">
+                                    <label for="exampleInputEmail1" class="form-label">Số nhà/Ngõ/Đường <sup
+                                            style="color: #fa0000a8;">*</sup> </label>
+                                    <input placeholder="Nhập địa chỉ..." style="height: 40px;" type="text"
+                                        class="form-control" id="exampleInputEmail1" ng-model="customer.diaChi"
+                                        aria-describedby="emailHelp">
+                                </div>
+
+                            </div>
+
+                            <div style="margin-top: 15px; float: right;">
+                                <button type="submit" class="btn btn-primary" ng-click="updateCustomer()">
+                                    <i class="ti ti-edit"
+                                    style="
+                                        display: inline-block;
+                                        font-size: 18px;
+                                        transform: translateY(2px);
+                                          "
+                                    ></i> 
+                                    Thay đổi thông tin khách hàng</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from htmldemo.net/juan/juan/wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:36 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <title>Juan - Shoes Store HTML Template</title>
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+    <!-- main wrapper start -->
+    <main>
+
+        <div class="card text-center" style="   
+                                            width: 50%;
+                                            margin-left: auto;
+                                            height: 300px;
+                                            margin-right: auto;
+                                            margin-bottom: 20px;
+                                            ">
+
+            <div class="card-body">
+                <div style="    
+                width: 80px;
+                height: 80px;
+                margin-left: auto;
+                margin-right: auto;
+                background-color: #2bbe7d;
+                color: white;
+                font-size: 50px;
+                margin-bottom: 20px;
+                border-radius: 50%;">
+                    <i class="ti ti-check"></i>
+                </div>
+                <h5 class="card-title" style="
+                                            color: #2bbe7d;
+                                            width: 55%;
+                                            margin-right: auto;
+                                            margin-left: auto;"
+                >Hóa đơn {{bill.ma}} đã được thanh toán thành công</h5>
+                <p style="margin-bottom: 20px;" class="card-text">
+                    Số tiền bạn vừa thanh toán là : <span style="
+                                                            color: #e60e23;
+                                                            font-size: 18px;
+                                                            font-weight: 700;">{{formatToVND(bill.tongTienSauGiam)}}</span>
+                </p>
+                <a
+                style="display: inline-block;
+                border-radius: 4px;
+                padding-top: 15px;
+                margin-bottom: 20px;
+                font-weight: 600;
+                box-sizing: border-box;
+                text-align: center;
+                cursor: pointer;
+                transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+                position: relative;
+                background: #3a4863;
+                border: none;
+                font-size: 14px;
+                height: 45px;
+                color: white;"
+                 href="#!chi-tiet-hoa-don/{{bill.id}}" class="btn btn-primary">Xem chi tiết đơn hàng</a>
+
+                 <a
+                 style="display: inline-block;
+                 border-radius: 4px;
+                 padding-top: 15px;
+                 margin-bottom: 20px;
+                 font-weight: 600;
+                 box-sizing: border-box;
+                 text-align: center;
+                 cursor: pointer;
+                 transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+                 position: relative;
+                 background: #3a4863;
+                 border: none;
+                 font-size: 14px;
+                 height: 45px;
+                 color: white;"
+                  href="#!trang-chu" class="btn btn-primary">Đi về trang chủ</a>
+            </div>
+
+        </div>
+
+    </main>
+    <!-- main wrapper end -->
+
+
+    <!-- offcanvas search form start -->
+    <div class="offcanvas-search-wrapper">
+        <div class="offcanvas-search-inner">
+            <div class="offcanvas-close">
+                <i class="ion-android-close"></i>
+            </div>
+            <div class="container">
+                <div class="offcanvas-search-box">
+                    <form class="d-flex bdr-bottom w-100">
+                        <input type="text" placeholder="Search entire storage here...">
+                        <button class="search-btn"><i class="ion-ios-search-strong"></i>search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offcanvas search form end -->
+
+    <!-- offcanvas mini cart start -->
+    <div class="offcanvas-minicart-wrapper">
+        <div class="minicart-inner">
+            <div class="offcanvas-overlay"></div>
+            <div class="minicart-inner-content">
+                <div class="minicart-close">
+                    <i class="ion-android-close"></i>
+                </div>
+                <div class="minicart-content-box">
+                    <div class="minicart-item-wrapper">
+                        <ul>
+                            <li class="minicart-item">
+                                <div class="minicart-thumb">
+                                    <a href="product-details.html">
+                                        <img src="assets/img/cart/cart-1.jpg" alt="product">
+                                    </a>
+                                </div>
+                                <div class="minicart-content">
+                                    <h3 class="product-name">
+                                        <a href="product-details.html">Flowers bouquet pink for all flower lovers</a>
+                                    </h3>
+                                    <p>
+                                        <span class="cart-quantity">1 <strong>&times;</strong></span>
+                                        <span class="cart-price">$100.00</span>
+                                    </p>
+                                </div>
+                                <button class="minicart-remove"><i class="ion-android-close"></i></button>
+                            </li>
+                            <li class="minicart-item">
+                                <div class="minicart-thumb">
+                                    <a href="product-details.html">
+                                        <img src="assets/img/cart/cart-2.jpg" alt="product">
+                                    </a>
+                                </div>
+                                <div class="minicart-content">
+                                    <h3 class="product-name">
+                                        <a href="product-details.html">Jasmine flowers white for all flower lovers</a>
+                                    </h3>
+                                    <p>
+                                        <span class="cart-quantity">1 <strong>&times;</strong></span>
+                                        <span class="cart-price">$80.00</span>
+                                    </p>
+                                </div>
+                                <button class="minicart-remove"><i class="ion-android-close"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="minicart-pricing-box">
+                        <ul>
+                            <li>
+                                <span>sub-total</span>
+                                <span><strong>$300.00</strong></span>
+                            </li>
+                            <li>
+                                <span>Eco Tax (-2.00)</span>
+                                <span><strong>$10.00</strong></span>
+                            </li>
+                            <li>
+                                <span>VAT (20%)</span>
+                                <span><strong>$60.00</strong></span>
+                            </li>
+                            <li class="total">
+                                <span>total</span>
+                                <span><strong>$370.00</strong></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="minicart-button">
+                        <a href="cart.html"><i class="fa fa-shopping-cart"></i> view cart</a>
+                        <a href="cart.html"><i class="fa fa-share"></i> checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- offcanvas mini cart end -->
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+
+    <script src="../lib/node_modules/angular-websocket/dist/angular-websocket.js"></script>
+    <script src="../lib//node_modules/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="../lib//node_modules/stompjs/lib/stomp.js"></script>
+</body>
+
+
+<!-- Mirrored from htmldemo.net/juan/juan/wishlist.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:36 GMT -->
+
+</html>

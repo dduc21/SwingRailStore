@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quên Mật Khẩu</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+</head>
+
+<body style="background-image: url(https://e0.pxfuel.com/wallpapers/735/662/desktop-wallpaper-sneakers-sneakers-background-on-bat-sneaker.jpg); background-size: cover;">
+    <!--  Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        <div class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center w-100">
+                <div class="row justify-content-center w-100">
+                    <div class="col-md-6 col-lg-5 col-xxl-5">
+                        <div class="card mb-0">
+                            <div class="card-body">
+                                <div style="text-align: center; color: #e3a51e; font-weight: 700; font-size: 21px; margin-bottom: 16px;">Swing Rail Store</div>
+                                
+                                <div class="mb-3">
+                                    <label for="emailInput" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp" placeholder="Nhập email của bạn" required>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <a class="text-primary fw-bold" href="/front_end/html/login.html" style="color: #e3a51e!important;">Quay lại đăng nhập</a>
+                                </div>
+
+                                <button onclick="sendEmail()" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" style="background-color: #e3a51e; border: none">Gửi mật khẩu về email</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- axios -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        function sendEmail() {
+    const email = document.getElementById("emailInput").value;
+
+    if (!email) {
+        Swal.fire({
+            icon: "error",
+            title: "Đã có lỗi",
+            text: "Bạn phải nhập email!",
+        });
+        return;
+    }
+    console.log(email);
+
+    // Gửi yêu cầu POST với email dưới dạng đối tượng JSON
+    axios.post('http://localhost:8080/email/confirm-password-reset?email=' +email, {
+        email: email // Đặt email vào trong đối tượng
+    })
+    .then((response) => {
+        Swal.fire({
+            icon: "success",
+            title: "Thành công",
+            text: "Email đã được gửi thành công!",
+        });
+        window.location.href = "/front_end/html/login.html";
+    })
+    .catch((error) => {
+        Swal.fire({
+            icon: "error",
+            title: "Đã có lỗi",
+            text: "Có lỗi xảy ra khi gửi email!",
+        });
+        console.log(error);
+    });
+}
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<!-- Mirrored from htmldemo.net/juan/juan/login-register.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Mar 2024 16:53:36 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="meta description">
+    <title>Juan - Shoes Store HTML Template</title>
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon" />
+    <!--=== All Plugins CSS ===-->
+    <link href="assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Modernizer JS -->
+    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+
+    <!-- notification -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+    <!--[if lt IE 9]>
+<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body>
+
+    <!-- main wrapper start -->
+    <main style="margin-bottom: 20px;">
+        <!-- breadcrumb area start -->
+        <div style="background: #fafafa;
+       margin-bottom: 20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pd5  " style="padding: 13px;font-size: 13px;">
+                        <span>Trang chủ /</span>
+                        <span>Danh sách hóa đơn</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- breadcrumb area end -->
+        <div style="
+            padding: 80px;
+            padding-top: 20px;
+            padding-bottom: 20px;">
+          
+          <div class="card p-3 shadow">
+          
+            <nav>
+              <div class="nav nav-tabs mb-3" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+                  role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(-1)" style="position: relative;">
+                  <div style="
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  top: -7px;
+                  right: -5px;
+                  background-color: #e85557;
+                  font-size: 11px;
+                  color: white;
+                  font-weight: 600;
+                  z-index: 5;
+                  line-height: 20px;">{{quantityStateAll}}</div>
+                  Tất cả
+                </button>
+                <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+                  role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(1)" style="position: relative;">Xác
+                  nhận đơn hàng
+                  <div style="
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  top: -7px;
+                  right: -5px;
+                  background-color: #e85557;
+                  font-size: 11px;
+                  color: white;
+                  font-weight: 600;
+                  z-index: 5;
+                  line-height: 20px;">{{quantityState1}}</div>
+                </button>
+                <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+                  role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(2)" style="position: relative;">Chờ
+                  giao
+                  <div style="
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  top: -7px;
+                  right: -5px;
+                  background-color: #e85557;
+                  font-size: 11px;
+                  color: white;
+                  font-weight: 600;
+                  z-index: 5;
+                  line-height: 20px;">{{quantityState2}}</div>
+                </button>
+                <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+                  role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(3)"
+                  style="position: relative;">Đang giao
+                  <div style="
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  top: -7px;
+                  right: -5px;
+                  background-color: #e85557;
+                  font-size: 11px;
+                  color: white;
+                  font-weight: 600;
+                  z-index: 5;
+                  line-height: 20px;">{{quantityState3}}</div>
+                </button>
+                <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+                  role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(4)"
+                  style="position: relative;">Hoàn thành
+                  <div style="
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  top: -7px;
+                  right: -5px;
+                  background-color: #e85557;
+                  font-size: 11px;
+                  color: white;
+                  font-weight: 600;
+                  z-index: 5;
+                  line-height: 20px;">{{quantityState4}}</div>
+                </button>
+                <button class="nav-link " id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+                  role="tab" aria-controls="nav-home" aria-selected="true" ng-click="loadBills(5)" style="position: relative;">Hủy
+                  <div style="
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  top: -7px;
+                  right: -5px;
+                  background-color: #e85557;
+                  font-size: 11px;
+                  color: white;
+                  font-weight: 600;
+                  z-index: 5;
+                  line-height: 20px;">{{quantityState5}}</div>
+                </button>
+               
+              </div>
+            </nav>
+            <div class="tab-content p-3 border" id="nav-tabContent">
+              <div class="tab-pane fade active show" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <table class="table" style="text-align: center;">
+                  <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%);text-align: center;">
+                    <tr>
+                      <th style="width: 7%;">
+                        <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">#</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Mã hóa đơn</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tên khách hàng</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Trạng thái</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0" style="border-right: 1px solid #b1acac;">Tổng tiền</h6>
+                      </th>
+                      <th class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0">Thao tác</h6>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="bill in bills.content">
+                      <td class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0"> {{$index + 1}}</h6>
+                      </td>
+                      <td class="border-bottom-0">
+                        <span class="fw-normal">{{bill.ma}}</span>
+                      </td>
+                      <td class="border-bottom-0">
+          
+                        <div class="d-flex align-items-center gap-2" ng-if="bill.idKhachHang === null">
+                          <span class="badge bg-info rounded-3 fw-semibold" style="    
+                                        padding: 11px;
+                                        font-size: 11px;">Khách lẻ</span>
+                        </div>
+          
+                        <div class="d-flex align-items-center gap-2" ng-if="bill.idKhachHang !== null">
+                          <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                                      padding: 11px;
+                                      font-size: 11px;">{{bill.tenNguoiNhan}} - {{bill.sdtNguoiNhan}}</span>
+                        </div>
+          
+                      </td>
+                      <td class="border-bottom-0">
+                        <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 1">
+                          <span class="badge bg-primary rounded-3 fw-semibold" style="    
+                                      padding: 11px;
+                                      font-size: 11px;">Xác nhận đơn hàng</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 2">
+                          <span class="badge bg-info rounded-3 fw-semibold" style="    
+                                      padding: 11px;
+                                      font-size: 11px;">Chờ giao</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 3">
+                          <span class="badge bg-warning rounded-3 fw-semibold" style="    
+                                      padding: 11px;
+                                      font-size: 11px;">Đang giao</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 4">
+                          <span class="badge bg-success rounded-3 fw-semibold" style="    
+                                      padding: 11px;
+                                      font-size: 11px;">Thành công</span>
+                        </div>
+                        <div class="d-flex align-items-center gap-2" ng-if="bill.trangThai === 5">
+                          <span class="badge bg-danger rounded-3 fw-semibold" style="    
+                                      padding: 11px;
+                                      font-size: 11px;">Bị hủy</span>
+                        </div>
+          
+                      </td>
+                      <td class="border-bottom-0" style="color: red;font-weight: 700;">
+                        <span class="fw-normal">{{formatToVND(bill.tongTienSauGiam)}}</span>
+                      </td>
+                      <td class="border-bottom-0">
+                        <h6 class="fw-semibold mb-0 fs-4">
+                          <a ng-href="#!chi-tiet-hoa-don/{{bill.id}}">
+                            <i style="
+                                    display: inline-block;
+                                    font-size: 23px;  
+                                    color: #d4d42e;" class="ti ti-edit"></i>
+                          </a>
+                        </h6>
+                      </td>
+                    </tr>
+          
+                  </tbody>
+                </table>
+          
+                <!-- Pagination -->
+                <span ng-show="numPages!=0">
+                  <uib-pagination items-per-page="itemsPerPage" total-items="totalItems" ng-model="currentPage"
+                    class="pagination-sm" previous-text="‹" next-text="›" first-text="«" last-text="»" style="
+                          width: 16%;
+                          margin-left: auto;
+                          margin-right: auto;
+                          " max-size="3" ng-change="pageChanged()"></uib-pagination>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </main>
+    <!-- main wrapper end -->
+
+    <!-- Scroll to top start -->
+    <div class="scroll-top not-visible">
+        <i class="fa fa-angle-up"></i>
+    </div>
+    <!-- Scroll to Top End -->
+
+    <!--=======================Javascript============================-->
+    <!--=== All Vendor Js ===-->
+    <script src="assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="assets/js/active.js"></script>
+
+    <!-- toastr -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+
+</html>
