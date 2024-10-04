@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class ProductDetailRequest {
 
-    HoaDon hoaDon;
+    private HoaDon hoaDon;
 
-    SanPhamChiTiet sanPhamChiTiet;
+    private SanPhamChiTiet sanPhamChiTiet;
 
-    Integer soLuong;
+    private Integer soLuong;
 
 }

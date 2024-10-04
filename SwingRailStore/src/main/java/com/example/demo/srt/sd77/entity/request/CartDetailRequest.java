@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class CartDetailRequest {
 
-    SanPhamChiTiet sanPhamChiTiet;
+    private SanPhamChiTiet sanPhamChiTiet;
 
-    Integer soLuong;
+    private Integer soLuong;
 
-    Long idKhachHang;
+    private Long idKhachHang;
 
 }

@@ -24,7 +24,7 @@ public interface INhanVienRepo extends JpaRepository<NhanVien, Long> {
                 select * from nhan_vien v
                 where v.id = :id 
             """, nativeQuery = true)
-    ArrayList<NhanVien> findEmployeeByID(@Param("id") Long id);
+    NhanVien findEmployeeByID(@Param("id") Long id);
 
     @Query(value = """
                 select top 1 ma from nhan_vien order by ngay_tao desc

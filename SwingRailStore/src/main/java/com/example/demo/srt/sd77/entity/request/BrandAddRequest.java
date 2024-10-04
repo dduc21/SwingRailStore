@@ -7,6 +7,6 @@ import lombok.Setter;
 @Setter
 public class BrandAddRequest {
 
-    String ten;
+    private String ten;
 
 }

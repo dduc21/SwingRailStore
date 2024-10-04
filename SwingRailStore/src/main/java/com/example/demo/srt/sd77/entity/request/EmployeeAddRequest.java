@@ -9,41 +9,41 @@ import java.util.Date;
 @Setter
 public class EmployeeAddRequest {
 
-    Long id;
+    private Long id;
 
-    String cccd;
+    private String cccd;
 
-    String ma;
+    private String ma;
 
-    String ten;
+    private String ten;
 
-    Date ngaySinh;
+    private Date ngaySinh;
 
-    Boolean gioiTinh;
+    private Boolean gioiTinh;
 
-    String soDienThoai;
+    private String soDienThoai;
 
-    String matKhau;
+    private String matKhau;
 
-    String email;
+    private String email;
 
-    String avatar;
+    private String avatar;
 
-    Boolean trangThai;
+    private Boolean trangThai;
 
-    Integer chucVu;
+    private Integer chucVu;
 
-    String xa;
+    private String xa;
 
-    String phuong;
+    private String phuong;
 
-    String tinh;
+    private String tinh;
 
-    String diaChi;
+    private String diaChi;
 
-    String maXa;
+    private String maXa;
 
-    String maPhuong;
+    private String maPhuong;
 
-    String maTinh;
+    private String maTinh;
 }

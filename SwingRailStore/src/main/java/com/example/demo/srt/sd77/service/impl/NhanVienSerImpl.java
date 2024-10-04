@@ -23,6 +23,8 @@ public class NhanVienSerImpl implements INhanVienSer {
 
     @Autowired
     private IChucVuRepo chucVuRepo;
+    @Autowired
+    private ChucVuServiceImpl chucVuService;
 
     public Page<NhanVien> getEmployeesWithPanigation(int pageNo, int pageSize, String key, String trangThai) {
 
@@ -38,7 +40,7 @@ public class NhanVienSerImpl implements INhanVienSer {
     }
 
     public NhanVien getEmployeeByID(Long id) {
-        return nhanVienRepo.findEmployeeByID(id).get(0);
+        return nhanVienRepo.findEmployeeByID(id);
     }
 
     public NhanVien addEmployee(EmployeeAddRequest req) {
@@ -65,7 +67,7 @@ public class NhanVienSerImpl implements INhanVienSer {
             employee.setTen(req.getTen());
             employee.setAvatar(req.getAvatar());
             employee.setMatKhau("123");
-
+//            employee.setChucVu(chucVuService.findById(req.getChucVu()));
             if (req.getChucVu() == 0) {
                 if (chucVuRepo.findByMa("0") != null) {
                     employee.setChucVu(chucVuRepo.findByMa("0"));
@@ -96,9 +98,9 @@ public class NhanVienSerImpl implements INhanVienSer {
         // generate code
         String newestCode = nhanVienRepo.generateNewestCode();
         if (newestCode == null || newestCode.equals("")) {
-            return "CUSTOMER_" + 0;
+            return "EMPLOYEE_" + 0;
         }
-        return "CUSTOMER_" + (Integer.parseInt(newestCode.substring(9)) + 1);
+        return "EMPLOYEE_" + (Integer.parseInt(newestCode.substring(9)) + 1);
     }
 
     public NhanVien updateEmployee(EmployeeAddRequest req) {

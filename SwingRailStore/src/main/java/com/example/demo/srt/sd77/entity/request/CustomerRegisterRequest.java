@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class CustomerRegisterRequest {
 
-    String ten;
+    private String ten;
 
-    String email;
+    private String email;
 
-    String matKhau;
+    private String matKhau;
 
 }

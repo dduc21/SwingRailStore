@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 public class ProductUpdateRequest {
 
-    Long id;
+    private Long id;
 
-    String ten;
+    private String ten;
 
-    ThuongHieu idThuongHieu;
+    private ThuongHieu idThuongHieu;
 
-    TheLoai idTheLoai;
+    private TheLoai idTheLoai;
 
-    Boolean trangThai;
+    private Boolean trangThai;
 }

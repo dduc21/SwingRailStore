@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class ProductVoucherUpdateRequest {
 
-    Voucher voucher;
+    private Voucher voucher;
 
-    HoaDon hoaDon;
+    private HoaDon hoaDon;
 }

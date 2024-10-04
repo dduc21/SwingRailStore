@@ -7,17 +7,17 @@ import lombok.Setter;
 @Setter
 public class ProductDetailSearchRequest {
 
-    String ids;
+    private String ids;
 
-    Integer pageNo;
+    private Integer pageNo;
 
-    Integer pageSize;
+    private Integer pageSize;
 
-    String key;
+    private String key;
 
-    Long idMauSac;
+    private Long idMauSac;
 
-    Long idTheLoai;
+    private Long idTheLoai;
 
-    Long idKichCo;
+    private Long idKichCo;
 }

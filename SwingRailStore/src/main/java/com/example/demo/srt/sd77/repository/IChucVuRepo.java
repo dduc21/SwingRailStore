@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface IChucVuRepo extends JpaRepository<ChucVu, Long> {
 
     ChucVu findByMa(String ma);
+    ChucVu findById(int id);
 }

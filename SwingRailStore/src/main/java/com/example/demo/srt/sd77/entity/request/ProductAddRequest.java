@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 public class ProductAddRequest {
 
-    ThuongHieu idThuongHieu;
+    private ThuongHieu idThuongHieu;
 
-    TheLoai idTheLoai;
+    private TheLoai idTheLoai;
 
-    String ten;
+    private String ten;
 
-    String moTa;
+    private String moTa;
 }

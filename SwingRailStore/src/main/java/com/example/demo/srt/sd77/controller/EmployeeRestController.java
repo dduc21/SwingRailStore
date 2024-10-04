@@ -36,8 +36,9 @@ public class EmployeeRestController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addVoucher(@RequestBody EmployeeAddRequest req) {
+    public ResponseEntity<?> addEmployee(@RequestBody EmployeeAddRequest req) {
         try {
+            System.out.println(req.getChucVu().toString());
             return new ResponseEntity<>(employeeSer.addEmployee(req), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);

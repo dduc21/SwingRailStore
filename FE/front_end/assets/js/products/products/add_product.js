@@ -653,7 +653,7 @@ main_app.controller("addProductController", function ($scope, $http) {
                             if (i === $scope.productDetails.length - 1) {
                                 toastr.success("Thêm sản phẩm mới thành công")
                                 setTimeout(function () {
-                                    location.href = "/html/router.html#!/san-pham"
+                                    location.href = "/front_end/html/router.html#!/san-pham"
                                 }, 200)
                             }
                         }
