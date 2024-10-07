@@ -909,17 +909,17 @@ clientApp.controller('billDetailController',
         }
 
         // realtime
-        var socket = new SockJS("http://localhost:8080/ws");
-        var stompClient = Stomp.over(socket);
+        // var socket = new SockJS("http://localhost:8080/ws");
+        // var stompClient = Stomp.over(socket);
 
-        stompClient.connect({}, function (frame) {
+        // stompClient.connect({}, function (frame) {
 
-            stompClient.subscribe("/bill/bill-detail", function (message) {
-                // toastr.success(message.body)
-                $scope.loadBill()
-                return;
-            });
-        });
+        //     stompClient.subscribe("/bill/bill-detail", function (message) {
+        //         // toastr.success(message.body)
+        //         $scope.loadBill()
+        //         return;
+        //     });
+        // });
 
         $scope.addBill = function (text) {
             toastr.success(text)

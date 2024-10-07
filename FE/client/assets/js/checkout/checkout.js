@@ -520,13 +520,13 @@ clientApp.controller('checkoutController',
                                                             axios.post("http://localhost:8080/email/send-email", $scope.bill).then(function (response) {
 
                                                             }).catch(function (error) {
-
                                                             })
                                                             $scope.addBill()
-                                                            $window.location.href = '#!chi-tiet-hoa-don/' + $scope.bill.id;
+                                                            $window.location.href = 'http://127.0.0.1:5500/client/router.html#!/chi-tiet-hoa-don/' + $scope.bill.id;
                                                             $window.location.reload();
                                                             window.scrollTo(0, 0);
                                                         }, 500)
+
                                                     }).catch((error) => {
                                                         console.log(error)
                                                     })
@@ -538,7 +538,7 @@ clientApp.controller('checkoutController',
                                                     }).catch(function (error) {
                                                     })
                                                     $scope.addBill()
-                                                    $window.location.href = '#!chi-tiet-hoa-don/' + $scope.bill.id;
+                                                    $window.location.href = 'http://127.0.0.1:5500/client/router.html#!/chi-tiet-hoa-don/' + $scope.bill.id;
                                                     $window.location.reload();
                                                 }, 500)
                                             }
@@ -683,8 +683,8 @@ clientApp.controller('checkoutController',
 
         }
 
-        var socket = new SockJS("http://localhost:8080/ws");
-        var stompClient = Stomp.over(socket);
+        // var socket = new SockJS("http://localhost:8080/ws");
+        // var stompClient = Stomp.over(socket);
 
         // stompClient.connect({}, function (frame) {
         //     console.log("Connected: " + frame);

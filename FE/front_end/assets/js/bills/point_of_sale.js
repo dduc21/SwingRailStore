@@ -716,7 +716,7 @@ main_app.controller("pointOfSaleController", function ($scope, $http) {
                                     axios.post("http://localhost:8080/email/send-email", $scope.bill).then(function (response) {
                                     }).catch(function (error) {
                                     })
-                                    location.href = "/html/router.html#!/chi-tiet-hoa-don/" + $scope.bill.id
+                                    location.href = "/front_end/html/router.html#!/chi-tiet-hoa-don/" + $scope.bill.id
                                     window.scrollTo(0, 0);
                                 }, 200)
                             }).catch((error) => {

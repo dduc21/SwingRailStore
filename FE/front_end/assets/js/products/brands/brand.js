@@ -1,4 +1,5 @@
 main_app.controller("brandController", function ($scope, $http) {
+  console.log('loaded')
   $scope.currentPage = 1;
   $scope.itemsPerPage = 10;
   $scope.totalItems = 1;

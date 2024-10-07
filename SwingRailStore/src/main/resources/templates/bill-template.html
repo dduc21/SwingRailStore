@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông Tin Đơn Hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .order-details {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .order-details th, .order-details td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .order-details th {
+            background-color: #f2f2f2;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Thông Tin Đơn Hàng</h1>
+    <p>Xin chào <strong th:text="${bill.getIdKhachHang().getTen()}">Khách hàng</strong>,</p>
+    <p>Đơn hàng của bạn với mã đơn hàng <strong th:text="${bill.ma}">Mã đơn hàng</strong> đã được tạo thành công!</p>
+
+    <h2>Chi tiết đơn hàng:</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Đơn giá sau khi giảm</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="chiTiet : ${billDetails}">
+            <td th:text="${chiTiet.idSanPhamChiTiet.idSanPham.ten != null ? chiTiet.idSanPhamChiTiet.idSanPham.ten : 'Khách Lẻ'}">Tên sản phẩm</td>
+            <td th:text="${chiTiet.soLuong}">Số lượng</td>
+            <td th:text="${chiTiet.donGia}">Đơn giá</td>
+            <td th:text="${chiTiet.donGiaSauKhiGiam}">Đơn giá sau khi giảm</td>
+            <td th:text="${chiTiet.tongTien}">Tổng tiền</td>
+            <td th:text="${chiTiet.trangThai}">Trạng thái</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Ngày tạo: </strong><span th:text="${ngayTao}">Ngày</span></p>
+    <p><strong>Trạng thái đơn hàng: </strong><span th:text="${trangThaiHoaDon}">Trạng thái</span></p>
+
+    <div class="footer">
+        <p> Mọi thắc mắc xin vui lòng liên về:
+            Gmail: swingrailstore@gmail.com
+            Hotline: 0987654321</p>
+        <p>Cảm ơn bạn đã đặt hàng!</p>
+        <p><a href="http://127.0.0.1:5500/front_end/html/login.html">Đăng Nhập</a></p>
+    </div>
+</div>
+</body>
+
+</html>
