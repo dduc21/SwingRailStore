@@ -86,7 +86,7 @@ clientApp.controller('cartController',
                 Swal.fire({
                     icon: "error",
                     title: "Xin lỗi vì sự bất tiện này!!",
-                    text: "Theo chính sách công ty, khi mua hàng quá 3 sản phẩm thì sẽ là mua sỉ. Vui lòng liên hệ 0968686868 biết thêm chi tiết.",
+                    text: "Theo chính sách công ty, khi mua hàng quá 3 sản phẩm thì sẽ là mua sỉ. Vui lòng liên hệ 09999999999 biết thêm chi tiết.",
                 });
                 return;
             }
@@ -95,7 +95,7 @@ clientApp.controller('cartController',
                 Swal.fire({
                     icon: "error",
                     title: "Xin lỗi vì sự bất tiện này!!",
-                    text: "Theo chính sách công ty, giỏ hàng chỉ được chọn tối đa là 5 sản phẩm . Vui lòng liên hệ 0968686868 biết thêm chi tiết.",
+                    text: "Theo chính sách công ty, giỏ hàng chỉ được chọn tối đa là 5 sản phẩm . Vui lòng liên hệ 09999999999 biết thêm chi tiết.",
                 });
                 return;
             }

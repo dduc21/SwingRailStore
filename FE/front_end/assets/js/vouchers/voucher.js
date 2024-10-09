@@ -28,7 +28,7 @@ main_app.controller("voucherController", function ($scope, $http) {
   setInterval(() => {
     loadData()
     console.log("running")
-  }, 1000);
+  }, 10000);
 
   loadData()
 

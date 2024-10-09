@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class ProductDetailIdentityReponse {
 
-    Long id;
+    private Long id;
 
-    String ten;
+    private String ten;
 
-    String duongDan;
+    private String duongDan;
 
 }

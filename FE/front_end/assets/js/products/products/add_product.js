@@ -602,12 +602,10 @@ main_app.controller("addProductController", function ($scope, $http) {
             return;
         }
 
-        for (var productDetail of $scope.productDetails) {
-            if (productDetail.quantity == "" || productDetail.price == "") {
+            if ($scope.product.quantity == "" || $scope.product.price == "") {
                 toastr.error("Bạn phải nhập đầy đủ số lượng và giá của sản phẩm")
                 return;
             }
-        }
 
         Swal.fire({
             title: "Xác nhận tạo sản phẩm này?",

@@ -110,8 +110,8 @@ clientApp.controller('successPaymentController',
 
         $scope.loadData()
 
-        var socket = new SockJS("http://localhost:8080/ws");
-        var stompClient = Stomp.over(socket);
+        // var socket = new SockJS("http://localhost:8080/ws");
+        // var stompClient = Stomp.over(socket);
 
         // stompClient.connect({}, function (frame) {
         //     console.log("Connected: " + frame);

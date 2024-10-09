@@ -1,109 +1,171 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login</title>
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="../assets/images/logos/favicon.png"
+    />
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login</title>
-  <link rel="shortcut icon" type="image/png" href="../assets/images/logos/favicon.png" />
-  <link rel="stylesheet" href="../assets/css/styles.min.css" />
-</head>
-
-<body
-  style="background-image: url(https://e0.pxfuel.com/wallpapers/735/662/desktop-wallpaper-sneakers-sneakers-background-on-bat-sneaker.jpg);background-size: cover;">
-  <!--  Body Wrapper -->
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
+  <body>
+    <!--  Body Wrapper -->
     <div
-      class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
-      <div class="d-flex align-items-center justify-content-center w-100">
-        <div class="row justify-content-center w-100">
-          <div class="col-md-6 col-lg-5 col-xxl-5">
-            <div class="card mb-0">
-              <div class="card-body">
-                <div style="    
-                text-align: center;
-                color: #e3a51e;
-                font-weight: 700;
-                font-size: 21px;
-                margin-bottom: 16px;">Swing Rail Store</div>
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" id="exampleInputEmail1"
-                    aria-describedby="emailHelp">
+      class="page-wrapper"
+      id="main-wrapper"
+      data-layout="vertical"
+      data-navbarbg="skin6"
+      data-sidebartype="full"
+      data-sidebar-position="fixed"
+      data-header-position="fixed"
+    >
+      <div
+        class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center"
+      >
+        <div class="d-flex align-items-center justify-content-center w-100">
+          <div class="row justify-content-center w-100">
+            <div class="col-md-6 col-lg-5 col-xxl-5">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div
+                    style="
+                      text-align: center;
+                      color: #e3a51e;
+                      font-weight: 700;
+                      font-size: 21px;
+                      margin-bottom: 16px;
+                    "
+                  >
+                    Swing Rail Store
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label"
+                      >Email</label
+                    >
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label for="exampleInputPassword1" class="form-label"
+                      >Mật khẩu</label
+                    >
+                    <input
+                      type="password"
+                      id="pass"
+                      class="form-control"
+                      id="exampleInputPassword1"
+                    />
+                  </div>
+                  <div
+                    class="d-flex align-items-center justify-content-between mb-4"
+                  >
+                    <a
+                      class="text-primary fw-bold"
+                      href="./forget_pass.html"
+                      style="color: #e3a51e !important"
+                      >Quên mật khẩu ?</a
+                    >
+                  </div>
+                  <button
+                    onclick="login()"
+                    class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
+                    style="background-color: #e3a51e; border: none"
+                  >
+                    Đăng nhập
+                  </button>
                 </div>
-                <div class="mb-4">
-                  <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                  <input type="password" id="pass" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="d-flex align-items-center justify-content-between mb-4">
-                  <a class="text-primary fw-bold" href="./forget_pass.html" style="color: #e3a51e!important;">Quên mật khẩu
-                    ?</a>
-                </div>
-                <button onclick="login()" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
-                  style="background-color: #e3a51e; border: none">Đăng nhập</button>
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- axios -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <!-- sweet alert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- axios -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- sweet alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script>
-    var email = document.getElementById("email")
-    var pass = document.getElementById("pass")
-    var email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    <script>
+      var email = document.getElementById("email");
+      var pass = document.getElementById("pass");
+      var email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    const login = () => {
-      email = email.value
-      pass = pass.value
-      if (email === "") {
-        Swal.fire({
-          icon: "error",
-          title: "Đã có lỗi",
-          text: "Bạn phải nhập email",
-        });
-        return;
+      const login = () => {
+        email = email.value;
+        pass = pass.value;
+        if (email === "") {
+          Swal.fire({
+            icon: "error",
+            title: "Đã có lỗi",
+            text: "Bạn phải nhập email",
+          });
+          alert("Yêu cầu nhập email !!");
+          return;
+        }
+
+        if (pass === "") {
+          Swal.fire({
+            icon: "error",
+            title: "Đã có lỗi",
+            text: "Bạn phải nhập mật khẩu",
+          });
+          alert("Yêu cầu nhập mật khẩu !!");
+          return;
+        }
+
+        if (!email_regex.test(email)) {
+          Swal.fire({
+            icon: "error",
+            title: "Đã có lỗi",
+            text: "Bạn phải nhập đúng định dạng email!",
+          });
+          alert("Sai định dạng email !!");
+          return;
+        }
+
+        axios
+  .post(
+    `http://localhost:8080/employee/login?user=${email}&pass=${pass}`
+  )
+  .then((response) => {
+    const employee = response.data;
+
+    // Lưu thông tin nhân viên vào localStorage
+    localStorage.setItem("employee", JSON.stringify(employee));
+
+    // Hiển thị thông báo đăng nhập thành công với tên và chức vụ
+    Swal.fire({
+      title: 'Đăng nhập thành công!',
+      html: `Xin chào, <strong style="color: green;">${employee.ten}</strong> (<em>${employee.chucVu.ten}</em>)!`,
+      icon: 'success',
+      confirmButtonText: 'OK'
+    }).then(() => {
+      // Chờ người dùng bấm "OK", sau đó mới điều hướng
+      if (employee.chucVu.ma == 1) {
+        window.location.href = "/front_end/html/router.html#!/thong-ke";
+      } else {
+        window.location.href = "/front_end/html/router.html#!/ban-hang";
       }
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
-      if (pass === "") {
-        Swal.fire({
-          icon: "error",
-          title: "Đã có lỗi",
-          text: "Bạn phải nhập mật khẩu",
-        });
-        return;
-      }
-
-      if (!email_regex.test(email)) {
-        Swal.fire({
-          icon: "error",
-          title: "Đã có lỗi",
-          text: "Bạn phải nhập đúng định dạng email!",
-        });
-        return;
-      }
-
-      axios.post('http://localhost:8080/employee/login?user=' + email + '&pass=' + pass).then((response) => {
-        console.log(response.data)
-        localStorage.setItem("employee", JSON.stringify(response.data))
-        window.location.href = "/front_end/html/router.html#!/thong-ke"
-      }).catch((error) => {
-        console.log(error)
-      })
-
-    }
-  </script>
-</body>
-
+      };
+    </script>
+  </body>
 </html>

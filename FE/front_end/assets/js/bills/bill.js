@@ -1,5 +1,4 @@
 main_app.controller("billController", function ($scope, $http) {
-
   $scope.bills = [];
   $scope.currentPage = 1;
   $scope.itemsPerPage = 10;
@@ -98,7 +97,7 @@ main_app.controller("billController", function ($scope, $http) {
 
   // stompClient.connect({}, function (frame) {
 
-  //   stompClient.subscribe("/front_end/bill/bills", function (message) {
+  //   stompClient.subscribe("/front_end/html/bill/bills", function (message) {
   //     $scope.loadBills(-1)
   //     console.log(message)
   //     if(message.body == "hehe"){
