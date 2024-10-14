@@ -137,34 +137,33 @@
         }
 
         axios
-  .post(
-    `http://localhost:8080/employee/login?user=${email}&pass=${pass}`
-  )
-  .then((response) => {
-    const employee = response.data;
+          .post(
+            `http://localhost:8080/employee/login?user=${email}&pass=${pass}`
+          )
+          .then((response) => {
+            const employee = response.data;
 
-    // Lưu thông tin nhân viên vào localStorage
-    localStorage.setItem("employee", JSON.stringify(employee));
+            // Lưu thông tin nhân viên vào localStorage
+            localStorage.setItem("employee", JSON.stringify(employee));
 
-    // Hiển thị thông báo đăng nhập thành công với tên và chức vụ
-    Swal.fire({
-      title: 'Đăng nhập thành công!',
-      html: `Xin chào, <strong style="color: green;">${employee.ten}</strong> (<em>${employee.chucVu.ten}</em>)!`,
-      icon: 'success',
-      confirmButtonText: 'OK'
-    }).then(() => {
-      // Chờ người dùng bấm "OK", sau đó mới điều hướng
-      if (employee.chucVu.ma == 1) {
-        window.location.href = "/front_end/html/router.html#!/thong-ke";
-      } else {
-        window.location.href = "/front_end/html/router.html#!/ban-hang";
-      }
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
+            // Hiển thị thông báo đăng nhập thành công với tên và chức vụ
+            Swal.fire({
+              title: "Đăng nhập thành công!",
+              html: `Xin chào, <strong style="color: green;">${employee.ten}</strong> (<em>${employee.chucVu.ten}</em>)!`,
+              icon: "success",
+              confirmButtonText: "OK",
+            }).then(() => {
+              // Chờ người dùng bấm "OK", sau đó mới điều hướng
+              if (employee.chucVu.ma == 1) {
+                window.location.href = "/front_end/html/router.html#!/thong-ke";
+              } else {
+                window.location.href = "/front_end/html/router.html#!/ban-hang";
+              }
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       };
     </script>
   </body>

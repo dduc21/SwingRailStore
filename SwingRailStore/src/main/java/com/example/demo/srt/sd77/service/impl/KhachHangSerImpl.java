@@ -19,28 +19,33 @@ public class KhachHangSerImpl implements IKhachHangSer {
     @Autowired
     private IKhachHangRepo khachHangRepo;
 
-    public Page<KhachHang> getCustomersWithPanigation(int pageNo, int pageSize, String key, String trangThai){
+    public Page<KhachHang> getCustomersWithPanigation(int pageNo, int pageSize, String key, String trangThai) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return khachHangRepo.findCustomers(pageable,
                 "%" + trangThai + "%",
                 "%" + key + "%");
     }
+    public Page<KhachHang> rankingCustomer(int pageNo, int pageSize) {
 
-    public ArrayList<KhachHang> getAllCustomers(){
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        return khachHangRepo.rankingCustomers(pageable);
+    }
+
+    public ArrayList<KhachHang> getAllCustomers() {
 //        get all voucher
         return (ArrayList<KhachHang>) khachHangRepo.findAll();
     }
 
-    public KhachHang getCustomerById(Long id){
+    public KhachHang getCustomerById(Long id) {
         return khachHangRepo.findKhachHangById(id).get(0);
     }
 
-    public KhachHang addCustomer(CustomerAddRequest req){
+    public KhachHang addCustomer(CustomerAddRequest req) {
         // add customer
-        if(khachHangRepo.findKhachHangByEmail(req.getEmail()) != null){
+        if (khachHangRepo.findKhachHangByEmail(req.getEmail()) != null) {
             throw new RuntimeException("Email đã tồn tại");
-        }else {
+        } else {
             KhachHang khachHang = new KhachHang();
 
             khachHang.setMa(generateCode());
@@ -60,22 +65,22 @@ public class KhachHangSerImpl implements IKhachHangSer {
             khachHang.setMaTinh(req.getMaTinh());
             khachHang.setTrangThai(true);
             khachHang.setMatKhau("123");
-
+            khachHang.setTichDiem(0);
             return khachHangRepo.save(khachHang);
         }
     }
 
 
-    public String generateCode(){
+    public String generateCode() {
         // generate code
         String newestCode = khachHangRepo.generateNewestCode();
-        if(newestCode == null || newestCode.equals("")){
+        if (newestCode == null || newestCode.equals("")) {
             return "CUSTOMER_" + 0;
         }
         return "CUSTOMER_" + (Integer.parseInt(newestCode.substring(9)) + 1);
     }
 
-    public KhachHang updateCustomer(KhachHang khachHang){
+    public KhachHang updateCustomer(KhachHang khachHang) {
         KhachHang customer = new KhachHang();
         customer.setCccd(khachHang.getCccd());
         customer.setDiaChi(khachHang.getDiaChi());
@@ -96,14 +101,14 @@ public class KhachHangSerImpl implements IKhachHangSer {
         customer.setTrangThai(khachHang.getTrangThai());
         customer.setNgayTao(khachHang.getNgayTao());
         customer.setMatKhau(khachHang.getMatKhau());
-
+        customer.setTichDiem(khachHang.getTichDiem());
         return khachHangRepo.save(customer);
     }
 
-    public KhachHang register(CustomerRegisterRequest req){
-        if(khachHangRepo.findKhachHangByEmail(req.getEmail()) != null){
+    public KhachHang register(CustomerRegisterRequest req) {
+        if (khachHangRepo.findKhachHangByEmail(req.getEmail()) != null) {
             throw new RuntimeException("Email đã tồn tại");
-        }else {
+        } else {
             KhachHang customer = new KhachHang();
             customer.setTen(req.getTen());
             customer.setEmail(req.getEmail());
@@ -113,16 +118,26 @@ public class KhachHangSerImpl implements IKhachHangSer {
         }
     }
 
-    public KhachHang login(String email, String matKhau){
-        KhachHang kh =  khachHangRepo.findKhachHangByEmailAndPass(email, matKhau);
+    public KhachHang login(String email, String matKhau) {
+        KhachHang kh = khachHangRepo.findKhachHangByEmailAndPass(email, matKhau);
 
-        if(kh == null){
+        if (kh == null) {
             throw new RuntimeException("Tài khoản hoặc mật khẩu không đúng");
         }
         return kh;
     }
 
-    public void changePass(String matKhau, String id){
+    @Override
+    public KhachHang updatePoints(Long id, int points) {
+        KhachHang customer = khachHangRepo.findById(id).orElse(null);
+        if (customer != null) {
+            customer.setTichDiem(customer.getTichDiem() + points);
+            return khachHangRepo.save(customer);
+        }
+        return null;
+    }
+
+    public void changePass(String matKhau, String id) {
         khachHangRepo.changePass(matKhau, id);
     }
 

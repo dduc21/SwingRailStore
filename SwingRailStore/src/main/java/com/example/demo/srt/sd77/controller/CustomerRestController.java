@@ -3,6 +3,7 @@ package com.example.demo.srt.sd77.controller;
 import com.example.demo.srt.sd77.entity.KhachHang;
 import com.example.demo.srt.sd77.entity.request.CustomerAddRequest;
 import com.example.demo.srt.sd77.entity.request.CustomerRegisterRequest;
+import com.example.demo.srt.sd77.infrastructure.configs.mail.EmailService;
 import com.example.demo.srt.sd77.service.impl.KhachHangSerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,22 +17,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.thymeleaf.context.Context;
 
 @RestController
 @RequestMapping("/customer")
 @CrossOrigin(origins = "*")
 public class CustomerRestController {
 
+    private final EmailService emailService;
+
     @Autowired
     private KhachHangSerImpl customerSer;
 
+    @Autowired
+    private CustomerRestController(EmailService emailService) {
+        this.emailService = emailService;
+    }
+
     @GetMapping("/find-all-panigation")
-    public ResponseEntity<?> getVouchers(@RequestParam("page") Integer pageNo,
+    public ResponseEntity<?> getAllCustomers(@RequestParam("page") Integer pageNo,
                                          @RequestParam("size") Integer pageSize,
                                          @RequestParam("key") String key,
                                          @RequestParam("trang_thai") String trangThai) {
         try {
             return new ResponseEntity<>(customerSer.getCustomersWithPanigation(pageNo, pageSize, key, trangThai), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/find-all-ranking-customers-panigation")
+    public ResponseEntity<?> getAllRankingCustomers(@RequestParam("page") Integer pageNo,
+                                         @RequestParam("size") Integer pageSize) {
+        try {
+            return new ResponseEntity<>(customerSer.rankingCustomer(pageNo, pageSize), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
@@ -55,6 +73,16 @@ public class CustomerRestController {
         }
     }
 
+    @PutMapping("/update-points")
+    public ResponseEntity<?> updateCustomerPoints(@RequestBody KhachHang khachHang) {
+        KhachHang updatedCustomer = customerSer.updatePoints(khachHang.getId(), khachHang.getTichDiem());
+        if (updatedCustomer != null) {
+            return ResponseEntity.ok(updatedCustomer);
+        } else {
+            return ResponseEntity.status(404).body("Khách hàng không tồn tại");
+        }
+    }
+
     @PutMapping("/update")
     public ResponseEntity<?> updateCustomer(@RequestBody KhachHang khachHang) {
         try {
@@ -67,7 +95,16 @@ public class CustomerRestController {
     @PostMapping("/register")
     public ResponseEntity<?> registerCustomer(@RequestBody CustomerRegisterRequest req) {
         try {
-            return new ResponseEntity<>(customerSer.register(req), HttpStatus.OK);
+            customerSer.register(req);
+            Context context = new Context();
+            context.setVariable("name", req.getTen());
+
+            emailService.sendEmailWithHtmlTemplate(req.getEmail(),
+                    "Chào mừng đến với hệ thống của chúng tôi!",
+                    "welcome-email-template",
+                    context);
+
+            return ResponseEntity.ok("Account registered successfully.");
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }

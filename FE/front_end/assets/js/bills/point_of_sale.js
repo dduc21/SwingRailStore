@@ -721,6 +721,27 @@ main_app.controller("pointOfSaleController", function ($scope, $http) {
             $scope.loadBills();
             $scope.bill = response.data;
 
+            const customerPoints = 0.005 * $scope.totalAllPrice; // 0.5% của tổng giá trị đơn hàng
+
+            // Cập nhật điểm tích lũy cho khách hàng
+            if ($scope.bill.idKhachHang !== null) {
+              // Kiểm tra nếu là khách hàng đã đăng ký
+              axios
+                .put("http://localhost:8080/customer/update-points", {
+                  id: $scope.bill.idKhachHang, // ID của khách hàng
+                  points: customerPoints, // Điểm tích lũy
+                })
+                .then(function (pointsResponse) {
+                  console.log(
+                    "Điểm tích lũy đã được cập nhật:",
+                    pointsResponse.data
+                  );
+                })
+                .catch(function (pointsError) {
+                  console.log("Lỗi cập nhật điểm tích lũy:", pointsError);
+                });
+            }
+
             if ($scope.bill.loaiHoaDon == 0) {
               axios
                 .post("http://localhost:8080/history/add", {

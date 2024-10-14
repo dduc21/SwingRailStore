@@ -72,4 +72,7 @@ public class KhachHang extends PrimaryEntity {
 
     @Column(name = "trang_thai")
     private Boolean trangThai;
+
+    @Column(name = "tich_diem")
+    private int tichDiem;
 }

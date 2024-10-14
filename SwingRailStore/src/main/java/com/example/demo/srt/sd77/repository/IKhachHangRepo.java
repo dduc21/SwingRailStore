@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IKhachHangRepo extends JpaRepository<KhachHang, Long> {
 
@@ -44,6 +45,13 @@ public interface IKhachHangRepo extends JpaRepository<KhachHang, Long> {
                 where email = :email 
             """, nativeQuery = true)
     KhachHang findKhachHangByEmail(@Param("email") String email);
+
+    @Query(value = """
+                SELECT *
+                FROM khach_hang
+                ORDER BY tich_diem DESC;
+            """, nativeQuery = true)
+    Page<KhachHang> rankingCustomers(Pageable pageable);
 
     @Modifying
     @Transactional

@@ -69,17 +69,14 @@ public class EmailController {
     @PostMapping("/send-html-voucher-email")
     public ResponseEntity<String> sendVoucherEmail(@RequestBody VoucherDetailRequest request) {
         try {
-            // Tạo bối cảnh (context) để truyền dữ liệu vào email template
             Context context = new Context();
             KhachHang khachHang = request.getKhachHang();
             Voucher voucher = request.getVoucher();
 
-            // Thêm các biến vào context để render trong template
             context.setVariable("fullNameCustomer", khachHang.getTen());
             context.setVariable("voucherName", voucher.getTen());
             context.setVariable("voucherCode", voucher.getMa());
 
-            // Format giá trị tiền tệ và ngày
             NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
             String formattedGiaTriToiThieu = currencyFormatter.format(voucher.getGiaTriToiThieu());
 
@@ -87,13 +84,11 @@ public class EmailController {
             String formattedNgayBatDau = dateFormat.format(voucher.getNgayBatDau());
             String formattedNgayKetThuc = dateFormat.format(voucher.getNgayKetThuc());
 
-            // Thêm các thông tin voucher vào context
             context.setVariable("valueVoucher", voucher.getPhanTramGiam() + "%");
             context.setVariable("conditionVoucher", formattedGiaTriToiThieu);
             context.setVariable("startDate", formattedNgayBatDau);
             context.setVariable("endDate", formattedNgayKetThuc);
 
-            // Gửi email
             emailService.sendEmailWithHtmlTemplate(khachHang.getEmail(), "Thông báo voucher mới từ The Sneaker House", "voucher-email-template", context);
             System.out.println("aa");
 
@@ -107,17 +102,14 @@ public class EmailController {
     @PostMapping("/confirm-password-reset")
     public ResponseEntity<String> confirmPasswordReset(@RequestParam Map<String, String> requestBody) {
         try {
-            // Cập nhật mật khẩu về '123456' (Cần thực hiện thao tác cập nhật mật khẩu trong hệ thống của bạn)
-            // userService.updatePassword(email, "123456");
+
             NhanVien account = nhanVienRepo.findNhanVienByEmail(requestBody.get("email"));
             account.setMatKhau("123456");
             nhanVienRepo.save(account);
 
-            // Tạo bối cảnh (context) để truyền dữ liệu vào email thông báo
             Context context = new Context();
             context.setVariable("newPassword", "123456");
 
-            // Gửi email thông báo đã đặt lại mật khẩu
             emailService.sendEmailWithHtmlTemplate(requestBody.get("email"), "Mật khẩu đã được đặt lại", "password-reset-notification-template",  // Template email thông báo
                     context);
             return ResponseEntity.ok("200");
@@ -125,5 +117,6 @@ public class EmailController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to send password reset notification email.");
         }
     }
+
 
 }
