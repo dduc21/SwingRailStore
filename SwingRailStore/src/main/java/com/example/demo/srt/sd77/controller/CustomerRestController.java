@@ -4,7 +4,7 @@ import com.example.demo.srt.sd77.entity.KhachHang;
 import com.example.demo.srt.sd77.entity.request.CustomerAddRequest;
 import com.example.demo.srt.sd77.entity.request.CustomerRegisterRequest;
 import com.example.demo.srt.sd77.infrastructure.configs.mail.EmailService;
-import com.example.demo.srt.sd77.service.impl.KhachHangSerImpl;
+import com.example.demo.srt.sd77.service.impl.KhachHangServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class CustomerRestController {
     private final EmailService emailService;
 
     @Autowired
-    private KhachHangSerImpl customerSer;
+    private KhachHangServiceImpl customerSer;
 
     @Autowired
     private CustomerRestController(EmailService emailService) {
@@ -45,11 +45,10 @@ public class CustomerRestController {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping("/find-all-ranking-customers-panigation")
-    public ResponseEntity<?> getAllRankingCustomers(@RequestParam("page") Integer pageNo,
-                                         @RequestParam("size") Integer pageSize) {
+    @GetMapping("/find-all-ranking-customers")
+    public ResponseEntity<?> getAllRankingCustomers() {
         try {
-            return new ResponseEntity<>(customerSer.rankingCustomer(pageNo, pageSize), HttpStatus.OK);
+            return new ResponseEntity<>(customerSer.rankingCustomer(), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e, HttpStatus.BAD_REQUEST);
         }
@@ -75,13 +74,31 @@ public class CustomerRestController {
 
     @PutMapping("/update-points")
     public ResponseEntity<?> updateCustomerPoints(@RequestBody KhachHang khachHang) {
-        KhachHang updatedCustomer = customerSer.updatePoints(khachHang.getId(), khachHang.getTichDiem());
-        if (updatedCustomer != null) {
-            return ResponseEntity.ok(updatedCustomer);
-        } else {
-            return ResponseEntity.status(404).body("Khách hàng không tồn tại");
+        try {
+            KhachHang updatedCustomer = customerSer.updatePoints(khachHang.getId(), khachHang.getTichDiem());
+            if (updatedCustomer != null) {
+                Context context = new Context();
+                context.setVariable("name", updatedCustomer.getTen());
+                context.setVariable("pointsAdded", khachHang.getTichDiem());
+                context.setVariable("totalPoints", updatedCustomer.getTichDiem());
+
+                emailService.sendEmailWithHtmlTemplate(
+                        updatedCustomer.getEmail(),
+                        "Cập nhật điểm tích lũy",
+                        "points-update-email-template",
+                        context
+                );
+
+                // Trả về kết quả thành công
+                return ResponseEntity.ok(updatedCustomer);
+            } else {
+                return ResponseEntity.status(404).body("Khách hàng không tồn tại");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Lỗi khi cập nhật điểm");
         }
     }
+
 
     @PutMapping("/update")
     public ResponseEntity<?> updateCustomer(@RequestBody KhachHang khachHang) {

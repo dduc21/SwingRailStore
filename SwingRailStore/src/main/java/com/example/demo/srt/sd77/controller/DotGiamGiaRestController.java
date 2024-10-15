@@ -2,7 +2,7 @@ package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.DotGiamGia;
 import com.example.demo.srt.sd77.entity.request.SaleAddRequest;
-import com.example.demo.srt.sd77.service.impl.DotGiamGiaSerImpl;
+import com.example.demo.srt.sd77.service.impl.DotGiamGiaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DotGiamGiaRestController {
 
     @Autowired
-    private DotGiamGiaSerImpl saleService;
+    private DotGiamGiaServiceImpl saleService;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getVouchers(@RequestParam("page") Integer pageNo,

@@ -1,7 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.request.PaymentMethodAddRequest;
-import com.example.demo.srt.sd77.service.impl.HinhThucThanhToanSerImpl;
+import com.example.demo.srt.sd77.service.impl.HinhThucThanhToanServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PaymentMethodRestController {
 
     @Autowired
-    private HinhThucThanhToanSerImpl paymentMethodSer;
+    private HinhThucThanhToanServiceImpl paymentMethodSer;
 
     @PostMapping("/add")
     public ResponseEntity<?> addPaymentMethod(@RequestBody PaymentMethodAddRequest req) {

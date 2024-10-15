@@ -1,7 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.MauSac;
-import com.example.demo.srt.sd77.service.impl.MauSacSerImpl;
+import com.example.demo.srt.sd77.service.impl.MauSacServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class ColorRestController {
 
     @Autowired
-    private MauSacSerImpl mauSacService;
+    private MauSacServiceImpl mauSacService;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getColors(@RequestParam("page")Integer pageNo,

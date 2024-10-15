@@ -1,7 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.request.EmployeeAddRequest;
-import com.example.demo.srt.sd77.service.impl.NhanVienSerImpl;
+import com.example.demo.srt.sd77.service.impl.NhanVienServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeRestController {
 
     @Autowired
-    private NhanVienSerImpl employeeSer;
+    private NhanVienServiceImpl employeeSer;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getVouchers(@RequestParam("page") Integer pageNo,

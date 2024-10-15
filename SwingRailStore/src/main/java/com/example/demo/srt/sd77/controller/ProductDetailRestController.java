@@ -3,7 +3,7 @@ package com.example.demo.srt.sd77.controller;
 import com.example.demo.srt.sd77.entity.SanPhamChiTiet;
 import com.example.demo.srt.sd77.entity.request.ProductDetailAddRequest;
 import com.example.demo.srt.sd77.entity.request.ProductDetailSearchRequest;
-import com.example.demo.srt.sd77.service.impl.SanPhamChiTietSerImpl;
+import com.example.demo.srt.sd77.service.impl.SanPhamChiTietServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductDetailRestController {
 
     @Autowired
-    private SanPhamChiTietSerImpl sanPhamChiTietService;
+    private SanPhamChiTietServiceImpl sanPhamChiTietService;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getVouchers(@RequestParam("page") Integer pageNo,

@@ -58,7 +58,8 @@
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
     <style>
       html,
       body {
@@ -181,7 +182,7 @@
 
                         <li
                           class="static btn-nav"
-                          id="newsest"
+                          id="ranking"
                           ng-click="changeActive(2)"
                         >
                           <a href="#!xep-hang-khach-hang" style="font-weight: 600">
@@ -192,7 +193,7 @@
                         <li
                           class="static btn-nav"
                           id="newsest"
-                          ng-click="changeActive(2)"
+                          ng-click="changeActive(3)"
                         >
                           <a href="#!tin-tuc" style="font-weight: 600">
                             Tin tức</a
@@ -819,7 +820,11 @@
             } else if (status == 1) {
               document.getElementById("men_shoes").classList.add("active");
               document.getElementById("men_shoes").classList.remove("static");
-            } else if (status == 2) {
+            }else if (status == 2) {
+              document.getElementById("ranking").classList.add("active");
+              document.getElementById("ranking").classList.remove("static");
+            }
+             else if (status == 3) {
               document.getElementById("newsest").classList.add("active");
               document.getElementById("newsest").classList.remove("static");
             }
@@ -926,7 +931,7 @@
           })
           // ranking
           .when("/xep-hang-khach-hang", {
-            templateUrl: "rankings/ranking_customers.html",
+            templateUrl: "/client/rankings/ranking_customers.html",
             controller: "rankingCustomersController",
           })
 
@@ -961,8 +966,10 @@
     <script src="assets/js/user/login.js"></script>
     <script src="assets/js/user/setting.js"></script>
     <script src="assets/js/user/bill.js"></script>
+    <script src="assets/js/rankings/ranking_customers.js"></script>
     <script src="assets/js/user/changePass.js"></script>
     <script src="assets/js/product_detail/shop.js"></script>
     <script src="assets/js/bill/success_payment.js"></script>
+    <script src="assets/js/websocketService.js"></script>
   </body>
 </html>

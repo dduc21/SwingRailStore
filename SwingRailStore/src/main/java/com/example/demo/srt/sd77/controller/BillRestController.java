@@ -2,7 +2,7 @@ package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.HoaDon;
 import com.example.demo.srt.sd77.entity.request.ProductVoucherUpdateRequest;
-import com.example.demo.srt.sd77.service.impl.HoaDonSerImpl;
+import com.example.demo.srt.sd77.service.impl.HoaDonServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ import java.util.Date;
 public class BillRestController {
 
     @Autowired
-    private HoaDonSerImpl hoaDonService;
+    private HoaDonServiceImpl hoaDonService;
 
     @GetMapping("/get-bill-by-state/{state}")
     public ArrayList<HoaDon> getHoaDonByTrangThai(@PathVariable("state") Integer trangThai) {

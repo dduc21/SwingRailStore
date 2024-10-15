@@ -1,7 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.request.VoucherDetailRequest;
-import com.example.demo.srt.sd77.service.impl.PhieuGiamGiaChiTietSerImpl;
+import com.example.demo.srt.sd77.service.impl.PhieuGiamGiaChiTietServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class VoucherDetailRestController {
 
     @Autowired
-    private PhieuGiamGiaChiTietSerImpl phieuGiamGiaChiTietSer;
+    private PhieuGiamGiaChiTietServiceImpl phieuGiamGiaChiTietSer;
 
     @PostMapping("/add-voucher-detail")
     public ResponseEntity<?> addVoucherDetail(@RequestBody VoucherDetailRequest voucherDetailRequest) {

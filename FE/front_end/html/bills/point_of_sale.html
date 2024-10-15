@@ -1462,69 +1462,35 @@
           aria-describedby="emailHelp"
           ng-keyup="searchVoucher()"
         />
-
-        <label
-          for="exampleInputEmail1"
-          class="form-label"
-          ng-if="voucherPrivates.length !== 0"
-          >Voucher dành riêng cho bạn:
+      
+        <!-- Hiển thị voucher dành riêng -->
+        <label for="exampleInputEmail1" class="form-label" ng-if="voucherPrivates.length !== 0">
+          Voucher dành riêng cho bạn:
         </label>
         <div
           class="card"
-          style="
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
-            position: relative;
-          "
+          style="display: flex; justify-content: space-between; padding: 20px; position: relative;"
           ng-repeat="voucher in voucherPrivates"
           ng-if="voucher.trangThai == 1"
         >
           <div style="width: 80%; font-size: 12px">
-            <div>
-              <span style="color: rgb(62 74 99 / 56%)">[{{voucher.ma}}]</span>
-              <span style="display: inline-block; font-weight: 500">
-                {{voucher.ten}}
-              </span>
-              <button
-                class="btn btn-info"
-                style="color: white; padding: 4px; font-size: 10px"
-              >
-                - {{voucher.phanTramGiam}}%
-              </button>
-            </div>
+            <span style="color: rgb(62 74 99 / 56%)">[{{voucher.ma}}]</span>
+            <span style="display: inline-block; font-weight: 500">{{voucher.ten}}</span>
+            <button class="btn btn-info" style="color: white; padding: 4px; font-size: 10px">
+              - {{voucher.phanTramGiam}}%
+            </button>
           </div>
-
+      
           <div>
-            <span
-              style="
-                display: inline-block;
-                font-size: 10px;
-                font-weight: 400;
-                width: 100px;
-              "
-              >Giá trị tối thiểu:</span
-            >
-            <span style="display: inline-block; font-size: 10px"
-              >{{formatToVND(voucher.giaTriToiThieu)}}</span
-            >
+            <span style="display: inline-block; font-size: 10px; font-weight: 400; width: 100px;">Giá trị tối thiểu:</span>
+            <span style="display: inline-block; font-size: 10px">{{formatToVND(voucher.giaTriToiThieu)}}</span>
           </div>
-
+      
           <div>
-            <span
-              style="
-                display: inline-block;
-                font-size: 10px;
-                font-weight: 400;
-                width: 100px;
-              "
-              >Ngày kết thúc:</span
-            >
-            <span style="display: inline-block; font-size: 10px"
-              >{{voucher.ngayKetThuc| date : 'HH:mmdd/MM/yyyy'}}</span
-            >
+            <span style="display: inline-block; font-size: 10px; font-weight: 400; width: 100px;">Ngày kết thúc:</span>
+            <span style="display: inline-block; font-size: 10px">{{voucher.ngayKetThuc | date : 'HH:mm dd/MM/yyyy'}}</span>
           </div>
-
+      
           <button
             class="btn btn-primary"
             style="position: absolute; right: 20px; bottom: 32px"
@@ -1533,15 +1499,54 @@
           >
             Chọn
           </button>
-          <button
-            class="btn btn-danger"
-            style="position: absolute; right: 20px; bottom: 32px"
-            disabled
-            ng-if="voucher.soLanDung == 0"
-          >
+          <button class="btn btn-danger" style="position: absolute; right: 20px; bottom: 32px" disabled ng-if="voucher.soLanDung == 0">
             Hết voucher
           </button>
         </div>
+      
+        <!-- Hiển thị tất cả voucher công khai -->
+        <label for="exampleInputEmail1" class="form-label" ng-if="voucherPublics.length !== 0">
+          Voucher công khai:
+        </label>
+        <div
+          class="card"
+          style="display: flex; justify-content: space-between; padding: 20px; position: relative;"
+          ng-repeat="voucher in voucherPublics"
+          ng-if="voucher.trangThai == 1"
+        >
+          <!-- Similar nội dung cho voucher công khai -->
+          <div style="width: 80%; font-size: 12px">
+            <span style="color: rgb(62 74 99 / 56%)">[{{voucher.ma}}]</span>
+            <span style="display: inline-block; font-weight: 500">{{voucher.ten}}</span>
+            <button class="btn btn-info" style="color: white; padding: 4px; font-size: 10px">
+              - {{voucher.phanTramGiam}}%
+            </button>
+          </div>
+      
+          <div>
+            <span style="display: inline-block; font-size: 10px; font-weight: 400; width: 100px;">Giá trị tối thiểu:</span>
+            <span style="display: inline-block; font-size: 10px">{{formatToVND(voucher.giaTriToiThieu)}}</span>
+          </div>
+      
+          <div>
+            <span style="display: inline-block; font-size: 10px; font-weight: 400; width: 100px;">Ngày kết thúc:</span>
+            <span style="display: inline-block; font-size: 10px">{{voucher.ngayKetThuc | date : 'HH:mm dd/MM/yyyy'}}</span>
+          </div>
+      
+          <button
+            class="btn btn-primary"
+            style="position: absolute; right: 20px; bottom: 32px"
+            ng-click="addVoucherToBill(voucher)"
+            ng-if="voucher.soLanDung != 0"
+          >
+            Chọn
+          </button>
+          <button class="btn btn-danger" style="position: absolute; right: 20px; bottom: 32px" disabled ng-if="voucher.soLanDung == 0">
+            Hết voucher
+          </button>
+        </div>
+      </div>
+      
 
         <label
           for="exampleInputEmail1"

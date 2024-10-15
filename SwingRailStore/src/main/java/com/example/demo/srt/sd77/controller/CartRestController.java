@@ -1,7 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.request.CartDetailRequest;
-import com.example.demo.srt.sd77.service.impl.GioHangSerImpl;
+import com.example.demo.srt.sd77.service.impl.GioHangServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CartRestController {
 
     @Autowired
-    private GioHangSerImpl cartService;
+    private GioHangServiceImpl cartService;
 
     @GetMapping("/get-quantity-by-id-customer/{id}")
     public ResponseEntity<?> getQuantityOfCartDetailByIdCustomer(@PathVariable("id") Long id) {

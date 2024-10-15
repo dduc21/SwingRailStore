@@ -1,9 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.KichCo;
-import com.example.demo.srt.sd77.entity.ThuongHieu;
-import com.example.demo.srt.sd77.service.impl.KichCoSerImpl;
-import com.example.demo.srt.sd77.service.impl.ThuongHieuSerImpl;
+import com.example.demo.srt.sd77.service.impl.KichCoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class SizeRestController {
 
     @Autowired
-    private KichCoSerImpl sizeService;
+    private KichCoServiceImpl sizeService;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getVouchers(@RequestParam("page") Integer pageNo,

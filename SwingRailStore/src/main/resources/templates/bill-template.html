@@ -58,7 +58,7 @@
 <body>
 <div class="container">
     <h1>Thông Tin Đơn Hàng</h1>
-    <p>Xin chào <strong th:text="${bill.getIdKhachHang().getTen()}">Khách hàng</strong>,</p>
+    <p>Xin chào <strong th:text="${bill.idKhachHang != null ? bill.idKhachHang.ten : bill.tenNguoiNhan}">Khách hàng</strong>,</p>
     <p>Đơn hàng của bạn với mã đơn hàng <strong th:text="${bill.ma}">Mã đơn hàng</strong> đã được tạo thành công!</p>
 
     <h2>Chi tiết đơn hàng:</h2>
@@ -75,7 +75,7 @@
         </thead>
         <tbody>
         <tr th:each="chiTiet : ${billDetails}">
-            <td th:text="${chiTiet.idSanPhamChiTiet.idSanPham.ten != null ? chiTiet.idSanPhamChiTiet.idSanPham.ten : 'Khách Lẻ'}">Tên sản phẩm</td>
+            <td th:text="${chiTiet.idSanPhamChiTiet.idSanPham.ten }">Tên sản phẩm</td>
             <td th:text="${chiTiet.soLuong}">Số lượng</td>
             <td th:text="${chiTiet.donGia}">Đơn giá</td>
             <td th:text="${chiTiet.donGiaSauKhiGiam}">Đơn giá sau khi giảm</td>

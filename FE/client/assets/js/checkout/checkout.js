@@ -594,21 +594,19 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
                             )
                             .then((response) => {
                               toastr.success("Tạo đơn hàng thành công.");
-
                               setTimeout(function () {
                                 axios
                                   .post(
                                     "http://localhost:8080/email/send-email",
                                     $scope.bill
                                   )
-                                  .then(function (response) {})
+                                  .then(function (response) {
+                                    $window.location.href =
+                                      "http://127.0.0.1:5500/client/router.html#!/trang-chu";
+                                    window.scrollTo(0, 0);
+                                  })
                                   .catch(function (error) {});
                                 $scope.addBill();
-                                $window.location.href =
-                                  "http://127.0.0.1:5500/client/router.html#!/chi-tiet-hoa-don/" +
-                                  $scope.bill.id;
-                                $window.location.reload();
-                                window.scrollTo(0, 0);
                               }, 500);
                             })
                             .catch((error) => {
@@ -623,13 +621,12 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
                                 "http://localhost:8080/email/send-email",
                                 $scope.bill
                               )
-                              .then(function (response) {})
+                              .then(function (response) {
+                                $window.location.href =
+                                  "http://127.0.0.1:5500/client/router.html#!/trang-chu";
+                              })
                               .catch(function (error) {});
                             $scope.addBill();
-                            $window.location.href =
-                              "http://127.0.0.1:5500/client/router.html#!/chi-tiet-hoa-don/" +
-                              $scope.bill.id;
-                            $window.location.reload();
                           }, 500);
                         }
                       }
@@ -744,35 +741,38 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
     }
 
     setTimeout(() => {
-      $scope.getVoucherByKey("");
+      $scope.getVoucherByKey();
     }, 50);
   };
 
-  $scope.getVoucherByKey = function (key) {
+  $scope.getVoucherByKey = function () {
     $http
-      .get("http://localhost:8080/voucher/get-all?key=" + key)
+      .get("http://localhost:8080/voucher/get-all-modal")
       .then(function (response) {
         $scope.vouchers = response.data;
         $scope.voucherPrivates = [];
         $scope.voucherPublics = [];
+
         response.data.forEach((voucher) => {
           if (voucher.loaiVoucher == 0) {
             $scope.voucherPublics.push(voucher);
-          } else {
-            if ($scope.bill.idKhachHang !== null) {
-              if (
-                $scope.voucherDetails.find(
-                  (e) => e.idPhieuGiamGia.id == voucher.id
-                ) != undefined
-              ) {
-                $scope.voucherPrivates.push(voucher);
-              }
+          } else if ($scope.bill && $scope.bill.idKhachHang !== null) {
+            if (
+              $scope.voucherDetails.find(
+                (e) => e.idPhieuGiamGia.id == voucher.id
+              )
+            ) {
+              $scope.voucherPrivates.push(voucher);
             }
           }
         });
+      })
+      .catch(function (error) {
+        console.log("Lỗi khi tải dữ liệu voucher: ", error);
       });
   };
 
+  $scope.getVoucherByKey();
   $scope.addVoucherToBill = function (voucher) {
     var voucherModal = document.querySelector("#voucherModal");
     var modal = bootstrap.Modal.getOrCreateInstance(voucherModal);
@@ -801,18 +801,18 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
     }, 100);
   };
 
-  // var socket = new SockJS("http://localhost:8080/ws");
-  // var stompClient = Stomp.over(socket);
+  var socket = new SockJS("http://localhost:8080/ws");
+  var stompClient = Stomp.over(socket);
 
-  // stompClient.connect({}, function (frame) {
-  //     console.log("Connected: " + frame);
+  stompClient.connect({}, function (frame) {
+    console.log("Connected: " + frame);
 
-  //     stompClient.subscribe("/bill/bills", function (message) {
-  //         console.log(message.body);
+    stompClient.subscribe("/bill/bills", function (message) {
+      console.log(message.body);
 
-  //         $scope.$apply();
-  //     });
-  // });
+      $scope.$apply();
+    });
+  });
 
   $scope.addBill = function () {
     var message = {

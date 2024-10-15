@@ -1,7 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.request.ImageAddRequest;
-import com.example.demo.srt.sd77.service.impl.HinhAnhSerImpl;
+import com.example.demo.srt.sd77.service.impl.HinhAnhServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class ImageRestController {
 
     @Autowired
-    private HinhAnhSerImpl hinhAnhService;
+    private HinhAnhServiceImpl hinhAnhService;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getImages(@RequestParam("page")Integer pageNo,

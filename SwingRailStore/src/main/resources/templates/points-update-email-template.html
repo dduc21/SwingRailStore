@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông báo cập nhật điểm tích lũy sau khi mua hàng!!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h2 {
+            margin: 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        .footer {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h2>Chào bạn, <span th:text="${name}"></span>!</h2>
+    </div>
+
+    <!-- Nội dung email -->
+    <div class="content">
+        <p>Bạn vừa thực hiện một giao dịch mua hàng thành công.</p>
+        <p>Bạn đã được cộng thêm <strong th:text="${pointsAdded}"></strong> điểm vào tài khoản tích lũy của mình.</p>
+        <p>Tổng số điểm hiện tại của bạn là: <strong th:text="${totalPoints}"></strong> điểm.</p>
+        <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Hệ thống của chúng tôi. All rights reserved.</p>
+    </div>
+</div>
+
+</body>
+</html>

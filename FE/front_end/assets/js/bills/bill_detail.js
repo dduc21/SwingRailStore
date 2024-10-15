@@ -754,7 +754,25 @@ main_app.controller(
             .post("http://localhost:8080/email/send-email", $scope.bill)
             .then(function (response) {})
             .catch(function (error) {});
-          // $scope.addBill(`Hóa đơn ${$scope.bill.ma} đã giao hàng thành công`)
+          $scope.customerPoints = 0.005 * $scope.bill.tongTienSauGiam; 
+            if ($scope.bill.idKhachHang !== null) {
+              axios
+                .put("http://localhost:8080/customer/update-points", {
+                  id: $scope.bill.idKhachHang.id,
+                  tichDiem: $scope.customerPoints,
+                })
+                .then(function (pointsResponse) {
+                  console.log('id:' + $scope.bill.idKhachHang.id)
+                  console.log('point:' +  $scope.customerPoints)
+                  console.log(
+                    "Điểm tích lũy đã được cập nhật:",
+                    pointsResponse.data
+                  );
+                })
+                .catch(function (pointsError) {
+                  console.log("Lỗi cập nhật điểm tích lũy:", pointsError);
+                });
+            }
           Swal.fire({
             title: "Hóa đơn",
             html:
@@ -1167,8 +1185,16 @@ main_app.controller(
         setTimeout(() => {
           $scope.loadBill();
           // $scope.addBill(`Hóa đơn ${$scope.bill.ma} đã được hoàn lại thành công`)
-          alert("Hóa đơn" + $scope.bill.ma + "đã được hoàn lại thành công ");
-        }, 100);
+          // alert("Hóa đơn " + $scope.bill.ma + " đã được hoàn lại thành công ");
+          Swal.fire({
+            title: "Hóa đơn",
+            html:
+              'Mã hóa đơn <strong style="color: red;">' +
+              $scope.bill.ma +
+              "</strong> đã được hoàn lại thành công.",
+            icon: "success",
+          });
+        }, 1000);
       }
     };
 

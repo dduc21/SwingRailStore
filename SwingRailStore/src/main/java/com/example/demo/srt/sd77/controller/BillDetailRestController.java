@@ -2,7 +2,7 @@ package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.HoaDonChiTiet;
 import com.example.demo.srt.sd77.entity.request.ProductDetailRequest;
-import com.example.demo.srt.sd77.service.impl.HoaDonChiTietSerImpl;
+import com.example.demo.srt.sd77.service.impl.HoaDonChiTietServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class BillDetailRestController {
 
     @Autowired
-    private HoaDonChiTietSerImpl hoaDonChiTietService;
+    private HoaDonChiTietServiceImpl hoaDonChiTietService;
 
     @GetMapping("/get-by-bill")
     public ResponseEntity<?> getByProduct(@RequestParam("id") Long id,

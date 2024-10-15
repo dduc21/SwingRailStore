@@ -244,7 +244,7 @@
                         <div style="padding: 14px;">
                             <div class="row">
                                 <div class="col-lg-5">
-                                    <div class="" mb-20">
+                                    <div class="" mb-20>
                                         <!-- <div ng-repeat="img in imageCurrents" >
                                             <img src="{{img.duongDan}}" alt="" style="width: 475px;" />
                                         </div> -->
@@ -640,6 +640,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+       <script type="text/javascript">
+  let timeout;
+
+  function resetTimeout() {
+    clearTimeout(timeout);
+    timeout = setTimeout(function() {
+      if (confirm("Bạn đã không tương tác trong một thời gian dài. Bạn có muốn tải lại trang để cập nhật nội dung không?")) {
+        location.reload();
+      }
+    }, 5 * 60 * 1000);  // 5 phút không tương tác
+  }
+
+  window.onload = resetTimeout;
+  document.onmousemove = resetTimeout;
+  document.onkeypress = resetTimeout;
+  document.onscroll = resetTimeout;
+  document.onclick = resetTimeout;
+</script>
+
+          
 
 </body>
 

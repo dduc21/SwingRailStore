@@ -1,9 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
-import com.example.demo.srt.sd77.entity.MauSac;
 import com.example.demo.srt.sd77.entity.TheLoai;
-import com.example.demo.srt.sd77.service.impl.MauSacSerImpl;
-import com.example.demo.srt.sd77.service.impl.TheLoaiSerImpl;
+import com.example.demo.srt.sd77.service.impl.TheLoaiServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class TypeRestController {
 
     @Autowired
-    private TheLoaiSerImpl theLoaiService;
+    private TheLoaiServiceImpl theLoaiService;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getTypes(@RequestParam("page")Integer pageNo,

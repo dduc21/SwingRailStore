@@ -2,15 +2,14 @@ package com.example.demo.srt.sd77.infrastructure.configs.mail;
 
 import com.example.demo.srt.sd77.entity.*;
 import com.example.demo.srt.sd77.entity.request.VoucherDetailRequest;
-import com.example.demo.srt.sd77.repository.IHoaDonChiTietRepo;
-import com.example.demo.srt.sd77.repository.INhanVienRepo;
+import com.example.demo.srt.sd77.repository.IHoaDonChiTietRepository;
+import com.example.demo.srt.sd77.repository.INhanVienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.context.Context;
 
-import java.net.URI;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class EmailController {
     private final EmailService emailService;
 
     @Autowired
-    private IHoaDonChiTietRepo hoaDonChiTietRepo;
+    private IHoaDonChiTietRepository hoaDonChiTietRepo;
 
     @Autowired
     public EmailController(EmailService emailService) {
@@ -33,7 +32,7 @@ public class EmailController {
     }
 
     @Autowired
-    public INhanVienRepo nhanVienRepo;
+    public INhanVienRepository nhanVienRepo;
 
     @PostMapping("/send-email")
     public String sendEmail(@RequestBody HoaDon hoaDon) {
@@ -89,7 +88,7 @@ public class EmailController {
             context.setVariable("startDate", formattedNgayBatDau);
             context.setVariable("endDate", formattedNgayKetThuc);
 
-            emailService.sendEmailWithHtmlTemplate(khachHang.getEmail(), "Thông báo voucher mới từ The Sneaker House", "voucher-email-template", context);
+            emailService.sendEmailWithHtmlTemplate(khachHang.getEmail(), "Thông báo voucher mới từ Swing Rail Store", "voucher-email-template", context);
             System.out.println("aa");
 
             return ResponseEntity.ok("Voucher email sent successfully!");

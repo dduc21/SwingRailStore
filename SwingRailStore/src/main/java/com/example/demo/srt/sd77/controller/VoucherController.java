@@ -2,7 +2,7 @@ package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.Voucher;
 import com.example.demo.srt.sd77.entity.request.VoucherAddRequest;
-import com.example.demo.srt.sd77.service.impl.VoucherSerImpl;
+import com.example.demo.srt.sd77.service.impl.VoucherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class VoucherController {
 
     @Autowired
-    private VoucherSerImpl voucherService;
+    private VoucherServiceImpl voucherService;
 
     @GetMapping("/find-all-panigation")
     public ResponseEntity<?> getVouchers(@RequestParam("page")Integer pageNo,
@@ -32,6 +32,14 @@ public class VoucherController {
     public ResponseEntity<?> getVouchers(@RequestParam("key")String key){
         try{
             return new ResponseEntity<>(voucherService.getAllVoucher(key), HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/get-all-modal")
+    public ResponseEntity<?> getVouchersModal(){
+        try{
+            return new ResponseEntity<>(voucherService.getAllVoucherModal(), HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

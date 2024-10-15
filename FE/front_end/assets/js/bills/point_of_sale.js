@@ -98,7 +98,7 @@ main_app.controller("pointOfSaleController", function ($scope, $http) {
         $scope.totalPrice = 0;
         for (var i = 0; i < $scope.billDetails.content.length; i++) {
           if (
-            $scope.billDetails.content[i].idSanPhamChiTiet.idDotGiamGia == null
+            $scope.billDetails.content[i].idSanPhamChiTiet.idDotGiamGia == null || $scope.billDetails.content[i].idSanPhamChiTiet.idDotGiamGia.trangThai == 0 || $scope.billDetails.content[i].idSanPhamChiTiet.idDotGiamGia.trangThai == 2
           ) {
             $scope.totalPrice +=
               Number($scope.billDetails.content[i].idSanPhamChiTiet.donGia) *
@@ -523,17 +523,20 @@ main_app.controller("pointOfSaleController", function ($scope, $http) {
     }, 50);
   };
 
-  $scope.getVoucherByKey = function (key) {
+  $scope.getVoucherByKey = function () {
     $http
-      .get("http://localhost:8080/voucher/get-all?key=" + key)
+      .get("http://localhost:8080/voucher/get-all-modal")
       .then(function (response) {
-        $scope.vouchers = response.data;
+        $scope.vouchers = response.data; // Lưu tất cả voucher
         $scope.voucherPrivates = [];
         $scope.voucherPublics = [];
+  
         response.data.forEach((voucher) => {
           if (voucher.loaiVoucher == 0) {
+            // Loại voucher public
             $scope.voucherPublics.push(voucher);
           } else {
+            // Loại voucher private (nếu người dùng có)
             if ($scope.bill.idKhachHang !== null) {
               if (
                 $scope.voucherDetails.find(
@@ -545,8 +548,12 @@ main_app.controller("pointOfSaleController", function ($scope, $http) {
             }
           }
         });
+      })
+      .catch(function (error) {
+        console.log("Error fetching vouchers: ", error);
       });
   };
+  
 
   $scope.searchVoucher = function () {
     $scope.getVoucherByKey($scope.code_voucher);
@@ -721,17 +728,18 @@ main_app.controller("pointOfSaleController", function ($scope, $http) {
             $scope.loadBills();
             $scope.bill = response.data;
 
-            const customerPoints = 0.005 * $scope.totalAllPrice; // 0.5% của tổng giá trị đơn hàng
-
+            $scope.customerPoints = 0.005 * $scope.bill.tongTienSauGiam; // 0.5% của tổng giá trị đơn hàng
             // Cập nhật điểm tích lũy cho khách hàng
             if ($scope.bill.idKhachHang !== null) {
               // Kiểm tra nếu là khách hàng đã đăng ký
               axios
                 .put("http://localhost:8080/customer/update-points", {
-                  id: $scope.bill.idKhachHang, // ID của khách hàng
-                  points: customerPoints, // Điểm tích lũy
+                  id: $scope.bill.idKhachHang.id, // ID của khách hàng
+                  tichDiem: $scope.customerPoints, // Điểm tích lũy
                 })
                 .then(function (pointsResponse) {
+                  console.log('id:' + $scope.bill.idKhachHang.id)
+                  console.log('point:' +  $scope.customerPoints)
                   console.log(
                     "Điểm tích lũy đã được cập nhật:",
                     pointsResponse.data

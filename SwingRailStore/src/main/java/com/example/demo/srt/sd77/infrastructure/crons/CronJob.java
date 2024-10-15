@@ -6,10 +6,10 @@ import com.example.demo.srt.sd77.entity.SanPhamChiTiet;
 import com.example.demo.srt.sd77.entity.Voucher;
 import com.example.demo.srt.sd77.enums.StatusDotGiamGia;
 import com.example.demo.srt.sd77.enums.StatusVoucher;
-import com.example.demo.srt.sd77.repository.IDotGiamGiaRepo;
-import com.example.demo.srt.sd77.repository.ISanPhamChiTietRepo;
-import com.example.demo.srt.sd77.repository.IVoucherRepo;
-import com.example.demo.srt.sd77.repository.PhieuGiamGiaChiTietRepo;
+import com.example.demo.srt.sd77.repository.IDotGiamGiaRepository;
+import com.example.demo.srt.sd77.repository.ISanPhamChiTietRepository;
+import com.example.demo.srt.sd77.repository.IVoucherRepository;
+import com.example.demo.srt.sd77.repository.PhieuGiamGiaChiTietRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +25,16 @@ public class CronJob {
     private static final Logger logger = LoggerFactory.getLogger(CronJob.class);
 
     @Autowired
-    private IVoucherRepo voucherRepo;
+    private IVoucherRepository voucherRepo;
 
     @Autowired
-    private IDotGiamGiaRepo dotGiamGiaRepo;
+    private IDotGiamGiaRepository dotGiamGiaRepo;
 
     @Autowired
-    private ISanPhamChiTietRepo sanPhamChiTietRepo;
+    private ISanPhamChiTietRepository sanPhamChiTietRepo;
 
     @Autowired
-    private PhieuGiamGiaChiTietRepo phieuGiamGiaChiTietRepo;
+    private PhieuGiamGiaChiTietRepository phieuGiamGiaChiTietRepository;
 
     @Scheduled(fixedRate = 1000)
     public void cronJobVoucher() {
@@ -47,9 +47,9 @@ public class CronJob {
                 voucher.setTrangThai(StatusVoucher.KET_THUC.getTrangThai());
                 // khi phieu giam gia ket thuc thi lap tuc nhung kh co voucher nay se mat ap dung
 
-                List<PhieuGiamGiaChiTiet> voucherDetails = phieuGiamGiaChiTietRepo.getChiTietByPhieuGiamGia(voucher.getId());
+                List<PhieuGiamGiaChiTiet> voucherDetails = phieuGiamGiaChiTietRepository.getChiTietByPhieuGiamGia(voucher.getId());
                 voucherDetails.forEach(voucherDetail -> {
-                    phieuGiamGiaChiTietRepo.deleteById(voucherDetail.getId());
+                    phieuGiamGiaChiTietRepository.deleteById(voucherDetail.getId());
                 });
             } else {
                 voucher.setTrangThai(StatusVoucher.DANG_DIEN_RA.getTrangThai());
