@@ -18,6 +18,7 @@ public class TheLoaiServiceImpl implements ITheLoaiService {
     @Autowired
     private ITheLoaiRepository theLoaiRepo;
 
+    @Override
     public Page<TheLoai> getTypes(int pageNo, int pageSize, String key) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -25,15 +26,17 @@ public class TheLoaiServiceImpl implements ITheLoaiService {
                 "%" + key + "%");
     }
 
+    @Override
     public ArrayList<TheLoai> getAll() {
-//        get all voucher
         return (ArrayList<TheLoai>) theLoaiRepo.findByOrderByNgayTaoDesc();
     }
 
+    @Override
     public TheLoai getById(Long id) {
         return theLoaiRepo.findTypeById(id).get(0);
     }
 
+    @Override
     public TheLoai add(String req) {
         TheLoai e = new TheLoai();
 
@@ -45,6 +48,7 @@ public class TheLoaiServiceImpl implements ITheLoaiService {
         return theLoaiRepo.save(e);
     }
 
+    @Override
     public TheLoai update(TheLoai req) {
         List<TheLoai> brands = theLoaiRepo.findTypeByName(req.getTen());
 

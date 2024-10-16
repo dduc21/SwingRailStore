@@ -11,6 +11,7 @@ public class GioHangChiTietServiceImpl implements IGioHangChiTietService {
     @Autowired
     private IGioHangChiTietRepository gioHangChiTietRepo;
 
+    @Override
     public void removeCartDetailById(Long id){
         gioHangChiTietRepo.deleteById(id);
     }

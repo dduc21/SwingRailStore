@@ -20,7 +20,7 @@ public class DotGiamGiaServiceImpl implements IDotGiamGiaService {
     @Autowired
     private IDotGiamGiaRepository dotGiamGiaRepo;
 
-
+    @Override
     public Page<DotGiamGia> getSales(int pageNo, int pageSize, String key, String trangThai) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -29,20 +29,20 @@ public class DotGiamGiaServiceImpl implements IDotGiamGiaService {
                 "%" + key + "%");
     }
 
+    @Override
     public ArrayList<DotGiamGia> getAllSales() {
-//        get all voucher
         return (ArrayList<DotGiamGia>) dotGiamGiaRepo.findAll();
     }
 
+    @Override
     public DotGiamGia getSaleById(Long id) {
         return dotGiamGiaRepo.findSalesByIdAndState(id).get(0);
     }
 
+    @Override
     public DotGiamGia addSale(SaleAddRequest req) {
-        // check state
         Date today = new Date();
 
-        // add sale
         DotGiamGia sale = new DotGiamGia();
         sale.setMa(generateCode());
         sale.setTen(req.getTen());
@@ -63,8 +63,8 @@ public class DotGiamGiaServiceImpl implements IDotGiamGiaService {
         return dotGiamGiaRepo.save(sale);
     }
 
+    @Override
     public String changeState(Long id) {
-        // check state
         Date today = new Date();
         DotGiamGia sale = dotGiamGiaRepo.findById(id).isPresent() ? dotGiamGiaRepo.findById(id).get() : null;
 
@@ -95,6 +95,7 @@ public class DotGiamGiaServiceImpl implements IDotGiamGiaService {
         return "Thay đổi trạng thái thành công";
     }
 
+    @Override
     public String generateCode() {
         // generate code
         String newestCode = dotGiamGiaRepo.generateNewestCode();
@@ -104,6 +105,7 @@ public class DotGiamGiaServiceImpl implements IDotGiamGiaService {
         return "SALE_" + (Integer.parseInt(newestCode.substring(5)) + 1);
     }
 
+    @Override
     public DotGiamGia editVoucher(DotGiamGia sale) {
         Date today = new Date();
 

@@ -43,6 +43,7 @@ public class SanPhamServiceImpl implements ISanPhamService {
     @Autowired
     private ISanPhamChiTietRepository sanPhamChiTietRepo;
 
+    @Override
     public Page<ProductResponce> getProducts(int pageNo,
                                              int pageSize,
                                              String key,
@@ -55,15 +56,17 @@ public class SanPhamServiceImpl implements ISanPhamService {
                 "%" + idBrand + "%");
     }
 
+    @Override
     public ArrayList<SanPham> getAll() {
-//        get all voucher
         return (ArrayList<SanPham>) sanPhamRepo.findByOrderByNgayTaoDesc();
     }
 
+    @Override
     public SanPham getById(Long id) {
         return sanPhamRepo.findProductById(id).get(0);
     }
 
+    @Override
     public SanPham add(ProductAddRequest req) {
         SanPham e = new SanPham();
 
@@ -80,12 +83,13 @@ public class SanPhamServiceImpl implements ISanPhamService {
         return sanPhamRepo.save(e);
     }
 
+    @Override
     public SanPham update(SanPham req) {
         return sanPhamRepo.save(req);
     }
 
+    @Override
     public String generateCode() {
-        // generate code
         String newestCode = sanPhamRepo.generateNewestCode();
         if (newestCode == null || newestCode.equals("")) {
             return "PRODUCT_" + 0;
@@ -93,10 +97,12 @@ public class SanPhamServiceImpl implements ISanPhamService {
         return "PRODUCT_" + (Integer.parseInt(newestCode.substring(8)) + 1);
     }
 
+    @Override
     public BigDecimal getMaxDonGia() {
         return sanPhamRepo.getMaxDonGia();
     }
 
+    @Override
     public SanPham updateProduct(ProductUpdateRequest req) {
         SanPham e = sanPhamRepo.findProductById(req.getId()).get(0);
 
@@ -139,18 +145,22 @@ public class SanPhamServiceImpl implements ISanPhamService {
         return sanPhamRepo.save(e);
     }
 
+    @Override
     public ArrayList<Object> getQuantitysByType() {
         return theLoaiRepo.getQuantitysOfProductByType();
     }
 
+    @Override
     public ArrayList<Object> getQuantitysByBrand() {
         return thuongHieuRepo.getQuantitysOfProductByBrand();
     }
 
+    @Override
     public ArrayList<Object> getQuantitysBySize() {
         return kichCoRepo.getQuantitysOfProductBySize();
     }
 
+    @Override
     public ArrayList<Object> getQuantitysByColor() {
         return mauSacRepo.getQuantitysOfProductByColor();
     }

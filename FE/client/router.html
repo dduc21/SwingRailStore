@@ -185,7 +185,10 @@
                           id="ranking"
                           ng-click="changeActive(2)"
                         >
-                          <a href="#!xep-hang-khach-hang" style="font-weight: 600">
+                          <a
+                            href="#!xep-hang-khach-hang"
+                            style="font-weight: 600"
+                          >
                             Top khách hàng nổi bật</a
                           >
                         </li>
@@ -548,7 +551,7 @@
               <ul>
                 <li class="minicart-item" ng-repeat="cartDetail in cartDetails">
                   <div class="minicart-thumb">
-                    <a href="product-details.html">
+                    <a href="http://127.0.0.1:5500/client/router.html#!/san-pham-chi-tiet/{{cartDetail.idSanPhamChiTiet.idSanPham.id}}">
                       <span
                         ng-repeat="img in getAllImagesByIDProductDetail(cartDetail.idSanPhamChiTiet.id)"
                       ></span>
@@ -686,6 +689,7 @@
         var html = document.getElementById("quantity_of_cart");
         var html_mobile = document.getElementById("quantity_of_cart_mobile");
         var idCustomer = user == null ? -1 : user.id;
+
         axios
           .get(
             "http://localhost:8080/cart/get-quantity-by-id-customer/" +
@@ -701,6 +705,15 @@
           });
       };
 
+      // Gọi load dữ liệu liên tục mỗi 30 giây (30000ms)
+      setInterval(function () {
+        loadQuantityByIdProduct();
+      }, 5000);
+
+      // Gọi load lần đầu tiên khi trang vừa load
+      window.onload = function () {
+        loadQuantityByIdProduct();
+      };
       loadQuantityByIdProduct(-1);
 
       var clientApp = angular.module("clientApp", ["ngRoute", "ui.bootstrap"]);
@@ -820,11 +833,10 @@
             } else if (status == 1) {
               document.getElementById("men_shoes").classList.add("active");
               document.getElementById("men_shoes").classList.remove("static");
-            }else if (status == 2) {
+            } else if (status == 2) {
               document.getElementById("ranking").classList.add("active");
               document.getElementById("ranking").classList.remove("static");
-            }
-             else if (status == 3) {
+            } else if (status == 3) {
               document.getElementById("newsest").classList.add("active");
               document.getElementById("newsest").classList.remove("static");
             }
@@ -970,6 +982,7 @@
     <script src="assets/js/user/changePass.js"></script>
     <script src="assets/js/product_detail/shop.js"></script>
     <script src="assets/js/bill/success_payment.js"></script>
-    <script src="assets/js/websocketService.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
   </body>
 </html>

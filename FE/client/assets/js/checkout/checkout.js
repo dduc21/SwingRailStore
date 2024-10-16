@@ -641,6 +641,7 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
                 console.log(response.data);
               });
           } else {
+            //https://sandbox.vnpayment.vn/apis/vnpay-demo/
             localStorage.setItem("bill_vnpay", JSON.stringify($scope.bill));
             localStorage.setItem(
               "bill_detail_vnpay",

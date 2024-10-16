@@ -24,26 +24,29 @@ public class HinhAnhServiceImpl implements IHinhAnhService {
     @Autowired
     private ISanPhamChiTietRepository sanPhamChiTietRepo;
 
-    public Page<HinhAnh> getImages(int pageNo, int pageSize, String key, Long id){
+    @Override
+    public Page<HinhAnh> getImages(int pageNo, int pageSize, String key, Long id) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return hinhAnhRepo.findPanigation(pageable, id);
     }
 
-    public ArrayList<HinhAnh> getAll(Long id){
-//        get all voucher
+    @Override
+    public ArrayList<HinhAnh> getAll(Long id) {
         return (ArrayList<HinhAnh>) hinhAnhRepo.findByOrderByNgayTaoDesc(id);
     }
 
-    public HinhAnh getById(Long id){
+    @Override
+    public HinhAnh getById(Long id) {
         return hinhAnhRepo.findImageById(id).get(0);
     }
 
-    public HinhAnh add(ImageAddRequest req){
+    @Override
+    public HinhAnh add(ImageAddRequest req) {
         HinhAnh e = new HinhAnh();
 
         ArrayList<SanPhamChiTiet> sanPhamChiTiets = sanPhamChiTietRepo.findProductDetailById(req.getIdSanPhamChiTiet());
 
-        if(sanPhamChiTiets.size() == 0){
+        if (sanPhamChiTiets.size() == 0) {
             throw new RuntimeException("Không tìm thấy sản pham này");
         }
         e.setTrangThai(true);
@@ -53,11 +56,13 @@ public class HinhAnhServiceImpl implements IHinhAnhService {
         return hinhAnhRepo.save(e);
     }
 
-    public TheLoai update(TheLoai req){
+    @Override
+    public TheLoai update(TheLoai req) {
         return null;
     }
 
-    public void deleteImageById(Long id){
+    @Override
+    public void deleteImageById(Long id) {
         hinhAnhRepo.deleteImageById(id);
     }
 

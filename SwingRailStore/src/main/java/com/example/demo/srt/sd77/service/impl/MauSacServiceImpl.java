@@ -18,6 +18,7 @@ public class MauSacServiceImpl implements IMauSacService {
     @Autowired
     private IMauSacRepository mauSacRepo;
 
+    @Override
     public Page<MauSac> getColors(int pageNo, int pageSize, String key) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -25,15 +26,17 @@ public class MauSacServiceImpl implements IMauSacService {
                 "%" + key + "%");
     }
 
+    @Override
     public ArrayList<MauSac> getAll() {
-//        get all voucher
         return (ArrayList<MauSac>) mauSacRepo.findAll();
     }
 
+    @Override
     public MauSac getById(Long id) {
         return mauSacRepo.findColorById(id).get(0);
     }
 
+    @Override
     public MauSac add(String req) {
         MauSac color = new MauSac();
 
@@ -45,6 +48,7 @@ public class MauSacServiceImpl implements IMauSacService {
         return mauSacRepo.save(color);
     }
 
+    @Override
     public MauSac update(MauSac req) {
         List<MauSac> brands = mauSacRepo.findColorByName(req.getTen());
 

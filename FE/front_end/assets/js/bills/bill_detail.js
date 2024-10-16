@@ -1198,27 +1198,27 @@ main_app.controller(
       }
     };
 
-    // // realtime
-    // var socket = new SockJS("http://localhost:8080/ws");
-    // var stompClient = Stomp.over(socket);
+    // realtime
+    var socket = new SockJS("http://localhost:8080/ws");
+    var stompClient = Stomp.over(socket);
 
-    // stompClient.connect({}, function (frame) {
+    stompClient.connect({}, function (frame) {
 
-    //     stompClient.subscribe("/bill/bill-detail", function (message) {
-    //         // toastr.success(message.body)
-    //         $scope.loadBill()
-    //         return;
-    //     });
-    // });
+        stompClient.subscribe("/bill/bill-detail", function (message) {
+            // toastr.success(message.body)
+            $scope.loadBill()
+            return;
+        });
+    });
 
-    // $scope.addBill = function (text) {
-    //     toastr.success(text)
-    //     var message = {
-    //         name: text,
-    //     };
+    $scope.addBill = function (text) {
+        toastr.success(text)
+        var message = {
+            name: text,
+        };
 
-    //     stompClient.send("/app/bill-detail", {}, JSON.stringify(message));
-    // };
+        stompClient.send("/app/bill-detail", {}, JSON.stringify(message));
+    };
 
     $scope.changePaymentMethod = (status) => {
       // change payment method whent money change

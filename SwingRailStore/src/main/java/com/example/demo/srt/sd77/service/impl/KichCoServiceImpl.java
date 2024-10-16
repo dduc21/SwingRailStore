@@ -17,27 +17,29 @@ public class KichCoServiceImpl implements IKichCoService {
     @Autowired
     private IKichCoRepository kichCoRepo;
 
-
-    public Page<KichCo> getSizes(int pageNo, int pageSize, String key){
+    @Override
+    public Page<KichCo> getSizes(int pageNo, int pageSize, String key) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return kichCoRepo.findSizePanigation(pageable,
                 "%" + key + "%");
     }
 
-    public ArrayList<KichCo> getAllSize(){
-//        get all voucher
+    @Override
+    public ArrayList<KichCo> getAllSize() {
         return (ArrayList<KichCo>) kichCoRepo.findAll();
     }
 
-    public KichCo getSizeById(Long id){
+    @Override
+    public KichCo getSizeById(Long id) {
         return kichCoRepo.findSizeById(id).get(0);
     }
 
-    public KichCo addSize(Integer req){
+    @Override
+    public KichCo addSize(Integer req) {
         KichCo size = new KichCo();
 
-        if(!kichCoRepo.findSizeBySize(req).isEmpty()){
+        if (!kichCoRepo.findSizeBySize(req).isEmpty()) {
             throw new RuntimeException("The size is already exists");
         }
         size.setKichCo(req);
@@ -45,12 +47,13 @@ public class KichCoServiceImpl implements IKichCoService {
         return kichCoRepo.save(size);
     }
 
-    public KichCo updateSize(KichCo req){
+    @Override
+    public KichCo updateSize(KichCo req) {
         ArrayList<KichCo> sizes = kichCoRepo.findSizeBySize(req.getKichCo());
 
-        if(!sizes.isEmpty()){
-            if(!sizes.get(0).getId().equals(req.getId())){
-                if(sizes.get(0).getKichCo().equals(req.getKichCo())){
+        if (!sizes.isEmpty()) {
+            if (!sizes.get(0).getId().equals(req.getId())) {
+                if (sizes.get(0).getKichCo().equals(req.getKichCo())) {
                     throw new RuntimeException("The size is already exists");
                 }
             }

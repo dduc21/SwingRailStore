@@ -13,6 +13,7 @@ import com.example.demo.srt.sd77.entity.responce.RevenueResponce;
 import com.example.demo.srt.sd77.enums.StatusHoaDon;
 import com.example.demo.srt.sd77.repository.IHoaDonRepository;
 import com.example.demo.srt.sd77.service.IHoaDonChiTietService;
+import com.example.demo.srt.sd77.service.IHoaDonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,15 +24,17 @@ import java.util.ArrayList;
 import java.util.Date;
 
 @Service
-public class HoaDonServiceImpl implements IHoaDonChiTietService {
+public class HoaDonServiceImpl implements IHoaDonService {
 
     @Autowired
     private IHoaDonRepository hoaDonRepo;
 
+    @Override
     public ArrayList<HoaDon> getHoaDonByTrangThai(Integer trangThai) {
         return (ArrayList<HoaDon>) hoaDonRepo.getHoaDonByTrangThai(trangThai);
     }
 
+    @Override
     public HoaDon createBillWait() {
 
         ArrayList<HoaDon> orders = getHoaDonByTrangThai(0);
@@ -46,8 +49,8 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return hoaDonRepo.save(hoaDon);
     }
 
+    @Override
     public String generateCode() {
-        // generate code
         String newestCode = hoaDonRepo.generateNewestCode();
         if (newestCode == null || newestCode.equals("")) {
             return "HD" + 0;
@@ -55,21 +58,25 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return "HD" + (Integer.parseInt(newestCode.substring(2)) + 1);
     }
 
+    @Override
     public String deleteBillById(Long id) {
         hoaDonRepo.deleteBillByIdBill(id);
         return "success";
     }
 
+    @Override
     public HoaDon addVoucherToBill(ProductVoucherUpdateRequest req) {
         HoaDon hoaDon = req.getHoaDon();
         hoaDon.setIdVoucher(req.getVoucher());
         return hoaDonRepo.save(hoaDon);
     }
 
+    @Override
     public HoaDon updateHoaDon(HoaDon hoaDon) {
         return hoaDonRepo.save(hoaDon);
     }
 
+    @Override
     public Voucher getVoucherByIdBill(Long id) {
         ArrayList<HoaDon> hoaDons = hoaDonRepo.getHoaDonByTrangThai(0);
         for (HoaDon hoaDon : hoaDons) {
@@ -80,6 +87,7 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return null;
     }
 
+    @Override
     public KhachHang getCustomerByIdBill(Long id) {
         ArrayList<HoaDon> hoaDons = hoaDonRepo.getHoaDonByTrangThai(0);
         for (HoaDon hoaDon : hoaDons) {
@@ -90,6 +98,7 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return null;
     }
 
+    @Override
     public Page<HoaDon> getBillAndPanigation(Integer pageNo, Integer pageSize, Integer state) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         if (state == -1) {
@@ -98,6 +107,7 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return hoaDonRepo.getBillPanigationByState(pageable, state);
     }
 
+    @Override
     public Page<HoaDon> getBillAndPanigationByIdCustomer(Integer pageNo, Integer pageSize, Integer state, Long id) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         if (state == -1) {
@@ -106,6 +116,7 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return hoaDonRepo.getBillPanigationByStateByIdCustomer(pageable, state, id);
     }
 
+    @Override
     public HoaDon getBillById(Long id) {
         HoaDon hoaDon = hoaDonRepo.findById(id).get();
         if (hoaDon == null) {
@@ -114,6 +125,7 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return hoaDon;
     }
 
+    @Override
     public HoaDon getBillByCode(String code) {
         HoaDon hoaDon = hoaDonRepo.getHoaDonByMa(code);
         if (hoaDon == null) {
@@ -122,30 +134,37 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return hoaDon;
     }
 
+    @Override
     public RevenueResponce getRevenueMonth() {
         return hoaDonRepo.getRevenueMonth();
     }
 
+    @Override
     public RevenueResponce getRevenueDay() {
         return hoaDonRepo.getRevenueDay();
     }
 
+    @Override
     public Integer getQuantityOfProductWithMonth() {
         return hoaDonRepo.getQuantityOfProductWithMonth();
     }
 
+    @Override
     public ArrayList<RevenueRangeDateResponce> getRevenueRangeDate(Date startDate, Date endDate) {
         return hoaDonRepo.getRevenueRangeDate(startDate, endDate);
     }
 
+    @Override
     public ArrayList<ProductBestSellerResponce> getBestSeller() {
         return hoaDonRepo.getTop5ProductBestSeller();
     }
 
+    @Override
     public ArrayList<BillStateResponce> getBillState() {
         return hoaDonRepo.getBillState();
     }
 
+    @Override
     public ArrayList<ProductBestSellerResponce> getTop5ProductBestSellerFillter(Integer state) {
         try {
             if (state == 0) {
@@ -161,6 +180,7 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return null;
     }
 
+    @Override
     public ArrayList<RevenueFillterResponce> getRevenueFillter(Integer state) {
         try {
             if (state == 0) {
@@ -176,18 +196,22 @@ public class HoaDonServiceImpl implements IHoaDonChiTietService {
         return null;
     }
 
+    @Override
     public ArrayList<BillRevenueResponse> getQuantityBillByState() {
         return hoaDonRepo.getQuantityBillByStates();
     }
 
+    @Override
     public ArrayList<BillRevenueResponse> getQuantityBillWithState(Integer state) {
         return hoaDonRepo.getQuantityBillByBuyPaymentState(state);
     }
 
+    @Override
     public ArrayList<BillRevenueResponse> getQuantityBillByStateAndIdCustomer(Long id) {
         return hoaDonRepo.getQuantityBillByStatesAndIDCustomer(id);
     }
 
+    @Override
     public HoaDon getNewBill() {
         HoaDon bill = new HoaDon();
         bill.setMa(generateCode());

@@ -24,6 +24,7 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
     @Autowired
     private ISanPhamChiTietRepository sanPhamChiTietRepo;
 
+    @Override
     public Page<HoaDonChiTiet> findProductDetailsByIdProduct(Integer pageNo, Integer pageSize, Long id) {
         try {
             Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -33,6 +34,7 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
         }
     }
 
+    @Override
     public HoaDonChiTiet addProductToBill(ProductDetailRequest req) {
         try {
             ArrayList<HoaDonChiTiet> productDetails = hoaDonChiTietRepo.findBillDetailsByIdBill(req.getHoaDon().getId());
@@ -121,6 +123,7 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
         }
     }
 
+    @Override
     public HoaDonChiTiet addProductToBillRefund(ProductDetailRequest req) {
         try {
             HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
@@ -141,7 +144,7 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
         }
     }
 
-
+    @Override
     public HoaDonChiTiet addProductToBillClient(ProductDetailRequest req) {
         try {
             SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepo.findById(req.getSanPhamChiTiet().getId()).orElse(null);
@@ -203,6 +206,7 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
         }
     }
 
+    @Override
     public void removeBillDetailById(Long id) {
         try {
             hoaDonChiTietRepo.deleteById(id);
@@ -211,14 +215,17 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
         }
     }
 
+    @Override
     public HoaDonChiTiet updateBillDetail(HoaDonChiTiet req) {
         return hoaDonChiTietRepo.save(req);
     }
 
+    @Override
     public ArrayList<HoaDonChiTiet> getBillDetailByState(Integer state, Long id) {
         return hoaDonChiTietRepo.findBillDetailByState(state, id);
     }
 
+    @Override
     public HoaDonChiTiet checkBillDetail(ProductDetailRequest req) {
         try {
             SanPhamChiTiet sanPhamChiTiet = sanPhamChiTietRepo.findById(req.getSanPhamChiTiet().getId()).orElse(null);

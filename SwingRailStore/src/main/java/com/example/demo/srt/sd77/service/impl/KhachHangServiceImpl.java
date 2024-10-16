@@ -20,6 +20,7 @@ public class KhachHangServiceImpl implements IKhachHangService {
     @Autowired
     private IKhachHangRepository khachHangRepo;
 
+    @Override
     public Page<KhachHang> getCustomersWithPanigation(int pageNo, int pageSize, String key, String trangThai) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -27,20 +28,24 @@ public class KhachHangServiceImpl implements IKhachHangService {
                 "%" + trangThai + "%",
                 "%" + key + "%");
     }
+
+    @Override
     public List<KhachHang> rankingCustomer() {
 
         return khachHangRepo.rankingCustomers();
     }
 
+    @Override
     public ArrayList<KhachHang> getAllCustomers() {
-//        get all voucher
         return (ArrayList<KhachHang>) khachHangRepo.findAll();
     }
 
+    @Override
     public KhachHang getCustomerById(Long id) {
         return khachHangRepo.findKhachHangById(id).get(0);
     }
 
+    @Override
     public KhachHang addCustomer(CustomerAddRequest req) {
         // add customer
         if (khachHangRepo.findKhachHangByEmail(req.getEmail()) != null) {
@@ -70,9 +75,8 @@ public class KhachHangServiceImpl implements IKhachHangService {
         }
     }
 
-
+    @Override
     public String generateCode() {
-        // generate code
         String newestCode = khachHangRepo.generateNewestCode();
         if (newestCode == null || newestCode.equals("")) {
             return "CUSTOMER_" + 0;
@@ -80,6 +84,7 @@ public class KhachHangServiceImpl implements IKhachHangService {
         return "CUSTOMER_" + (Integer.parseInt(newestCode.substring(9)) + 1);
     }
 
+    @Override
     public KhachHang updateCustomer(KhachHang khachHang) {
         KhachHang customer = new KhachHang();
         customer.setCccd(khachHang.getCccd());
@@ -105,6 +110,7 @@ public class KhachHangServiceImpl implements IKhachHangService {
         return khachHangRepo.save(customer);
     }
 
+    @Override
     public KhachHang register(CustomerRegisterRequest req) {
         if (khachHangRepo.findKhachHangByEmail(req.getEmail()) != null) {
             throw new RuntimeException("Email đã tồn tại");
@@ -118,6 +124,7 @@ public class KhachHangServiceImpl implements IKhachHangService {
         }
     }
 
+    @Override
     public KhachHang login(String email, String matKhau) {
         KhachHang kh = khachHangRepo.findKhachHangByEmailAndPass(email, matKhau);
 

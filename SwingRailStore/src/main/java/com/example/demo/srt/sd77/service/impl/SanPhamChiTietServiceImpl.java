@@ -36,6 +36,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
     @Autowired
     private IHinhAnhRepository hinhanhRepo;
 
+    @Override
     public Page<SanPhamChiTiet> getProducts(int pageNo, int pageSize,
                                             Long id,
                                             String idKichCo, String idMauSac) {
@@ -46,10 +47,12 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
                 "%" + idMauSac + "%");
     }
 
+    @Override
     public ArrayList<SanPhamChiTiet> getAll() {
         return (ArrayList<SanPhamChiTiet>) sanPhamChiTietRepo.findByOrderByNgayTaoDesc();
     }
 
+    @Override
     public SanPhamChiTiet add(ProductDetailAddRequest req) {
         SanPhamChiTiet e = new SanPhamChiTiet();
 
@@ -64,15 +67,18 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return sanPhamChiTietRepo.save(e);
     }
 
+    @Override
     public SanPhamChiTiet update(SanPhamChiTiet req) {
         return sanPhamChiTietRepo.save(req);
     }
 
+    @Override
     public Page<SanPhamChiTiet> findAllAndPanigation(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return sanPhamChiTietRepo.findAllAndPanigation(pageable);
     }
 
+    @Override
     public Page<SanPhamChiTiet> getByIdString(ProductDetailSearchRequest req) {
         Pageable pageable = PageRequest.of(req.getPageNo(), req.getPageSize());
         List<Integer> listId = List.of(req.getIds().split(",")).stream().map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
@@ -86,10 +92,12 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
                 pageable);
     }
 
+    @Override
     public SanPhamChiTiet addSale(SanPhamChiTiet req) {
         return sanPhamChiTietRepo.save(req);
     }
 
+    @Override
     public ArrayList<SanPhamChiTiet> getProductDetailByIDSale(Long id) {
         try {
             return sanPhamChiTietRepo.getProductDetailByIdSale(id);
@@ -98,6 +106,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         }
     }
 
+    @Override
     public ArrayList<SanPhamChiTiet> getProductDetailNewest() {
         ArrayList<SanPhamChiTiet> productDetails = (ArrayList<SanPhamChiTiet>) sanPhamChiTietRepo.findAll();
 
@@ -122,6 +131,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return productDetailNewest;
     }
 
+    @Override
     public ArrayList<SanPhamChiTiet> getTopProductBestSeller() {
         ArrayList<ProductBestSellerResponse> resp = hoaDonRepo.getTopProductBestSeller();
         ArrayList<SanPhamChiTiet> productDetails = (ArrayList<SanPhamChiTiet>) sanPhamChiTietRepo.findAll();
@@ -138,6 +148,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return productDetailNewest;
     }
 
+    @Override
     public ArrayList<SanPhamChiTiet> getProductDetailWithSales() {
         ArrayList<SanPhamChiTiet> productDetailsWithSale = sanPhamChiTietRepo.getTopProductOfSales();
         ArrayList<SanPhamChiTiet> productDetails = (ArrayList<SanPhamChiTiet>) sanPhamChiTietRepo.findAll();
@@ -154,7 +165,7 @@ public class SanPhamChiTietServiceImpl implements ISanPhamChiTietService {
         return productDetailNewest;
     }
 
-
+    @Override
     public ArrayList<ProductDetailIdentityReponse> getProductDetailIdentity(Long id) {
         ArrayList<ColorIdentityResponse> colors = mauSacRepo.getColorIdentity(id);
 

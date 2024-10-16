@@ -1,6 +1,7 @@
 package com.example.demo.srt.sd77.service.impl;
 
 import com.example.demo.srt.sd77.infrastructure.configs.VNPay.VNPayConfig;
+import com.example.demo.srt.sd77.service.IVnPayService;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -10,9 +11,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
-public class VnPayServiceImpl {
+public class VnPayServiceImpl implements IVnPayService {
 
-
+    @Override
     public String createOrderClient(long total, String orderInfor, String orderCode) {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";

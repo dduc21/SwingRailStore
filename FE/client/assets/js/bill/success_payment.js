@@ -135,7 +135,6 @@ clientApp.controller(
 
     stompClient.connect({}, function (frame) {
       console.log("Connected: " + frame);
-
       stompClient.subscribe("/bill/bills", function (message) {
         console.log(message.body);
 

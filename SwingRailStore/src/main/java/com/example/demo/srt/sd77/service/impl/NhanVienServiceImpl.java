@@ -25,6 +25,7 @@ public class NhanVienServiceImpl implements INhanVienService {
     @Autowired
     private ChucVuServiceImpl chucVuService;
 
+    @Override
     public Page<NhanVien> getEmployeesWithPanigation(int pageNo, int pageSize, String key, String trangThai) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
@@ -33,15 +34,17 @@ public class NhanVienServiceImpl implements INhanVienService {
                 "%" + key + "%");
     }
 
+    @Override
     public ArrayList<NhanVien> getAllCustomers() {
-//        get all voucher
         return (ArrayList<NhanVien>) nhanVienRepo.findAll();
     }
 
+    @Override
     public NhanVien getEmployeeByID(Long id) {
         return nhanVienRepo.findEmployeeByID(id);
     }
 
+    @Override
     public NhanVien addEmployee(EmployeeAddRequest req) {
 
         if (nhanVienRepo.findNhanVienByEmail(req.getEmail()) != null) {
@@ -93,6 +96,7 @@ public class NhanVienServiceImpl implements INhanVienService {
         }
     }
 
+    @Override
     public String generateCode() {
         // generate code
         String newestCode = nhanVienRepo.generateNewestCode();
@@ -102,6 +106,7 @@ public class NhanVienServiceImpl implements INhanVienService {
         return "EMPLOYEE_" + (Integer.parseInt(newestCode.substring(9)) + 1);
     }
 
+    @Override
     public NhanVien updateEmployee(EmployeeAddRequest req) {
         NhanVien employee = new NhanVien();
 
@@ -149,6 +154,7 @@ public class NhanVienServiceImpl implements INhanVienService {
         return nhanVienRepo.save(employee);
     }
 
+    @Override
     public NhanVien login(String email, String matKhau) {
         NhanVien nv = nhanVienRepo.findNhanVienByEmailAndPass(email, matKhau);
 
@@ -177,8 +183,8 @@ public class NhanVienServiceImpl implements INhanVienService {
         return nv;
     }
 
+    @Override
     public String changePass(String oldPass, String newPass, Long id) {
-        // change pass
         NhanVien employee = nhanVienRepo.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy nhân viên"));
 
         if (employee.getMatKhau().equals(oldPass)) {

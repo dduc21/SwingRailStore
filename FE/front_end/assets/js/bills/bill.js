@@ -92,28 +92,29 @@ main_app.controller("billController", function ($scope, $http) {
 
   $scope.loadBills(-1);
 
-  // var socket = new SockJS("http://localhost:8080/ws");
-  // var stompClient = Stomp.over(socket);
+  var socket = new SockJS("http://localhost:8080/ws");
+  var stompClient = Stomp.over(socket);
+  
+  stompClient.connect({}, function (frame) {
+      console.log("Connected: " + frame); // Log thông báo khi kết nối thành công
+      stompClient.subscribe("/bills", function (message) {
+          console.log("Received message: ", message.body); // Log thông báo khi nhận được dữ liệu
+          if (message.body === "hehe") {
+              toastr.success(`Có đơn hàng ${message.body} vừa được đặt.`);
+          }
+      });
+  }, function (error) {
+      console.log("WebSocket error: " + error); // Log lỗi khi có lỗi kết nối
+  });
+  
 
-  // stompClient.connect({}, function (frame) {
+  $scope.addBill = function () {
+    var message = {
+      name: 'hehe',
+    };
 
-  //   stompClient.subscribe("/front_end/html/bill/bills", function (message) {
-  //     $scope.loadBills(-1)
-  //     console.log(message)
-  //     if(message.body == "hehe"){
-  //       toastr.success(`Có đơn hàng ${message.body} vừa được đặt.`)
-  //     }
-  //     return;
-  //   });
-  // });
-
-  // $scope.addBill = function () {
-  //   var message = {
-  //     name: 'hehe',
-  //   };
-
-  //   stompClient.send("/app/bills", {}, JSON.stringify(message));
-  // };
+    stompClient.send("/app/bills", {}, JSON.stringify(message));
+  };
 
   $scope.formatToVND = function (amount) {
     const formatter = new Intl.NumberFormat("vi-VN", {

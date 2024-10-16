@@ -1028,6 +1028,8 @@ clientApp.controller(
     stompClient.connect({}, function (frame) {
       stompClient.subscribe("/bill/bill-detail", function (message) {
         // toastr.success(message.body)
+        $scope.showMiniCart();
+        $scope.loadSizes();
         $scope.loadBill();
         return;
       });

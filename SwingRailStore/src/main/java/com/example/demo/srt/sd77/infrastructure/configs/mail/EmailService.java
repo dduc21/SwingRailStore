@@ -33,39 +33,18 @@ public class EmailService {
 
     public void sendEmailWithHtmlTemplate(String to, String subject, String templateName, Context context) {
         try {
-            // Tạo nội dung email từ template HTML
             String body = templateEngine.process(templateName, context);
 
-            // Tạo email
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
             helper.setTo(to);
             helper.setSubject(subject);
-            helper.setText(body, true); // Gửi email với nội dung HTML
+            helper.setText(body, true);
 
-            // Gửi email
             mailSender.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException("Failed to send email", e);
-        }
-    }
-
-    public void sendEmailWithHtmlTemplateVoucher(String to, String subject, String templateName, Context context) {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "UTF-8");
-
-        try {
-            helper.setTo(to);
-            helper.setSubject(subject);
-            String htmlContent = templateEngine.process(templateName, context);
-            helper.setText(htmlContent, true);
-            // Thêm file đính kèm
-//      FileSystemResource file = new FileSystemResource(new File(attachmentPath));
-//      helper.addAttachment(file.getFilename(), file);
-            mailSender.send(mimeMessage);
-        } catch (MessagingException e) {
-            // Handle exception
         }
     }
 

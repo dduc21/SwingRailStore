@@ -19,39 +19,43 @@ public class ThuongHieuServiceImpl implements IThuongHieuService {
     private IThuongHieuRepository thuongHieuRepo;
 
 
-    public Page<ThuongHieu> getBrands(int pageNo, int pageSize, String key){
+    @Override
+    public Page<ThuongHieu> getBrands(int pageNo, int pageSize, String key) {
 
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         return thuongHieuRepo.findBrandsByStateAndName(pageable,
                 "%" + key + "%");
     }
 
-    public ArrayList<ThuongHieu> getAllBrands(){
-//        get all voucher
+    @Override
+    public ArrayList<ThuongHieu> getAllBrands() {
         return (ArrayList<ThuongHieu>) thuongHieuRepo.findByOrderByNgayTaoDesc();
     }
 
-    public ThuongHieu getBrandById(Long id){
+    @Override
+    public ThuongHieu getBrandById(Long id) {
         return thuongHieuRepo.findBrandsById(id).get(0);
     }
 
-    public ThuongHieu addBrand(String req){
-      ThuongHieu brand = new ThuongHieu();
+    @Override
+    public ThuongHieu addBrand(String req) {
+        ThuongHieu brand = new ThuongHieu();
 
-      if(!thuongHieuRepo.findBrandsByName(req).isEmpty()){
-          throw new RuntimeException("The brand is already exists");
-      }
-      brand.setTen(req);
+        if (!thuongHieuRepo.findBrandsByName(req).isEmpty()) {
+            throw new RuntimeException("The brand is already exists");
+        }
+        brand.setTen(req);
 
-      return thuongHieuRepo.save(brand);
+        return thuongHieuRepo.save(brand);
     }
 
-    public ThuongHieu updateBrand(ThuongHieu req){
+    @Override
+    public ThuongHieu updateBrand(ThuongHieu req) {
         List<ThuongHieu> brands = thuongHieuRepo.findBrandsByName(req.getTen());
 
-        if(!brands.isEmpty()){
-            if(!brands.get(0).getId().equals(req.getId())){
-                if(brands.get(0).getTen().equals(req.getTen())){
+        if (!brands.isEmpty()) {
+            if (!brands.get(0).getId().equals(req.getId())) {
+                if (brands.get(0).getTen().equals(req.getTen())) {
                     throw new RuntimeException("The brand is already exists");
                 }
             }

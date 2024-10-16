@@ -135,9 +135,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title text-center">
-                            <h2 class="title">Sản phẩm đang khuyến mại.</h2>
+                            <h2 class="title">Sản phẩm đang khuyến mại</h2>
+                            <p class="subtitle">Khám phá những ưu đãi tốt nhất cho bạn</p> <!-- Thêm một câu phụ nếu cần -->
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <!-- Slider main container -->
@@ -222,8 +224,9 @@
                     <div class="col-12">
                         <div class="section-title text-center">
                             <h2 class="title">Sản phẩm bán chạy nhất</h2>
+                            <p class="subtitle">Khám phá các sản phẩm đang được ưa chuộng nhất</p> <!-- Câu phụ thêm vào -->
                         </div>
-                    </div>
+                    </div>                    
                 </div>
                 <div class="row">
                     <!-- Slider main container -->
@@ -309,8 +312,10 @@
                     <div class="col-12">
                         <div class="section-title text-center">
                             <h2 class="title">Sản phẩm mới nhất</h2>
+                            <p class="subtitle">Khám phá các sản phẩm mới vừa về</p> <!-- Câu phụ thêm vào -->
                         </div>
                     </div>
+                    
                 </div>
                 <div class="row">
                     <!-- Slider main container -->
@@ -409,7 +414,7 @@
                             </div>
                             <div class="info">
                               <div class="date">
-                                <span>05 <br> 04</span>
+                                <span>30 <br> 10</span>
                               </div>
                               <a href="#!thong-tin-tin-tuc"><h5>Extrim và Yên Foundation mang Tết ấm cho cộng đồng</h5></a>
                               <p style="color: #a5a0a0" >Công ty vệ sinh giày Extrim cùng Tổ chức Yên Foundation triển khai chiến dịch "Xuân chân thành đổi Tết chân ấm" với hoạt động quyên góp giày, túi, balo cho các em nhỏ khó khăn.</p>
@@ -426,7 +431,7 @@
                               </div>
                               <div class="info">
                                 <div class="date">
-                                  <span>19 <br> 12</span>
+                                  <span>10 <br> 11</span>
                                 </div>
                                 <a href="#!thong-tin-tin-tuc"><h5>Mẹo khử mùi hôi giày mà không phải giặt</h5></a>
                                 <p style="color: #a5a0a0">Giày hôi ảnh hưởng đến sự tự tin của bạn và khiến người xung quanh cảm thấy khó chịu. Việc mang giày hôi cũng sẽ sinh nấm mốc ở chân gây tổn hại đến sức khỏe.</p>
@@ -443,7 +448,7 @@
                               </div>
                               <div class="info">
                                 <div class="date">
-                                  <span>25 <br> Dec</span>
+                                  <span>11 <br> 11</span>
                                 </div>
                                 <a href="#!thong-tin-tin-tuc"><h5>Nike - hãng giày ra đời từ bài luận trong trường đại học</h5></a>
                                 <p style="color: #a5a0a0">Hành trình của Nike bắt đầu vào năm 1962. Khi đó, đồng sáng lập Phil Knight vừa hoàn thành chương trình MBA (thạc sĩ quản trị kinh doanh) tại Đại học Stanford.</p>
@@ -534,8 +539,35 @@
             touch: false
         })
     </script>
+    <style>
+        .section-title {
+    margin: 30px 0; /* Thêm khoảng cách ở trên và dưới */
+    position: relative; /* Để có thể sử dụng cho hiệu ứng dưới đây */
+}
+
+.title {
+    font-size: 2.5rem; /* Kích thước chữ lớn */
+    color: #2c3e50; /* Màu chữ chính */
+    font-weight: bold; /* Đậm chữ */
+    text-transform: uppercase; /* Chữ hoa */
+    margin-bottom: 10px; /* Khoảng cách dưới tiêu đề */
+}
+
+.subtitle {
+    font-size: 1.2rem; /* Kích thước chữ phụ */
+    color: #7f8c8d; /* Màu chữ phụ */
+    margin-top: 5px; /* Khoảng cách trên câu phụ */
+}
+
+.section-title:after {
+    content: ""; /* Thêm một đường gạch dưới */
+    display: block;
+    width: 60px; /* Chiều rộng của đường gạch */
+    height: 4px; /* Chiều cao của đường gạch */
+    background-color: #e67e22; /* Màu đường gạch */
+    margin: 10px auto; /* Căn giữa đường gạch */
+}
+
+    </style>
 </body>
-
-
-
 </html>
