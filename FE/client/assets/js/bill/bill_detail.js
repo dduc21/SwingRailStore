@@ -781,6 +781,7 @@ clientApp.controller(
           quantityHtml.value
         );
       }
+      $scope.loadBill();
     };
 
     $scope.plusQuantity = function (billDetail) {
