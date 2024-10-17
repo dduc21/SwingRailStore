@@ -65,6 +65,91 @@
       body {
         font-family: "Quicksand", sans-serif;
       }
+      /* CSS cho nút tên lửa */
+      .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: none; /* Bắt đầu với trạng thái ẩn */
+        cursor: pointer;
+        z-index: 1000;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .scroll-top img {
+        width: 50px;
+        height: 50px;
+        transition: transform 0.2s ease-in-out;
+      }
+
+      .scroll-top:hover img {
+        transform: scale(1.2); /* Phóng to tên lửa khi hover */
+      }
+
+      /* Tạo khói */
+      .smoke {
+        position: absolute;
+        bottom: -20px; /* Đặt dưới tên lửa */
+        left: 50%;
+        transform: translateX(-50%);
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.8); /* Màu của khói */
+        border-radius: 50%;
+        opacity: 0;
+      }
+
+      .smoke::before,
+      .smoke::after {
+        content: "";
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        opacity: 0;
+      }
+
+      .smoke::before {
+        animation: smokeAnimation 1.5s infinite;
+      }
+
+      .smoke::after {
+        animation: smokeAnimation 2s infinite;
+      }
+
+      /* Hiệu ứng bay lên */
+      .rocket-launch {
+        animation: rocketAnimation 1s ease-in-out forwards;
+      }
+
+      /* Ẩn toàn bộ nút khi tên lửa bay */
+      .scroll-top.hide {
+        display: none;
+      }
+
+      /* Định nghĩa hoạt ảnh cho tên lửa */
+      @keyframes rocketAnimation {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-2000px); /* Tên lửa bay ra khỏi màn hình */
+        }
+      }
+
+      /* Định nghĩa hoạt ảnh cho khói */
+      @keyframes smokeAnimation {
+        0% {
+          transform: translateY(0) scale(3);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-50px) scale(2);
+          opacity: 0;
+        }
+      }
+
     </style>
   </head>
 
@@ -322,6 +407,7 @@
                     />
                   </a>
                 </div>
+
                 <div class="mobile-menu-toggler">
                   <div class="mini-cart-wrap">
                     <i class="ion-bag"></i>
@@ -551,7 +637,9 @@
               <ul>
                 <li class="minicart-item" ng-repeat="cartDetail in cartDetails">
                   <div class="minicart-thumb">
-                    <a href="http://127.0.0.1:5500/client/router.html#!/san-pham-chi-tiet/{{cartDetail.idSanPhamChiTiet.idSanPham.id}}">
+                    <a
+                      href="http://127.0.0.1:5500/client/router.html#!/san-pham-chi-tiet/{{cartDetail.idSanPhamChiTiet.idSanPham.id}}"
+                    >
                       <span
                         ng-repeat="img in getAllImagesByIDProductDetail(cartDetail.idSanPhamChiTiet.id)"
                       ></span>
@@ -631,10 +719,17 @@
     </div>
     <!-- offcanvas mini cart end -->
 
-    <!-- Scroll to top start -->
-    <div class="scroll-top not-visible">
-      <i class="fa fa-angle-up"></i>
+    <!-- Nút tên lửa cuộn lên đầu trang -->
+    <div class="scroll-top" id="scrollTopButton">
+      <img
+        src="data:image/png;base64,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"
+        alt="Rocket"
+        id="rocket-icon"
+      />
+      <div class="smoke" id="smokeEffect"></div>
+      <!-- Hiệu ứng khói -->
     </div>
+
     <!-- Scroll to Top End -->
 
     <!--=======================Javascript============================-->
@@ -683,6 +778,49 @@
 
     <!-- custom code -->
     <script>
+      window.onscroll = function () {
+        scrollFunction();
+      };
+
+      function scrollFunction() {
+        const button = document.getElementById("scrollTopButton");
+        if (
+          document.body.scrollTop > 100 ||
+          document.documentElement.scrollTop > 100
+        ) {
+          button.style.display = "block"; // Hiển thị nút tên lửa
+        } else {
+          button.style.display = "none"; // Ẩn nút tên lửa
+        }
+      }
+
+      document.getElementById("scrollTopButton").onclick = function () {
+        const rocketIcon = document.getElementById("rocket-icon");
+        const scrollButton = document.getElementById("scrollTopButton");
+        const smokeEffect = document.getElementById("smokeEffect");
+
+        rocketIcon.classList.add("rocket-launch");
+        smokeEffect.style.opacity = "1"; 
+
+        
+        setTimeout(function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+
+          
+          scrollButton.classList.add("hide");
+
+         
+          setTimeout(function () {
+            rocketIcon.classList.remove("rocket-launch");
+            scrollButton.classList.remove("hide");
+            smokeEffect.style.opacity = "0"; 
+          }, 1000); 
+        }, 500);
+      };
+
       // load quantity
       var loadQuantityByIdProduct = (id) => {
         var user = JSON.parse(localStorage.getItem("user"));

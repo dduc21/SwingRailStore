@@ -100,8 +100,6 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <version>10.1.18</version>
         </dependency>
-
-
     </dependencies>
 
     <build>
