@@ -1,5 +1,7 @@
 package com.example.demo.srt.sd77.infrastructure.configs.mail;
 
+import com.example.demo.srt.sd77.entity.KhachHang;
+import com.example.demo.srt.sd77.repository.IKhachHangRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,15 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
+import java.util.List;
+
 
 @Service
 public class EmailService {
     private final JavaMailSender mailSender;
     private final TemplateEngine templateEngine;
+    @Autowired
+    private IKhachHangRepository khachHangRepository;
 
     @Autowired
     public EmailService(JavaMailSender mailSender, TemplateEngine templateEngine) {
@@ -47,5 +53,49 @@ public class EmailService {
             throw new RuntimeException("Failed to send email", e);
         }
     }
+
+
+    public String calculateRank(int tichDiem) {
+        double averagePoints = calculateAveragePoints();
+
+        // Nếu điểm = 0 thì không được xếp hạng "Đồng"
+        if (tichDiem == 0) {
+            return "Không có điểm"; // Hoặc có thể trả về giá trị khác nếu muốn
+        } else if (tichDiem <= averagePoints * 0.5) {
+            return "Đồng";
+        } else if (tichDiem <= averagePoints) {
+            return "Bạc";
+        } else if (tichDiem <= averagePoints * 1.5) {
+            return "Vàng";
+        } else if (tichDiem <= averagePoints * 2) {
+            return "Bạch Kim";
+        } else {
+            return "Kim Cương";
+        }
+    }
+
+    public double calculateAveragePoints() {
+        List<KhachHang> customers = khachHangRepository.findAll();
+        double totalPoints = customers.stream().mapToInt(KhachHang::getTichDiem).sum();
+        return customers.isEmpty() ? 0 : totalPoints / customers.size();
+    }
+
+    public String getDiscountByRank(String rank) {
+        switch (rank) {
+            case "Đồng":
+                return "2%";
+            case "Bạc":
+                return "3%";
+            case "Vàng":
+                return "10%";
+            case "Bạch Kim":
+                return "15%";
+            case "Kim Cương":
+                return "20%";
+            default:
+                return "0%";
+        }
+    }
+
 
 }

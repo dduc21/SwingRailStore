@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông Tin Đơn Hàng</title>
-    <style>
+    <th:style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -52,7 +52,7 @@
             font-size: 12px;
             color: #777;
         }
-    </style>
+    </th:style>
 </head>
 
 <body>
@@ -79,7 +79,7 @@
             <td th:text="${chiTiet.soLuong}">Số lượng</td>
             <td th:text="${chiTiet.donGia}">Đơn giá</td>
             <td th:text="${chiTiet.donGiaSauKhiGiam}">Đơn giá sau khi giảm</td>
-            <td th:text="${chiTiet.tongTien}">Tổng tiền</td>
+            <td th:text="${chiTiet.donGiaSauKhiGiam}">Tổng tiền</td>
             <td th:text="${chiTiet.trangThai}">Trạng thái</td>
         </tr>
         </tbody>
@@ -93,7 +93,7 @@
             Gmail: swingrailstore@gmail.com
             Hotline: 0987654321</p>
         <p>Cảm ơn bạn đã đặt hàng!</p>
-        <p><a href="http://127.0.0.1:5500/front_end/html/login.html">Đăng Nhập</a></p>
+        <p><a href="http://127.0.0.1:5500/client/html/login.html">Đăng Nhập</a></p>
     </div>
 </div>
 </body>

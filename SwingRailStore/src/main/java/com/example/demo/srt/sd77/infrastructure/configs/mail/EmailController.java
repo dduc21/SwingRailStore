@@ -3,6 +3,7 @@ package com.example.demo.srt.sd77.infrastructure.configs.mail;
 import com.example.demo.srt.sd77.entity.*;
 import com.example.demo.srt.sd77.entity.request.VoucherDetailRequest;
 import com.example.demo.srt.sd77.repository.IHoaDonChiTietRepository;
+import com.example.demo.srt.sd77.repository.IKhachHangRepository;
 import com.example.demo.srt.sd77.repository.INhanVienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.thymeleaf.context.Context;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -25,6 +27,10 @@ public class EmailController {
 
     @Autowired
     private IHoaDonChiTietRepository hoaDonChiTietRepo;
+
+    @Autowired
+    private IKhachHangRepository khachHangRepository;
+
 
     @Autowired
     public EmailController(EmailService emailService) {
@@ -118,4 +124,69 @@ public class EmailController {
     }
 
 
+    public void sendDailyRankNotification() {
+        try {
+            List<KhachHang> customers = khachHangRepository.findAll();
+            StringBuilder resultMessage = new StringBuilder();
+
+            for (KhachHang temp : customers) {
+                int points = temp.getTichDiem();
+                String rank = emailService.calculateRank(points);
+                String discount = emailService.getDiscountByRank(rank);
+
+                Context context = new Context();
+                context.setVariable("customerName", temp.getTen());
+                context.setVariable("points", points);
+                context.setVariable("rank", rank);
+                context.setVariable("discount", discount);
+
+                emailService.sendEmailWithHtmlTemplate(temp.getEmail(), "Thông báo điểm và hạng khách hàng", "daily-rank-notification-template", context);
+
+                resultMessage.append("Đã gửi email cho ").append(temp.getTen()).append("\n");
+                System.out.println(resultMessage);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Lỗi khi gửi email cho khách hàng " + e.getMessage());
+        }
+    }
+
+    public void sendDailyResetRankNotification() {
+        try {
+            List<KhachHang> customers = khachHangRepository.findAll();
+            StringBuilder resultMessage = new StringBuilder();
+
+            for (KhachHang temp : customers) {
+                Context context = new Context();
+                context.setVariable("customerName", temp.getTen());
+
+                emailService.sendEmailWithHtmlTemplate(temp.getEmail(), "Thông báo reset điểm!!", "daily-reset-rank-notification-template", context);
+
+                resultMessage.append("Đã gửi email cho ").append(temp.getTen()).append("\n");
+                System.out.println(resultMessage);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Lỗi khi gửi email cho khách hàng " + e.getMessage());
+        }
+    }
+
+    public void sendDailyNotification() {
+        try {
+            List<KhachHang> customers = khachHangRepository.findAll();
+            StringBuilder resultMessage = new StringBuilder();
+
+            for (KhachHang temp : customers) {
+                Context context = new Context();
+                context.setVariable("customerName", temp.getTen());
+                emailService.sendEmailWithHtmlTemplate(temp.getEmail(), "SWING RAIL STORE CHÀO BUỔI SÁNG!!", "daily-notification-template", context);
+
+                resultMessage.append("Đã gửi email cho ").append(temp.getTen()).append("\n");
+                System.out.println(resultMessage);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Lỗi khi gửi email cho khách hàng " + e.getMessage());
+        }
+    }
 }

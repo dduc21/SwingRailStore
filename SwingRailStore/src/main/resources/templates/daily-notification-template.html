@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Chào buổi sáng!</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        color: #333;
+    }
+    .greeting {
+        font-size: 1.5em;
+        margin: 10px 0;
+        font-weight: bold;
+        color: #007bff; /* Màu xanh cho phần chào mừng */
+    }
+    .encouragement {
+        font-size: 1.2em;
+        margin: 10px 0;
+        color: #5cb85c; /* Màu xanh lá cây cho khích lệ */
+    }
+    .footer {
+        margin-top: 20px;
+        font-size: 0.8em;
+        color: #777;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="greeting">Chào buổi sáng, <span th:text="${customerName}"></span>!</h1>
+  <p class="encouragement">Hôm nay là một ngày tuyệt vời để mua sắm! Hãy khám phá các ưu đãi đặc biệt dành cho bạn!</p>
+  <p class="encouragement">Đừng bỏ lỡ cơ hội để tích điểm và nhận thêm ưu đãi!</p>
+  <div class="footer">
+    <p>Cảm ơn bạn đã tin tưởng và sử dụng dịch vụ của chúng tôi!</p>
+    <p>Chúc bạn có một ngày tuyệt vời!</p>
+  </div>
+</div>
+</body>
+</html>

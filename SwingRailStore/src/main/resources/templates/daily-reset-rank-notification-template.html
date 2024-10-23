@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Thông báo Reset Điểm</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        color: #333;
+    }
+    .message {
+        margin: 20px 0;
+        font-size: 1.1em;
+    }
+    .footer {
+        margin-top: 20px;
+        font-size: 0.8em;
+        color: #777;
+        text-align: center;
+    }
+    .highlight {
+        color: #d9534f; /* Màu đỏ cho phần thông báo quan trọng */
+        font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Xin chào, <span th:text="${customerName}">Khách hàng</span>!</h1>
+  <div class="message">
+    <p>Chúng tôi xin thông báo rằng sau một quý, điểm tích lũy của bạn đã được <span class="highlight">reset</span> lại.</p>
+    <p>Hãy tiếp tục mua sắm và tích lũy điểm để nhận được nhiều ưu đãi hơn!</p>
+  </div>
+  <div class="footer">
+    <p>Cảm ơn bạn đã đồng hành cùng chúng tôi!</p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông báo điểm và hạng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .rank {
+            font-size: 1.2em;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .discount {
+            color: #d9534f; /* Màu đỏ cho phần giảm giá */
+            font-size: 1.1em;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #777;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Xin chào, <span th:text="${customerName}">Khách hàng</span>!</h1>
+    <p>Chúng tôi xin thông báo về số điểm và hạng hiện tại của bạn:</p>
+    <p><strong>Số điểm:</strong> <span th:text="${points}">0</span></p>
+    <p class="rank">Hạng của bạn: <span th:text="${rank}">Chưa xác định</span></p>
+    <p class="discount">Ưu đãi của bạn: <span th:text="${discount}">0%</span></p>
+    <div class="footer">
+        <p class="alert">Điểm và ưu đãi sẽ hết hiệu lực sau 30 ngày!!</p>
+        <p>Hãy dùng ưu đãi này để mua thêm nhiều đơn hàng và nhận thêm nhiều điểm!!</p>
+        <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!</p>
+    </div>
+</div>
+</body>
+</html>

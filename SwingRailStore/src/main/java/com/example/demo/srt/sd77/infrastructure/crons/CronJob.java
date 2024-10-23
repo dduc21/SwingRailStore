@@ -1,21 +1,18 @@
 package com.example.demo.srt.sd77.infrastructure.crons;
 
-import com.example.demo.srt.sd77.entity.DotGiamGia;
-import com.example.demo.srt.sd77.entity.PhieuGiamGiaChiTiet;
-import com.example.demo.srt.sd77.entity.SanPhamChiTiet;
-import com.example.demo.srt.sd77.entity.Voucher;
+import com.example.demo.srt.sd77.entity.*;
 import com.example.demo.srt.sd77.enums.StatusDotGiamGia;
 import com.example.demo.srt.sd77.enums.StatusVoucher;
-import com.example.demo.srt.sd77.repository.IDotGiamGiaRepository;
-import com.example.demo.srt.sd77.repository.ISanPhamChiTietRepository;
-import com.example.demo.srt.sd77.repository.IVoucherRepository;
-import com.example.demo.srt.sd77.repository.PhieuGiamGiaChiTietRepository;
+import com.example.demo.srt.sd77.infrastructure.configs.mail.EmailController;
+import com.example.demo.srt.sd77.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 
@@ -30,8 +27,15 @@ public class CronJob {
     @Autowired
     private IDotGiamGiaRepository dotGiamGiaRepo;
 
+    private LocalDate lastRunDate = LocalDate.now();
+
     @Autowired
     private ISanPhamChiTietRepository sanPhamChiTietRepo;
+    @Autowired
+    private IKhachHangRepository khachHangRepository;
+
+    @Autowired
+    private EmailController emailController;
 
     @Autowired
     private PhieuGiamGiaChiTietRepository phieuGiamGiaChiTietRepository;
@@ -45,8 +49,6 @@ public class CronJob {
                 voucher.setTrangThai(StatusVoucher.CHUA_BAT_DAU.getTrangThai());
             } else if (voucher.getNgayKetThuc().before(today)) {
                 voucher.setTrangThai(StatusVoucher.KET_THUC.getTrangThai());
-                // khi phieu giam gia ket thuc thi lap tuc nhung kh co voucher nay se mat ap dung
-
                 List<PhieuGiamGiaChiTiet> voucherDetails = phieuGiamGiaChiTietRepository.getChiTietByPhieuGiamGia(voucher.getId());
                 voucherDetails.forEach(voucherDetail -> {
                     phieuGiamGiaChiTietRepository.deleteById(voucherDetail.getId());
@@ -68,7 +70,6 @@ public class CronJob {
                 sale.setTrangThai(StatusDotGiamGia.CHUA_BAT_DAU.getTrangThai());
             } else if (sale.getNgayKetThuc().before(today)) {
                 sale.setTrangThai(StatusDotGiamGia.KET_THUC.getTrangThai());
-                // Kh dot giam gia ket thuc lap tuc xoa tat ca cac sanpham co ap dung
                 List<SanPhamChiTiet> productDetails = sanPhamChiTietRepo.getProductDetailsByIdSale(sale.getId());
                 productDetails.forEach(productDetail -> {
                     productDetail.setIdDotGiamGia(null);
@@ -80,5 +81,32 @@ public class CronJob {
             dotGiamGiaRepo.save(sale);
         });
     }
+    @Scheduled(cron = "0 0 10 * * ?")
+    public void sendDailyRankNotifications() {
+        emailController.sendDailyRankNotification();
+        System.out.println("abvasvjavnakvankaksvkaknsvnksavnka: 10h rồi!");
+    }
+
+    @Scheduled(cron = "0 0 9 * * ?")
+    public void sendDailyNotifications() {
+        emailController.sendDailyNotification();
+        System.out.println("abvasvjavnakvankaksvkaknsvnksavnka: 9h rồi!");
+    }
+
+//    @Scheduled(cron = "0 0 10 * * ?")
+//    public void resetPointsOfCustomerAfter90days() {
+//        LocalDate currentDate = LocalDate.now();
+//
+//        if (ChronoUnit.DAYS.between(lastRunDate, currentDate) >= 90) {
+//            KhachHang kh = new KhachHang();
+//            kh.setTichDiem(0);
+//            khachHangRepository.save(kh);
+//            emailController.sendDailyResetRankNotification();
+//            lastRunDate = currentDate;
+//            System.out.println("Email đã được gửi sau 90 ngày!");
+//        } else {
+//            System.out.println("Chưa đến thời gian gửi email!");
+//        }
+//    }
 
 }
