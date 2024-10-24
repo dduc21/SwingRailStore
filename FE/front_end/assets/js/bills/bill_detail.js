@@ -541,14 +541,14 @@ main_app.controller(
         .then((res) => res.json())
         .then((data) => {
           const defaultOption = document.createElement("option");
-          defaultOption.value = -1; 
-          defaultOption.textContent = "Chọn Tỉnh"; 
+          defaultOption.value = -1;
+          defaultOption.textContent = "Chọn Tỉnh";
           defaultOption.disabled = false;
           selectCityCustomer.appendChild(defaultOption);
           const options = data.data;
           for (let i = 0; i < options.length; i++) {
             const option = document.createElement("option");
-            option.text = options[i].ProvinceName; 
+            option.text = options[i].ProvinceName;
             option.setAttribute("providecode", options[i].ProvinceID);
             if (province_code === String(options[i].ProvinceID)) {
               option.selected = true;
@@ -686,7 +686,6 @@ main_app.controller(
             .post("http://localhost:8080/email/send-email", $scope.bill)
             .then(function (response) {})
             .catch(function (error) {});
-          // $scope.addBill(`Hóa đơn ${$scope.bill.ma} đã được xác nhận thành công`)
           Swal.fire({
             title: "Hóa đơn",
             html:
@@ -695,9 +694,7 @@ main_app.controller(
               "</strong> đã được xác nhận thành công.",
             icon: "success",
           });
-          // alert('Hóa đơn ' + $scope.bill.ma + ' đã được xác nhận thành công ')
           $scope.loadBill();
-          window.location.reload();
         }, 1000);
       }
     };
@@ -717,7 +714,6 @@ main_app.controller(
             .post("http://localhost:8080/email/send-email", $scope.bill)
             .then(function (response) {})
             .catch(function (error) {});
-          // $scope.addBill(`Hóa đơn ${$scope.bill.ma} đã được giao cho bên vận chuyển.`)
           Swal.fire({
             title: "Hóa đơn",
             html:
@@ -726,7 +722,6 @@ main_app.controller(
               "</strong> đã được bàn giao cho bên vận chuyển.",
             icon: "success",
           });
-          // alert('Hóa đơn ' + $scope.bill.ma + ' đã được bàn giao cho bên vận chuyển.')
           $scope.loadBill();
         }, 1000);
       }
@@ -754,25 +749,25 @@ main_app.controller(
             .post("http://localhost:8080/email/send-email", $scope.bill)
             .then(function (response) {})
             .catch(function (error) {});
-          $scope.customerPoints = 0.005 * $scope.bill.tongTienSauGiam; 
-            if ($scope.bill.idKhachHang !== null) {
-              axios
-                .put("http://localhost:8080/customer/update-points", {
-                  id: $scope.bill.idKhachHang.id,
-                  tichDiem: $scope.customerPoints,
-                })
-                .then(function (pointsResponse) {
-                  console.log('id:' + $scope.bill.idKhachHang.id)
-                  console.log('point:' +  $scope.customerPoints)
-                  console.log(
-                    "Điểm tích lũy đã được cập nhật:",
-                    pointsResponse.data
-                  );
-                })
-                .catch(function (pointsError) {
-                  console.log("Lỗi cập nhật điểm tích lũy:", pointsError);
-                });
-            }
+          $scope.customerPoints = 0.005 * $scope.bill.tongTienSauGiam;
+          if ($scope.bill.idKhachHang !== null) {
+            axios
+              .put("http://localhost:8080/customer/update-points", {
+                id: $scope.bill.idKhachHang.id,
+                tichDiem: $scope.customerPoints,
+              })
+              .then(function (pointsResponse) {
+                console.log("id:" + $scope.bill.idKhachHang.id);
+                console.log("point:" + $scope.customerPoints);
+                console.log(
+                  "Điểm tích lũy đã được cập nhật:",
+                  pointsResponse.data
+                );
+              })
+              .catch(function (pointsError) {
+                console.log("Lỗi cập nhật điểm tích lũy:", pointsError);
+              });
+          }
           Swal.fire({
             title: "Hóa đơn",
             html:
@@ -781,9 +776,8 @@ main_app.controller(
               "</strong> đã giao hàng thành công.",
             icon: "success",
           });
-          // alert('Hóa đơn ' +  $scope.bill.ma + ' đã giao hàng thành công.')
           $scope.loadBill();
-        }, 100);
+        }, 1000);
       }
     };
 
@@ -1198,31 +1192,35 @@ main_app.controller(
       }
     };
 
-    // realtime
     var socket = new SockJS("http://localhost:8080/ws");
     var stompClient = Stomp.over(socket);
 
-    stompClient.connect({}, function (frame) {
-
+    // Kết nối tới server WebSocket
+    stompClient.connect(
+      {},
+      function (frame) {
+        console.log("Connected: " + frame);
         stompClient.subscribe("/bill/bill-detail", function (message) {
-            // toastr.success(message.body)
-            $scope.loadBill()
-            return;
+          console.log("Received message in management: ", message.body);
+          toastr.success(message.body);
         });
-    });
-
+      },
+      function (error) {
+        console.error("WebSocket error: " + error);
+      }
+    );
     $scope.addBill = function (text) {
-        toastr.success(text)
-        var message = {
-            name: text,
-        };
+      toastr.success(text);
+      var message = {
+        name: text,
+      };
 
-        stompClient.send("/app/bill-detail", {}, JSON.stringify(message));
+      console.log("Sending message: ", JSON.stringify(message));
+
+      stompClient.send("/app/bill-detail", {}, JSON.stringify(message));
     };
 
     $scope.changePaymentMethod = (status) => {
-      // change payment method whent money change
-
       axios
         .put("http://localhost:8080/bill/update-bill", $scope.oldBill)
         .then(function (response) {
@@ -1262,7 +1260,6 @@ main_app.controller(
     };
 
     $scope.confirmPayment = () => {
-      // confirm payment
       var confirmPaymentModal = document.querySelector("#paymentModal");
       var modal = bootstrap.Modal.getOrCreateInstance(confirmPaymentModal);
 
@@ -1300,7 +1297,7 @@ main_app.controller(
 
           setTimeout(() => {
             // $scope.addBill(`Hóa đơn ${$scope.bill.ma} đã thanh toán thành công.`)
-            alert("Hóa đơn" + $scope.bill.ma + "đã thanh toán thành công. ");
+            alert("Hóa đơn " + $scope.bill.ma + "đã thanh toán thành công. ");
             $scope.loadBill();
             window.location.reload();
           }, 100);

@@ -96,31 +96,35 @@ main_app.controller("billController", function ($scope, $http) {
   var stompClient = Stomp.over(socket);
   
   stompClient.connect({}, function (frame) {
-      console.log("Connected: " + frame); // Log thông báo khi kết nối thành công
-      stompClient.subscribe("/bills", function (message) {
-          console.log("Received message: ", message.body); // Log thông báo khi nhận được dữ liệu
-          if (message.body === "hehe") {
+      console.log("Connected: " + frame);
+  
+      // Subscribe to the correct topic
+      stompClient.subscribe("/bill/bills", function (message) {
+          console.log("Received message: ", message.body);
+          if (message.body === message.body) {
               toastr.success(`Có đơn hàng ${message.body} vừa được đặt.`);
+              $scope.loadBills(-1);
           }
       });
   }, function (error) {
-      console.log("WebSocket error: " + error); // Log lỗi khi có lỗi kết nối
+      console.log("WebSocket error: " + error);
   });
   
-
-  $scope.addBill = function () {
-    var message = {
-      name: 'hehe',
-    };
-
-    stompClient.send("/app/bills", {}, JSON.stringify(message));
-  };
+  // $scope.addBill = function () {
+  //     // var message = {
+  //     //     name: 'hehe',
+  //     // };
+  
+  //     // Sending the message to the server
+  //     stompClient.send("/app/bills", {}, JSON.stringify(message));
+  // };
+  
 
   $scope.formatToVND = function (amount) {
     const formatter = new Intl.NumberFormat("vi-VN", {
       style: "currency",
       currency: "VND",
-      minimumFractionDigits: 0, // Set to 0 to display whole numbers
+      minimumFractionDigits: 0,
     });
     return formatter.format(amount);
   };

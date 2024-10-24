@@ -1011,8 +1011,6 @@ clientApp.controller(
         $scope.updateStateOfBill($scope.bill.trangThai, $scope.noteState4);
         toastr.success("Trả hàng thành công.");
 
-        // $scope.addProductToBillApi($scope.billDetailRefund.idSanPhamChiTiet, $scope.bill, $scope.billDetailRefund.soLuong - $scope.quantityRefund)
-
         setTimeout(() => {
           $scope.loadBill();
           $scope.addBill(
@@ -1022,31 +1020,22 @@ clientApp.controller(
       }
     };
 
-    // realtime
-    var socket = new SockJS("http://localhost:8080/ws");
-    var stompClient = Stomp.over(socket);
+var socket = new SockJS("http://localhost:8080/ws");
+var stompClient = Stomp.over(socket);
+stompClient.connect({}, function (frame) {
+    console.log("Connected: " + frame);
+    stompClient.subscribe("/bill/bill-detail", function (message) {
+        console.log("Received message: ", message.body);
+        toastr.success(`Có thông báo mới: ${message.body}`);
 
-    stompClient.connect({}, function (frame) {
-      stompClient.subscribe("/bill/bill-detail", function (message) {
-        // toastr.success(message.body)
-        $scope.showMiniCart();
-        $scope.loadSizes();
-        $scope.loadBill();
-        return;
-      });
+        $scope.showMiniCart(); 
+        $scope.loadSizes(); 
+        $scope.loadBill(); 
     });
-
-    $scope.addBill = function (text) {
-      toastr.success(text);
-      var message = {
-        name: text,
-      };
-
-      stompClient.send("/app/bill-detail", {}, JSON.stringify(message));
-    };
-
+}, function (error) {
+    console.error("WebSocket error: " + error);
+});
     $scope.changePaymentMethod = (status) => {
-      // change payment method whent money change
 
       axios
         .put("http://localhost:8080/bill/update-bill", $scope.oldBill)

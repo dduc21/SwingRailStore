@@ -92,9 +92,6 @@ clientApp.controller(
                                 .then(function (response) {})
                                 .catch(function (error) {});
                               $scope.addBill();
-                              // $window.location.href = '#!chi-tiet-hoa-don/' + $scope.bill.id;
-                              // $window.location.reload();
-                              // window.scrollTo(0, 0);
                             }, 500);
                           })
                           .catch((error) => {
@@ -110,8 +107,6 @@ clientApp.controller(
                             .then(function (response) {})
                             .catch(function (error) {});
                           $scope.addBill();
-                          // $window.location.href = '#!chi-tiet-hoa-don/' + $scope.bill.id;
-                          // $window.location.reload();
                         }, 500);
                       }
                     }
@@ -134,27 +129,40 @@ clientApp.controller(
     var stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function (frame) {
-      console.log("Connected: " + frame);
-      stompClient.subscribe("/bill/bills", function (message) {
-        console.log(message.body);
+        console.log("Connected: " + frame);
+        stompClient.subscribe("/bill/bills", function (message) {
+          try {
+            console.log("Message received: ", message.body);
+            toastr.success(message.body); 
 
-        $scope.$apply();
-      });
-    });
+          } catch (error) {
+            console.error("Error processing message: ", error);
+          }
+        });
+      },
+      function (error) {
+        console.log("WebSocket error: " + error);
+      }
+    );
 
     $scope.addBill = function () {
-      var message = {
-        name: $scope.bill.ma,
-      };
+      if ($scope.bill && $scope.bill.ma) {
+        var message = {
+          name: $scope.bill.ma,
+        };
 
-      stompClient.send("/app/bills", {}, JSON.stringify(message));
+        console.log("Sending message: ", message);
+        stompClient.send("/app/bills", {}, JSON.stringify(message));
+      } else {
+        console.error("Bill code (ma) is missing or invalid.");
+      }
     };
 
     $scope.formatToVND = function (amount) {
       const formatter = new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
-        minimumFractionDigits: 0, // Set to 0 to display whole numbers
+        minimumFractionDigits: 0,
       });
       return formatter.format(amount);
     };

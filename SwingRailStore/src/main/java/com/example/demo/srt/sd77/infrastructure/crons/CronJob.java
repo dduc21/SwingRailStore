@@ -1,10 +1,12 @@
 package com.example.demo.srt.sd77.infrastructure.crons;
 
+import ch.qos.logback.core.util.StringUtil;
 import com.example.demo.srt.sd77.entity.*;
 import com.example.demo.srt.sd77.enums.StatusDotGiamGia;
 import com.example.demo.srt.sd77.enums.StatusVoucher;
 import com.example.demo.srt.sd77.infrastructure.configs.mail.EmailController;
 import com.example.demo.srt.sd77.repository.*;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
