@@ -129,10 +129,8 @@ clientApp.controller(
     var stompClient = Stomp.over(socket);
 
     stompClient.connect({}, function (frame) {
-        console.log("Connected: " + frame);
         stompClient.subscribe("/bill/bills", function (message) {
           try {
-            console.log("Message received: ", message.body);
             toastr.success(message.body); 
 
           } catch (error) {

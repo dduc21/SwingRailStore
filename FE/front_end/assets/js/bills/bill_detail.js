@@ -695,6 +695,7 @@ main_app.controller(
             icon: "success",
           });
           $scope.loadBill();
+          $scope.updateBill();
         }, 1000);
       }
     };
@@ -723,6 +724,7 @@ main_app.controller(
             icon: "success",
           });
           $scope.loadBill();
+          $scope.updateBill();
         }, 1000);
       }
     };
@@ -777,6 +779,7 @@ main_app.controller(
             icon: "success",
           });
           $scope.loadBill();
+          $scope.updateBill();
         }, 1000);
       }
     };
@@ -1042,17 +1045,29 @@ main_app.controller(
                     console.log(error);
                   });
               });
+              
 
               setTimeout(() => {
                 $scope.loadBill();
-                $scope.addBill(`Hóa đơn ${$scope.bill.ma} đã hủy thành công`);
-                // axios.post("http://localhost:8080/email/send-email", $scope.bill).then(function (response) {
-                // }).catch(function (error) {
-                // })
-              }, 100);
+                $scope.updateBill();
+                Swal.fire({
+                  title: "Hóa đơn",
+                  html:
+                    'Mã hóa đơn <strong style="color: red;">' +
+                    $scope.bill.ma +
+                    "</strong> đã hủy thành công.",
+                  icon: "success",
+                });
+                axios.post("http://localhost:8080/email/send-email", $scope.bill).then(function (response) {
+                }).catch(function (error) {
+                  console.log(error)
+                })
+              }, 1000);
             })
             .catch(function (response) {
               $scope.loadBill();
+              $scope.updateBill();
+
             });
         }
       });
@@ -1192,32 +1207,24 @@ main_app.controller(
       }
     };
 
+    // Kết nối WebSocket
     var socket = new SockJS("http://localhost:8080/ws");
     var stompClient = Stomp.over(socket);
+    stompClient.connect({}, function (frame) {
 
-    // Kết nối tới server WebSocket
-    stompClient.connect(
-      {},
-      function (frame) {
-        console.log("Connected: " + frame);
-        stompClient.subscribe("/bill/bill-detail", function (message) {
-          console.log("Received message in management: ", message.body);
-          toastr.success(message.body);
-        });
-      },
-      function (error) {
-        console.error("WebSocket error: " + error);
-      }
-    );
-    $scope.addBill = function (text) {
-      toastr.success(text);
-      var message = {
-        name: text,
-      };
-
-      console.log("Sending message: ", JSON.stringify(message));
-
-      stompClient.send("/app/bill-detail", {}, JSON.stringify(message));
+      stompClient.subscribe("/bill/bill-detail", function (message) {
+        toastr.success(`Bill updated: ${message.body}`);
+      });
+    });
+    $scope.updateBill = function () {
+      if ($scope.bill && $scope.bill.ma) {
+        var message = {
+          name: $scope.bill.ma,
+        };
+      stompClient.send("/app/bill-detail", {}, JSON.stringify(message)); // Gửi thông điệp tới topic
+    } else {
+      console.error("Bill code (ma) is missing or invalid.");
+    }
     };
 
     $scope.changePaymentMethod = (status) => {
@@ -1226,10 +1233,15 @@ main_app.controller(
         .then(function (response) {
           setTimeout(() => {
             $scope.loadBill();
-            $scope.addBill(
-              `Hóa đơn ${$scope.bill.ma} đã được thay đổi thông tin khách hàng thành công.`
-            );
-          }, 100);
+            Swal.fire({
+              title: "Hóa đơn",
+              html:
+                'Mã hóa đơn <strong style="color: red;">' +
+                $scope.bill.ma +
+                "</strong> đã được thay đổi thông tin khách hàng thành công.",
+              icon: "success",
+            });
+          }, 1000);
         })
         .catch(function (response) {
           $scope.loadBill();

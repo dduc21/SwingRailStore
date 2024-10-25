@@ -96,11 +96,7 @@ main_app.controller("billController", function ($scope, $http) {
   var stompClient = Stomp.over(socket);
   
   stompClient.connect({}, function (frame) {
-      console.log("Connected: " + frame);
-  
-      // Subscribe to the correct topic
       stompClient.subscribe("/bill/bills", function (message) {
-          console.log("Received message: ", message.body);
           if (message.body === message.body) {
               toastr.success(`Có đơn hàng ${message.body} vừa được đặt.`);
               $scope.loadBills(-1);
@@ -109,15 +105,6 @@ main_app.controller("billController", function ($scope, $http) {
   }, function (error) {
       console.log("WebSocket error: " + error);
   });
-  
-  // $scope.addBill = function () {
-  //     // var message = {
-  //     //     name: 'hehe',
-  //     // };
-  
-  //     // Sending the message to the server
-  //     stompClient.send("/app/bills", {}, JSON.stringify(message));
-  // };
   
 
   $scope.formatToVND = function (amount) {

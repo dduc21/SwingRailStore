@@ -12,14 +12,12 @@ public class WebSocketController {
     @MessageMapping("/bills")
     @SendTo("/bill/bills")
     public String getListBill(@Payload Hello message) {
-        System.out.println(message);
         return message.getName() ;
     }
 
     @MessageMapping("/bill-detail")
     @SendTo("/bill/bill-detail")
     public String changeNotificationBillDetail(@Payload Hello message) {
-        System.out.println(message);
         return message.getName() ;
     }
 }

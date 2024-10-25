@@ -1020,23 +1020,28 @@ clientApp.controller(
       }
     };
 
-var socket = new SockJS("http://localhost:8080/ws");
-var stompClient = Stomp.over(socket);
-stompClient.connect({}, function (frame) {
-    console.log("Connected: " + frame);
-    stompClient.subscribe("/bill/bill-detail", function (message) {
-        console.log("Received message: ", message.body);
-        toastr.success(`Có thông báo mới: ${message.body}`);
+    // Kết nối WebSocket
+    var socket = new SockJS("http://localhost:8080/ws");
+    var stompClient = Stomp.over(socket);
+    stompClient.connect(
+      {},
+      function (frame) {
+        console.log("Connected (Client): " + frame);
 
-        $scope.showMiniCart(); 
-        $scope.loadSizes(); 
-        $scope.loadBill(); 
-    });
-}, function (error) {
-    console.error("WebSocket error: " + error);
-});
+        stompClient.subscribe("/bill/bill-detail", function (message) {
+          console.log("Received message (Client): ", message.body); 
+          if (message.body === message.body) {
+            toastr.success(`Có đơn hàng ${message.body} vừa được cập nhật.`);
+            $scope.loadBill();
+        }
+        });
+      },
+      function (error) {
+        console.error("WebSocket error: " + error); 
+      }
+    );
+
     $scope.changePaymentMethod = (status) => {
-
       axios
         .put("http://localhost:8080/bill/update-bill", $scope.oldBill)
         .then(function (response) {

@@ -107,4 +107,26 @@ clientApp.controller("billControler", function ($scope, $http) {
     });
     return formatter.format(amount);
   };
+  var socket = new SockJS("http://localhost:8080/ws");
+  var stompClient = Stomp.over(socket);
+
+  // Kết nối tới server WebSocket
+  stompClient.connect(
+    {},
+    function (frame) {
+      console.log("Connected (Client): " + frame);
+
+      // Subscribe vào topic "/bill/bill-detail"
+      stompClient.subscribe("/bill/bill-detail", function (message) {
+        console.log("Received message (Client): ", message.body); // Kiểm tra thông điệp nhận được
+        if (message.body === message.body) {
+          toastr.success(`Có đơn hàng ${message.body} vừa được cập nhật.`);
+          $scope.loadBills(-1);
+        }
+      });
+    },
+    function (error) {
+      console.error("WebSocket error: " + error); // Xử lý lỗi kết nối
+    }
+  );
 });
