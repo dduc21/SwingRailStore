@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -58,9 +57,8 @@ public class EmailService {
     public String calculateRank(int tichDiem) {
         double averagePoints = calculateAveragePoints();
 
-        // Nếu điểm = 0 thì không được xếp hạng "Đồng"
         if (tichDiem == 0) {
-            return "Không có điểm"; // Hoặc có thể trả về giá trị khác nếu muốn
+            return "Không có điểm";
         } else if (tichDiem <= averagePoints * 0.5) {
             return "Đồng";
         } else if (tichDiem <= averagePoints) {

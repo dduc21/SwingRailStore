@@ -4,6 +4,7 @@ import com.example.demo.srt.sd77.entity.KhachHang;
 import com.example.demo.srt.sd77.entity.request.CustomerAddRequest;
 import com.example.demo.srt.sd77.entity.request.CustomerRegisterRequest;
 import com.example.demo.srt.sd77.infrastructure.configs.mail.EmailService;
+import com.example.demo.srt.sd77.repository.IKhachHangRepository;
 import com.example.demo.srt.sd77.service.impl.KhachHangServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class CustomerRestController {
     private KhachHangServiceImpl customerSer;
 
     @Autowired
-    private CustomerRestController(EmailService emailService) {
+    private CustomerRestController(EmailService emailService, IKhachHangRepository repository) {
         this.emailService = emailService;
     }
 
@@ -89,7 +90,6 @@ public class CustomerRestController {
                         context
                 );
 
-                // Trả về kết quả thành công
                 return ResponseEntity.ok(updatedCustomer);
             } else {
                 return ResponseEntity.status(404).body("Khách hàng không tồn tại");

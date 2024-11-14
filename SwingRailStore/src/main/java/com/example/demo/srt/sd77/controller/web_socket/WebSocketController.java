@@ -20,4 +20,5 @@ public class WebSocketController {
     public String changeNotificationBillDetail(@Payload Hello message) {
         return message.getName() ;
     }
+
 }
