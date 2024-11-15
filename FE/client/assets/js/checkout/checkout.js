@@ -607,7 +607,7 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
                                   })
                                   .catch(function (error) {});
                                 $scope.addBill();
-                              }, 500);
+                              }, 100);
                             })
                             .catch((error) => {
                               console.log(error);
@@ -627,7 +627,7 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
                               })
                               .catch(function (error) {});
                             $scope.addBill();
-                          }, 500);
+                          }, 100);
                         }
                       }
                     })

@@ -19,11 +19,35 @@
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- Modernizer JS -->
     <script src="assets/js/modernizr-2.8.3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
 
     <!-- notification -->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <style>
+        h2 {
+            font-family: 'Lobster', cursive;
+            font-size: 36px;
+            text-align: center;
+            background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff6a74);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: colorChange 3s infinite;
+        }
+        
+        @keyframes colorChange {
+            0% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+            </style>
 
     <!--[if lt IE 9]>
 <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -58,28 +82,28 @@
                     width: 619px;
                     margin-left: auto;text-align: center;
                     margin-right: auto;">
-                        <h2>Đăng kí</h2>
+                        <h2>Đăng ký</h2>
                         <div class="single-input-item">
-                            <input type="text" ng-model="user.ten" style="border-radius: 5px;background-color: white;"
+                            <input type="text" ng-model="user.ten" style="border-radius: 20px;height: 60px; text-align: center ; background-color: white;"
                                 placeholder="Họ và tên" required />
                         </div>
                         <div class="single-input-item">
                             <input type="email" ng-model="user.email"
-                                style="border-radius: 5px;background-color: white;" placeholder="Địa chỉ email"
+                                style="border-radius: 20px; height: 60px; text-align: center ; background-color: white;" placeholder="Địa chỉ email"
                                 required />
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="single-input-item">
                                     <input type="password" ng-model="user.matKhau"
-                                        style="border-radius: 5px;background-color: white;" placeholder="Mật khẩu"
+                                        style="border-radius: 20px;height: 60px; text-align: center ; background-color: white;" placeholder="Mật khẩu"
                                         required />
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="single-input-item">
                                     <input type="password" ng-model="passAgain"
-                                        style="border-radius: 5px;background-color: white;"
+                                        style="border-radius: 20px; height: 60px; text-align: center ; background-color: white;"
                                         placeholder="Nhập lại mật khẩu" required />
                                 </div>
                             </div>
@@ -99,6 +123,11 @@
                                 background: #3a4863 ;
                                 height: 50px;
                                 color: white;" class="btn">Đăng kí</button>
+                        </div>
+                        <div class="login-footer">
+                            <p>Đã có tài khoản? 
+                                <a href="#!dang-nhap" style="color: #3a4863; font-weight: bold; text-decoration: none;">Đăng nhập ngay!</a>
+                            </p>
                         </div>
                     </div>
                 </div>
