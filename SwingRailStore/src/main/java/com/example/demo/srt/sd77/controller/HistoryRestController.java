@@ -22,7 +22,6 @@ public class HistoryRestController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
-    //aaaaaaa
 
     @PostMapping("/add")
     public ResponseEntity<?> add(@RequestBody HistoryRequest history){

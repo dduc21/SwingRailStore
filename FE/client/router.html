@@ -1163,11 +1163,10 @@
             templateUrl: "/client/bills/success_payment.html",
             controller: "successPaymentController",
           })
-          .when("/thanh-toan-that-bai", {
-            templateUrl: "bills/error_payment.html",
+            .when("/thanh-toan-that-bai", {
+              templateUrl: "bills/error_payment.html",
             controller: "errorPaymentController",
           })
-
           // mặc định
           .otherwise({ redirectTo: "/trang-chu" });
       });

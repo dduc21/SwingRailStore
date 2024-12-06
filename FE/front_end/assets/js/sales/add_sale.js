@@ -343,7 +343,7 @@ main_app.controller("addSaleController", function ($scope, $http) {
                             })
         
                             if (i === $scope.productDetailChooses.length - 1) {
-                                location.href = "/html/router.html#!/dot-giam-gia"
+                                location.href = "http://127.0.0.1:5500/front_end/html/router.html#!/dot-giam-gia"
                                 toastr.success('Bạn đã tạo đợt giảm giá thành công')
         
                             }

@@ -427,54 +427,65 @@ clientApp.controller("checkoutController", function ($scope, $http, $window) {
 
   // GET FEE SHIPPING
   $scope.getFeeShipping = () => {
+    // Lấy mã quận/huyện và phường/xã từ select box
     const district_selected =
       selectDistrict.options[selectDistrict.selectedIndex];
-    const district_attribute = district_selected.getAttribute("districtcode");
+    const district_attribute = district_selected?.getAttribute("districtcode");
+    if (!district_attribute) {
+      console.error("Quận/huyện không hợp lệ.");
+      return;
+    }
     const id_district = district_attribute;
-
+  
     const ward_selected =
       selectWardCodeCustomer.options[selectWardCodeCustomer.selectedIndex];
-    const ward_attribute = ward_selected.getAttribute("WardCode");
+    const ward_attribute = ward_selected?.getAttribute("WardCode");
+    if (!ward_attribute) {
+      console.error("Phường/xã không hợp lệ.");
+      return;
+    }
     const code_ward = ward_attribute;
-
+  
+    // Cập nhật thông tin phường/xã vào hóa đơn
     $scope.bill.maXa = code_ward;
     $scope.bill.xa = ward_selected.textContent;
-
+  
+    // Gửi yêu cầu API để tính phí vận chuyển
     axios
       .get(
         "https://dev-online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee",
         {
           params: {
-            from_district_id: shopDistrictId,
-            from_ward_code: shopWardCode,
-            service_id: serviceID,
+            from_district_id: shopDistrictId, // Kiểm tra giá trị này đã đúng chưa
+            from_ward_code: shopWardCode,    // Kiểm tra giá trị này đã đúng chưa
+            service_type_id: 2,              // Loại dịch vụ: 2 = giao nhanh
+            service_id: serviceID,           // Kiểm tra serviceID đã đúng chưa
             to_district_id: id_district,
             to_ward_code: code_ward,
-            weight: 240,
+            weight: 240,                     // Kiểm tra khối lượng
           },
           headers: {
-            token: token,
+            token: token,                    // Token GHN
             Accept: "application/json",
           },
         }
       )
       .then((res) => {
-        $scope.bill.phiVanChuyen = res.data.data.total;
-        $scope.totalPrice += $scope.bill.phiVanChuyen;
-        $scope.shipFee = res.data.data.total;
+        if (res.data.code !== 200) {
+          console.error("Lỗi từ API GHN:", res.data.message);
+          return;
+        }
+        const shippingFee = res.data.data.total;
+        $scope.bill.phiVanChuyen = shippingFee;
+        $scope.totalPrice += shippingFee;
+        $scope.shipFee = shippingFee;
         $scope.loadDataProductDetail();
       })
-      .catch((error) => console.error("Error:", error));
-  };
-
-  $scope.removeCartDetail = (e) => {
-    axios
-      .delete("http://localhost:8080/cart-detail/remove-cart-detail/" + e.id)
-      .then(function (response) {})
-      .catch(function (error) {
-        console.log(error);
+      .catch((error) => {
+        console.error("Lỗi khi gọi API:", error.response?.data || error.message);
       });
   };
+  
 
   $scope.checkout = () => {
     var flag = 0;
