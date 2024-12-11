@@ -214,6 +214,20 @@ main_app.controller("addVoucherController", function ($scope, $http) {
         }
 
     }
-
+    const fillter = function (key, trang_thai) {
+        $http.get('http://localhost:8080/customer/find-all-panigation?page=' + ($scope.currentPageCustomer - 1) +
+                  '&size=' + $scope.itemsPerPageCustomer +
+                  '&key=' + key +
+                  '&trang_thai=' + trang_thai)
+            .then(function (response) {
+                $scope.customers = response.data;
+                $scope.totalItemCustomers = response.data.totalElements; // Cập nhật tổng số khách hàng
+            });
+    };
+      
+      $scope.fillterByCustomerKey = function () {
+        var key = document.getElementById("customerKey").value || ""; // Lấy giá trị từ input
+        fillter(key, $scope.trang_thai); // Gọi hàm fillter với từ khóa và trạng thái
+    };
 
 })

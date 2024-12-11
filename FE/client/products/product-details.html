@@ -386,7 +386,7 @@
                                             color: white;
                                             font-weight: 700;
                                             border-radius: 5px;width: 360px;"
-                                                ng-if="productChooseCurrent.soLuongTon !== 0">
+                                                ng-if="productChooseCurrent.soLuongTon !== 0 && productChooseCurrent.trangThai === true">
                                                 <i class="fa-solid fa-cart-plus"></i>
                                                 Thêm vào giỏ hàng</button>
 
@@ -399,8 +399,20 @@
                                                 font-weight: 700;
                                                 border-radius: 5px;width: 360px;"
                                                 disabled
-                                                ng-if="productChooseCurrent.soLuongTon === 0">
+                                                ng-if="productChooseCurrent.soLuongTon === 0 && productChooseCurrent.trangThai === true">
                                                 Sản phẩm đã tạm hết hàng</button>
+
+                                                <button ng-click="addToCart()" style="    
+                                                font-size: 16px;
+                                                padding: 15px;
+                                                background-color: #f94c43;
+                                                opacity: 0.6;
+                                                color: white;
+                                                font-weight: 700;
+                                                border-radius: 5px;width: 360px;"
+                                                disabled
+                                                ng-if="productChooseCurrent.trangThai === false">
+                                                Sản phẩm đang ngừng kinh doanh</button>
                                         </div>
 
                                         <div class="color-option">

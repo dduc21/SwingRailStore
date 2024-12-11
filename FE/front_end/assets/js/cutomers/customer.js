@@ -35,11 +35,6 @@ main_app.controller("customerController", function ($scope, $http) {
       });
   };
 
-  // $scope.fillterByTrangThai = function(trang_thai){
-  //   $scope.trang_thai = trang_thai;
-  //   fillter($scope.key, $scope.trang_thai)
-  // }
-
   $scope.fillterByCustomerKey = function () {
     var key = document.getElementById("customerKey").value
     fillter(key, $scope.trang_thai)

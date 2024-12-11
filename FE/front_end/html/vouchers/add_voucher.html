@@ -426,6 +426,17 @@
             </div>
             <div style="width: 44%;" ng-if="stateVoucher == 1">
               <div class="table-responsive">
+                <div style="display: flex; justify-content: space-between;width: 63%;">
+
+                  <div class="mb-3 mb-sm-0">
+                    <div style="color: black;margin-bottom: 5px;">
+                      Nhập mã, sdt khách hàng
+                    </div>
+                    <input style="width: 262px; height: 40px;" type="text" class="form-control" id="customerKey"
+                      ng-model="customerKey" ng-keyup="fillterByCustomerKey()" placeholder="Tìm kiếm khách hàng theo tên,...">
+                  </div>
+      
+                </div>
                 <table class="table">
                   <thead class="text-dark fs-4" style="background-color: rgb(218 212 212 / 24%)">
                     <tr>
