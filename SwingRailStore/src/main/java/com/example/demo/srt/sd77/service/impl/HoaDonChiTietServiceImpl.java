@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
@@ -32,6 +33,11 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public SanPhamChiTiet findProductById(Long id) {
+        return sanPhamChiTietRepo.findById(id).orElse(null);
     }
 
     @Override
@@ -219,6 +225,12 @@ public class HoaDonChiTietServiceImpl implements IHoaDonChiTietService {
     public HoaDonChiTiet updateBillDetail(HoaDonChiTiet req) {
         return hoaDonChiTietRepo.save(req);
     }
+
+    @Override
+    public SanPhamChiTiet updateSingleProduct(SanPhamChiTiet sanPhamChiTiet) {
+        return sanPhamChiTietRepo.save(sanPhamChiTiet);
+    }
+
 
     @Override
     public ArrayList<HoaDonChiTiet> getBillDetailByState(Integer state, Long id) {

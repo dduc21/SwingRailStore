@@ -1,12 +1,12 @@
 package com.example.demo.srt.sd77.service;
 
-import com.example.demo.srt.sd77.entity.HinhThucThanhToan;
 import com.example.demo.srt.sd77.entity.HoaDonChiTiet;
-import com.example.demo.srt.sd77.entity.request.PaymentMethodAddRequest;
+import com.example.demo.srt.sd77.entity.SanPhamChiTiet;
 import com.example.demo.srt.sd77.entity.request.ProductDetailRequest;
 import org.springframework.data.domain.Page;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public interface IHoaDonChiTietService {
     Page<HoaDonChiTiet> findProductDetailsByIdProduct(Integer pageNo, Integer pageSize, Long id);
@@ -24,4 +24,7 @@ public interface IHoaDonChiTietService {
     ArrayList<HoaDonChiTiet> getBillDetailByState(Integer state, Long id);
 
     HoaDonChiTiet checkBillDetail(ProductDetailRequest req);
+
+    SanPhamChiTiet updateSingleProduct(SanPhamChiTiet sanPhamChiTiet);
+    SanPhamChiTiet findProductById(Long id);
 }

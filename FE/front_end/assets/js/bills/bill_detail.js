@@ -1411,7 +1411,7 @@ main_app.controller(
 
     $scope.backSingleProduct = (billDetail, quantity) => {
       if (billDetail.soLuong == quantity) {
-        billDetail.trangThai = 3;
+                billDetail.trangThai = 3;
         axios
           .put("http://localhost:8080/bill-detail/refund-single", billDetail)
           .then((response) => {

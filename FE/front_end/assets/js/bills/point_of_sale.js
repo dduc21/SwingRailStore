@@ -220,7 +220,7 @@ main_app.controller("pointOfSaleController", function ($scope, $http) {
     $http
       .post("http://localhost:8080/bill/create-bill-wait")
       .then(function (response) {
-        toastr.success("ạo hóa đơn thành công !!!");
+        toastr.success("Tạo hóa đơn thành công !!!");
         $scope.loadBills();
       })
       .catch(function (error) {

@@ -1,6 +1,7 @@
 package com.example.demo.srt.sd77.controller;
 
 import com.example.demo.srt.sd77.entity.HoaDonChiTiet;
+import com.example.demo.srt.sd77.entity.SanPhamChiTiet;
 import com.example.demo.srt.sd77.entity.request.ProductDetailRequest;
 import com.example.demo.srt.sd77.service.impl.HoaDonChiTietServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bill-detail")
@@ -77,7 +79,12 @@ public class BillDetailRestController {
     @PutMapping("/refund-single")
     public void deleteProductDetailByID(@RequestBody HoaDonChiTiet req) {
         try {
-            hoaDonChiTietService.updateBillDetail(req);
+            int soLuong = req.getSoLuong();
+            SanPhamChiTiet sanPhamChiTiet = hoaDonChiTietService.findProductById(req.getIdSanPhamChiTiet().getId());
+            int soLuongTon = sanPhamChiTiet.getSoLuongTon();
+            int updatedQuantity = soLuongTon + soLuong;
+            sanPhamChiTiet.setSoLuongTon(updatedQuantity);
+            hoaDonChiTietService.updateSingleProduct(sanPhamChiTiet);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
